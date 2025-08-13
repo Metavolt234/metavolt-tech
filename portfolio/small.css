@@ -1,0 +1,59 @@
+/* Media Query for Medium Screens (up to 1024px) */
+@media (max-width: 1024px) {
+
+    /* Welcome Section */
+    .home-content h1 {
+        font-size: 36px; 
+    }
+
+    .home-content p {
+        font-size: 16px; 
+    }
+
+    /* Projects Section */
+    #projects, #project {
+        grid-template-columns: repeat(2, 1fr); /* Two columns on medium screens */
+        margin-left: 20px; /* Reduced margin */
+    }
+
+    /* About Section */
+    .card_container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+    }
+
+    .card {
+        flex: 1 1 calc(50% - 20px); 
+        
+    }
+
+    /* Services Section */
+    .services .card_container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+    }
+
+    .services .card {
+        flex: 1 1 calc(50% - 20px); 
+    }
+
+    /* Works Section */
+    .works .card_container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+    }
+
+    .works .card {
+        flex: 1 1 calc(50% - 20px); 
+    }
+}
+
+/* Media Query for Small Screens (up to 600px) */
+@media (max-width: 600px) {
+
+    /* Welcome Section */
+    
+}

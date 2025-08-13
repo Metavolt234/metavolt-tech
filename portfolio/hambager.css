@@ -1,0 +1,158 @@
+/* HAMBERGER*/
+@media (max-width:600px){
+    .navbar{
+        min-height: 60px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 24px;
+    }
+    .navbar{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap:60px;
+    }
+    .hamburger{
+        display: none;
+        cursor: pointer;
+    }
+    .bar{
+        display: block;
+        width: 25px;
+        height: 3px;
+        margin: 5px auto;
+        -webkit-transition: all 0.3s ease-in-out;
+        transition: all 0.3s ease-in-out;
+        background-color: white;
+    }
+
+
+    .hamburger{
+        display: block;
+    }
+    .hamburger.active .bar:nth-child(2){
+        opacity: 0;
+    }
+    .hamburger.active .bar:nth-child(1){
+        transform: translateY(8px) rotate(45deg);
+    }
+    .hamburger.active .bar:nth-child(3){
+        transform: translateY(-8px) rotate(-45deg);
+    }
+    .nav-menu{
+        position: fixed;
+        left: -100px;
+        top: 70px;
+        gap: 0;
+        flex-direction: column;
+        background-color: #262626;
+        width: 100%;
+        text-align: center;
+        transition: 0.3s;
+    }
+    .nav-item{
+        margin: 16px auto;
+    }
+    .nave-menu.active{
+        left: 0;
+    }
+
+    
+
+    .home-content h1 {
+        font-size: 24px; 
+    }
+
+    .home-content p {
+        font-size: 14px; 
+    }
+
+    /* Projects Section */
+    .card {
+        grid-template-columns: 1fr; /* Single column on small screens */
+        margin-left: 0;
+    }
+
+    /* About Section */
+    .card_container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+    }
+
+    .card {
+        flex: 1 1 100%; /* One card per row */
+    }
+
+    /* Services Section */
+    .services .card_container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+    }
+
+    .services .card {
+        flex: 1 1 100%; /* One card per row */
+    }
+
+    /* Works Section */
+    .works .card_container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+    }
+
+    .works .card {
+        flex: 1 1 100%; /* One card per row */
+    }
+
+    /* Contact Form */
+    .contact form {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .contact input, .contact textarea {
+        width: 100%;
+        padding: 10px;
+        box-sizing: border-box;
+    }
+
+    .contact input[type="submit"] {
+        background-color: #333;
+        color: white;
+        border: none;
+        padding: 15px;
+        cursor: pointer;
+    }
+
+    /* Footer */
+    footer {
+        padding: 20px;
+        text-align: center;
+    }
+
+    footer p {
+        margin: 5px 0;
+    }
+
+    footer a {
+        color: #f1970f;
+        text-decoration: none;
+    }
+
+    footer a:hover {
+        text-decoration: underline;
+    }
+
+
+
+
+
+
+
+}
+
+

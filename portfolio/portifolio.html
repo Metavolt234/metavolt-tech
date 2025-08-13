@@ -1,0 +1,251 @@
+<!-- 
+Document type element-->
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Personal portifolio Website</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/small.css">
+  <link rel="stylesheet" href="css/hambager.css">
+
+</head>
+<body>
+  
+  <!--Nav section with links-->
+ <header>
+  <header>
+    <nav class="navbar">
+        <ul class="nav-menu">
+          <li class="nav-item"><a href="#home" class="nav-link">Home</a></li>
+          <li class="nav-item"><a href="#about" class="nav-link">About</a></li>
+          <li class="nav-item"><a href="#services" class="nav-link">Services</a></li>
+          <li class="nav-item"><a href="#works" class="nav-link">My Works</a></li>
+          <li class="nav-item"><a href="#contact" class="nav-link">Contact</a></li>
+        </ul>
+        <!--hsrbager bars-->
+        <div class="hamburger">
+          <span class="bar"></span>
+          <span class="bar"></span>
+          <span class="bar"></span>
+        </div>
+    </nav>
+  </header>
+ </header>
+
+  <!-- 
+    Home section with background video and content
+  -->
+  <section id="home" class="home">
+    <video autoplay muted loop class="background_video">
+      <source src="video/bg-vd.mp4" type="video/mp4">
+      Your browser doesn't support this video
+    </video>
+    <div class="home-content">
+       <h1>WELCOME TO MY PERSONAL WEBSITE</h1> 
+      <p>Where I showcase my expertise in electrical installation,
+         database programming, web development, and animation, and offer real-life advisory services.</p>
+    </div>
+  </section>
+
+  <!-- 
+    About section -->
+   
+  <section id="about" class="about">
+    <h2>About Me</h2>
+
+    <!--Card 1-->
+    <div class="card_container">
+        <div class="card">
+          <img src="images/me.jpg" alt="Introduction">
+          <h3>Introduction</h3>
+          <p>
+            <p>I'am Tumwesige Nelson, I specialize in electrical installation, database programming, web development, and animation.
+                 With a degree in Computer Programming from Brigham Young University - USA-Idaho, I have worked on various projects that span multiple industries.</p>
+          <button class="read-more">Read More</button>
+        </div>
+      
+
+    <!--Card 2-->
+    
+      <div class="card">
+        <img src="images/graduate.jpg" alt="education">
+        <h3>My Education</h3>
+        <p>Bachelor's Degree in Computer programming (Applied Technology) from Brigham Young University, USA-Idaho [(Uganda-Kampala Branch)],
+            Certificate in Responsive Web designing from Free-code Camp (online), Certificate in Electrical Installation from PSBGC-Makerere, 
+            Certificate in 2D-Cartoon Animation from Toon-Animator (online)
+        </p>
+        <button class="read-more">Read More</button>
+      </div>
+    
+
+    <!--Card 3-->
+
+        <div class="card">
+          <img src="images/skills.jpg" alt="skills and expertise">
+          <h3>Skills and Expertise</h3>
+          <p>
+            <ul>
+                <li><strong>Electrical Installation:</strong> Extensive experience in designing and implementing electrical systems.</li>
+                <li><strong>Database Programming:</strong> Proficient in creating and managing databases.</li>
+                <li><strong>Web Development:</strong> Skilled in front-end and back-end development.</li>
+                <li><strong>Animation:</strong> Experienced in creating dynamic animations.</li>
+              </ul>
+          </p>
+          <button class="read-more">Read More</button>
+        </div>
+      
+
+    <!--Card 4-->
+  
+        <div class="card">
+          <img src="images/personal touch.jpg" alt="personal Touch">
+          <h3>Personal Touch</h3>
+          <p>When I’m not coding or designing, you can find me exploring new technologies, enjoying a good book, 
+            or experimenting with new animation techniques. and AI learning</p>
+          <button class="read-more">Read More</button>
+        </div>
+     
+
+
+  <!--Card 5-->
+ 
+    <div class="card">
+      <img src="images/goals.jpg" alt="Vision and Goals">
+      <h3>Vision and Goals</h3>
+      <p>My goal is to continue pushing the boundaries of technology and design, working on projects that challenge me and contribute to innovative solutions.</p>
+      <button class="read-more">Read More</button>
+    </div>
+
+
+
+<!--Card 6-->
+
+    <div class="card">
+      <img src="images/achievement.jpg" alt="Achievements">
+      <h3>Achievements</h3>
+      <p>One of my proudest achievements was developing a comprehensive database solution for a major client, which improved their data management processes.</p></p>
+      <button class="read-more">Read More</button>
+    </div>
+
+
+
+
+  </div>
+</section>
+
+
+  <!-- 
+    Services section 
+  -->
+  <section id="services" class="services">
+    <h2>My Services</h2>
+
+    <!--Card 1 services-->
+    <div class="card_container">
+      <div class="card">
+        <img src="images/business intel.jpg" alt="business">
+        <h3>Business Intelligence Solutions</h3>
+        <p>Transform your data into actionable insights with my Business Intelligence services.
+         From data integration to dashboard creation, I help you visualize and interpret data to make informed business decisions.</p>
+        <button class="read-more">Read More</button>
+      </div>
+    
+
+    <!--Card 2 services-->
+        <div class="card">
+          <img src="images/web devnt.jpg" alt="web development">
+          <h3>Web Development</h3>
+          <p>Create a strong online presence with my web development services. I offer custom website design, 
+            front-end and back-end development, and ongoing maintenance to ensure your site performs optimally and meets your business goals.</p>
+          <button class="read-more">Read More</button>
+        </div>
+      
+
+  
+    <!--Card 3 services-->
+    
+        <div class="card">
+          <img src="images/electrical.jpg" alt="electrical installation">
+          <h3>Electrical Installation</h3>
+          <p>Expert installation of electrical systems, including wiring, circuit design, and system upgrades. 
+            Ensure safety and efficiency with professional electrical solutions tailored to residential and commercial needs.</p>
+          <button class="read-more">Read More</button>
+        </div>
+
+    </div>
+  </section>
+
+  <!-- 
+    My works page section  -->
+  <section id="works" class="works">
+    <h2>My Works</h2>
+    <!--Card 1 My works-->
+    <div class="card_container" id="card_container">
+      <div class="card">
+        <a href="https://www.facebook.com/profile.php?id=100081779612067" target="_blank">
+          <img src="images/facebook.png" alt="Facebook" >
+          <h3>Facebook Profile</h3>
+        </a>
+      </div>
+    
+
+      <!--Card 2 My works-->
+        <div class="card">
+          <a href="https://github.com/Nelsonbyu/wdd230" target="_blank">
+            <img src="images/git.png" alt="github">
+            <h3>Github Profile</h3>
+          </a>
+        </div>
+     
+
+        <!--Card 3 My works-->
+        <div class="card">
+          <a href="https://www.linkedin.com/feed/" target="_blank">
+            <img src="images/linkin.webp" alt="Linkedin">
+            <h3>Linkedin Profile</h3>
+          </a>
+        </div>
+   
+
+    <!--Card 4 My works-->
+    <div class="card">
+        <a href="(link unavailable)" target="_blank">
+        <img src="images/web.png" alt="website">
+        <h3>Website</h3>
+        </a>
+    </div>
+  
+    </div>
+  </section>
+
+  <!-- 
+    Contact section 
+  -->
+  <section id="contact" class="contact">
+    <h2>Contact Me</h2>
+    <div class="card">
+      <form action="#" method="post">
+        <label for="phone">Phone:</label>
+        <input type="tel" id="phone" name="phone" required placeholder="+256 0000 000 000">
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required placeholder="your-email-address@gmail.com">
+        <label for="message">Message:</label>
+        <textarea id="message" name="message" rows="4" required placeholder="Type your message here...."></textarea>
+        <input type="submit" value="Send Message">
+      </form>
+    </div>
+  </section>
+
+  <!-- 
+    Footer with copyright and back to top link
+  -->
+  <footer>
+    <p>&copy; 2024 Tumwesige Nelson. All Rights Reserved!</p>
+    <p><a href="#home">Back to Top</a></p>
+  </footer>
+
+<!--Javascript for the Hamburger-->
+  <script src="js/hambager.js"></script>
+
+</body>
+</html>
