@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us | ZamZam</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Header & Navigation -->
+    <header class="header">
+        <nav class="nav">
+            <div class="nav-container">
+                <a href="index.html" class="logo">
+                    <i class="fas fa-heartbeat"></i>
+                    <span>ZamZam</span>
+                </a>
+                <ul class="nav-menu">
+                    <li><a href="index.html" class="nav-link">Home</a></li>
+                    <li class="dropdown">
+                        <a href="services.html" class="nav-link">Services <i class="fas fa-chevron-down"></i></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="services/personal-care.html">Personal Care</a></li>
+                            <li><a href="services/companion-care.html">Companion Care</a></li>
+                            <li><a href="services/dementia-care.html">Dementia Care</a></li>
+                            <li><a href="services/respite-care.html">Respite Care</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="about.html" class="nav-link">About</a></li>
+                    <li><a href="testimonials.html" class="nav-link">Testimonials</a></li>
+                    <li><a href="contact.html" class="nav-link">Contact</a></li>
+                </ul>
+                <div class="nav-cta">
+                    <a href="tel:2086641507" class="btn btn-secondary call-btn">
+                        <i class="fas fa-phone"></i>
+                        Call Now
+                    </a>
+                    <button class="btn btn-primary" id="consultationBtn">Free Consultation</button>
+                </div>
+                <div class="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1>Contact Us</h1>
+            <p>We're here to answer your questions and discuss your care needs</p>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="content-section">
+        <div class="container">
+            <div class="contact-container">
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h3>Our Location</h3>
+                            <p>407 W. Appleway Ave.<br>Coeur d'Alene, ID 83814</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-phone"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h3>Phone Number</h3>
+                            <p><a href="tel:2086641507">(208) 664-1507</a></p>
+                            <p><small>Available 24/7 for emergencies</small></p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h3>Email Address</h3>
+                            <p><a href="mailto:care@comfortcarecdl.com">care@comfortcarecdl.com</a></p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h3>Business Hours</h3>
+                            <p>Monday - Friday: 8am - 6pm<br>Saturday: 9am - 2pm<br>Sunday: Emergency calls only</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-calendar-check"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h3>Free Consultation</h3>
+                            <p>Schedule a free in-home assessment to discuss your specific care needs and create a personalized care plan.</p>
+                            <button class="btn btn-primary" id="contactConsultation">Schedule Assessment</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="contact-form">
+                    <h3>Send Us a Message</h3>
+                    <form id="contactForm" class="appointment-form">
+                        <div class="form-group">
+                            <label for="contactName">Full Name *</label>
+                            <input type="text" id="contactName" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="contactEmail">Email Address *</label>
+                            <input type="email" id="contactEmail" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="contactPhone">Phone Number *</label>
+                            <input type="tel" id="contactPhone" name="phone" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="contactService">Service Interested In</label>
+                            <select id="contactService" name="service">
+                                <option value="">Select a service</option>
+                                <option value="personal">Personal Care</option>
+                                <option value="companion">Companion Care</option>
+                                <option value="dementia">Dementia Care</option>
+                                <option value="respite">Respite Care</option>
+                                <option value="not-sure">Not Sure</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="contactMessage">Message *</label>
+                            <textarea id="contactMessage" name="message" rows="5" required placeholder="How can we help you? Tell us about your specific situation..."></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-full">
+                            <i class="fas fa-paper-plane"></i>
+                            Send Message
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Map Section -->
+    <section class="content-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Visit Our Office</h2>
+                <p>Stop by our Coeur d'Alene location to discuss your care needs in person</p>
+            </div>
+            <div style="background: var(--background-alt); padding: 2rem; border-radius: var(--radius);">
+                <div style="height: 400px; background: #e5e7eb; border-radius: var(--radius); display: flex; align-items: center; justify-content: center; color: var(--text-light);">
+                    <div style="text-align: center;">
+                        <i class="fas fa-map-marker-alt" style="font-size: 3rem; margin-bottom: 1rem;"></i>
+                        <p>Interactive Map Would Appear Here</p>
+                        <p><small>407 W. Appleway Ave., Coeur d'Alene, ID 83814</small></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="logo">
+                        <i class="fas fa-heartbeat"></i>
+                        <span>ZamZam</span>
+                    </div>
+                    <p>Providing compassionate, professional in-home care services for seniors in Coeur d'Alene and surrounding areas.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="services.html">Services</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="testimonials.html">Testimonials</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact Info</h3>
+                    <div class="contact-info">
+                        <p><i class="fas fa-map-marker-alt"></i> 407 W. Appleway Ave., Coeur d'Alene, ID 83814</p>
+                        <p><i class="fas fa-phone"></i> <a href="tel:2086641507">(208) 664-1507</a></p>
+                        <p><i class="fas fa-envelope"></i> <a href="mailto:care@comfortcarecdl.com">care@comfortcarecdl.com</a></p>
+                        <p><i class="fas fa-clock"></i> Available 24/7</p>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 ZamZam. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Appointment Modal -->
+    <div id="appointmentModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2>Schedule Your Free Consultation</h2>
+            <form id="appointmentForm" class="appointment-form">
+                <div class="form-group">
+                    <label for="name">Full Name *</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email Address *</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="phone">Phone Number *</label>
+                    <input type="tel" id="phone" name="phone" required>
+                </div>
+                <div class="form-group">
+                    <label for="service">Service Interested In</label>
+                    <select id="service" name="service">
+                        <option value="">Select a service</option>
+                        <option value="personal">Personal Care</option>
+                        <option value="companion">Companion Care</option>
+                        <option value="dementia">Dementia Care</option>
+                        <option value="respite">Respite Care</option>
+                        <option value="not-sure">Not Sure</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="date">Preferred Date</label>
+                    <input type="date" id="date" name="date">
+                </div>
+                <div class="form-group">
+                    <label for="message">Additional Information</label>
+                    <textarea id="message" name="message" rows="4" placeholder="Tell us about your specific needs..."></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary btn-full">
+                    <i class="fas fa-paper-plane"></i>
+                    Schedule Consultation
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Success Modal -->
+    <div id="successModal" class="modal success">
+        <div class="modal-content">
+            <div class="success-icon">
+                <i class="fas fa-check-circle"></i>
+            </div>
+            <h2>Thank You!</h2>
+            <p>Your consultation request has been received. We'll contact you within 24 hours to schedule your free assessment.</p>
+            <button class="btn btn-primary" id="closeSuccess">Close</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        // Additional contact page functionality
+        document.getElementById('contactConsultation').addEventListener('click', () => {
+            openModal(document.getElementById('appointmentModal'));
+        });
+    </script>
+</body>
+</html>

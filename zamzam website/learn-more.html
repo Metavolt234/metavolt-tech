@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Learn More | ZamZam</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Header & Navigation -->
+    <header class="header">
+        <nav class="nav">
+            <div class="nav-container">
+                <a href="index.html" class="logo">
+                    <i class="fas fa-heartbeat"></i>
+                    <span>ZamZam</span>
+                </a>
+                <ul class="nav-menu">
+                    <li><a href="index.html" class="nav-link">Home</a></li>
+                    <li class="dropdown">
+                        <a href="services.html" class="nav-link">Services <i class="fas fa-chevron-down"></i></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="services/personal-care.html">Personal Care</a></li>
+                            <li><a href="services/companion-care.html">Companion Care</a></li>
+                            <li><a href="services/dementia-care.html">Dementia Care</a></li>
+                            <li><a href="services/respite-care.html">Respite Care</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="about.html" class="nav-link">About</a></li>
+                    <li><a href="testimonials.html" class="nav-link">Testimonials</a></li>
+                    <li><a href="contact.html" class="nav-link">Contact</a></li>
+                </ul>
+                <div class="nav-cta">
+                    <a href="tel:2086641507" class="btn btn-secondary call-btn">
+                        <i class="fas fa-phone"></i>
+                        Call Now
+                    </a>
+                    <button class="btn btn-primary" id="consultationBtn">Free Consultation</button>
+                </div>
+                <div class="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1>Learn More About ComfortCare</h1>
+            <p>Discover our approach to senior care and what makes us different</p>
+        </div>
+    </section>
+
+    <!-- Video Section -->
+    <section class="content-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Our Story in Motion</h2>
+                <p>Watch how we're making a difference in the lives of seniors and their families</p>
+            </div>
+            <div style="max-width: 800px; margin: 0 auto;">
+                <div style="background: var(--background-alt); padding: 3rem; border-radius: var(--radius); text-align: center;">
+                    <i class="fas fa-play-circle" style="font-size: 4rem; color: var(--primary); margin-bottom: 1rem;"></i>
+                    <h3 style="margin-bottom: 1rem;">ComfortCare Introduction Video</h3>
+                    <p style="margin-bottom: 2rem; color: var(--text-light);">This video would showcase our facilities, caregivers, and client testimonials to give you a comprehensive view of our services.</p>
+                    <button class="btn btn-large btn-primary" onclick="alert('Video player would launch here')">
+                        <i class="fas fa-play"></i>
+                        Play Video
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Our Approach -->
+    <section class="content-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Our Care Approach</h2>
+                <p>How we deliver exceptional senior care that families trust</p>
+            </div>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-user-check"></i>
+                    </div>
+                    <h3>Personalized Care Plans</h3>
+                    <p>Every client receives a customized care plan developed through comprehensive assessment and ongoing evaluation.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <h3>Certified Caregivers</h3>
+                    <p>All our caregivers are thoroughly screened, trained, and certified to provide the highest quality care.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-hand-holding-heart"></i>
+                    </div>
+                    <h3>Compassionate Service</h3>
+                    <p>We believe in treating every client with the dignity, respect, and compassion they deserve.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="content-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Frequently Asked Questions</h2>
+                <p>Get answers to common questions about our services</p>
+            </div>
+            <div style="max-width: 800px; margin: 0 auto;">
+                <div class="service-card" style="text-align: left;">
+                    <h3 style="color: var(--primary); margin-bottom: 1rem;">How do I get started with ComfortCare?</h3>
+                    <p>Getting started is easy! Simply contact us to schedule a free in-home assessment. We'll meet with you and your loved one to discuss needs, answer questions, and create a personalized care plan.</p>
+                </div>
+                <div class="service-card" style="text-align: left; margin-top: 1.5rem;">
+                    <h3 style="color: var(--primary); margin-bottom: 1rem;">What areas do you serve?</h3>
+                    <p>We primarily serve Coeur d'Alene and surrounding communities in Kootenai County. Contact us to confirm if we service your specific location.</p>
+                </div>
+                <div class="service-card" style="text-align: left; margin-top: 1.5rem;">
+                    <h3 style="color: var(--primary); margin-bottom: 1rem;">Are your caregivers insured and bonded?</h3>
+                    <p>Yes, all ComfortCare caregivers are fully insured, bonded, and undergo thorough background checks for your peace of mind.</p>
+                </div>
+                <div class="service-card" style="text-align: left; margin-top: 1.5rem;">
+                    <h3 style="color: var(--primary); margin-bottom: 1rem;">Can I change or adjust the care schedule?</h3>
+                    <p>Absolutely! We understand that needs can change. We offer flexible scheduling and can adjust care plans as needed with proper notice.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section class="content-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Ready to Learn More?</h2>
+                <p>Contact us today to schedule your free consultation and discover how ComfortCare can help your family</p>
+            </div>
+            <div class="text-center">
+                <a href="contact.html" class="btn btn-large btn-primary">Schedule Free Consultation</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="logo">
+                        <i class="fas fa-heartbeat"></i>
+                        <span>ZamZam</span>
+                    </div>
+                    <p>Providing compassionate, professional in-home care services for seniors in Coeur d'Alene and surrounding areas.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="services.html">Services</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="testimonials.html">Testimonials</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact Info</h3>
+                    <div class="contact-info">
+                        <p><i class="fas fa-map-marker-alt"></i> 407 W. Appleway Ave., Coeur d'Alene, ID 83814</p>
+                        <p><i class="fas fa-phone"></i> <a href="tel:2086641507">(208) 664-1507</a></p>
+                        <p><i class="fas fa-envelope"></i> <a href="mailto:care@comfortcarecdl.com">care@comfortcarecdl.com</a></p>
+                        <p><i class="fas fa-clock"></i> Available 24/7</p>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 ZamZam. All rights reserved.</p>
+                <p class="designer"><i>Designed by T.Nelson <i class="fas fa-clock"></i>MetaVolt Tech<i class="fas fa-clock"></i> <b>+256 775781560</b></i></p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

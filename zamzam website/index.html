@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ZamZam | Premium In-Home Senior Care</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Header & Navigation -->
+    <header class="header">
+        <nav class="nav">
+            <div class="nav-container">
+                <a href="index.html" class="logo">
+                    <i class="fas fa-heartbeat"></i>
+                    <span>ZamZam</span>
+                </a>
+                <ul class="nav-menu">
+                    <li><a href="index.html" class="nav-link" class="active">Home</a></li>
+                    <li class="dropdown">
+                        <a href="services.html" class="nav-link">Services <i class="fas fa-chevron-down"></i></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="services/personal-care.html">Personal Care</a></li>
+                            <li><a href="services/companion-care.html">Companion Care</a></li>
+                            <li><a href="services/dementia-care.html">Dementia Care</a></li>
+                            <li><a href="services/respite-care.html">Respite Care</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="about.html" class="nav-link">About</a></li>
+                    <li><a href="testimonials.html" class="nav-link">Testimonials</a></li>
+                    <li><a href="contact.html" class="nav-link">Contact</a></li>
+                </ul>
+                <div class="nav-cta">
+                    <a href="tel:2086641507" class="btn btn-secondary call-btn">
+                        <i class="fas fa-phone"></i>
+                        Call Now
+                    </a>
+                    <button class="btn btn-primary" id="consultationBtn">Free Consultation</button>
+                </div>
+                <div class="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-background">
+            <div class="hero-particles" id="particles"></div>
+        </div>
+        <div class="hero-container">
+            <div class="hero-content">
+                <h1 class="hero-title">
+                    <span class="title-line">Compassionate Care</span>
+                    <span class="title-line">For Your Loved Ones</span>
+                </h1>
+                <p class="hero-subtitle">Providing exceptional in-home care services with dignity, respect, and personalized attention for seniors in our community.</p>
+                <div class="hero-buttons">
+                    <button class="btn btn-large btn-primary" id="heroConsultation">
+                        <i class="fas fa-calendar-check"></i>
+                        Schedule Free Assessment
+                    </button>
+                    <a href="learn-more.html" class="btn btn-large btn-secondary">
+                        <i class="fas fa-play-circle"></i>
+                        Watch Our Story
+                    </a>
+                </div>
+                <div class="hero-stats">
+                    <div class="stat">
+                        <span class="stat-number" data-count="500">0</span>
+                        <span class="stat-label">Clients Served</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number" data-count="24">0</span>
+                        <span class="stat-label">Hour Care</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number" data-count="98">0</span>
+                        <span class="stat-label">% Satisfaction</span>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-image">
+                <div class="floating-card card-1">
+                    <i class="fas fa-shield-alt"></i>
+                    <span>Certified Caregivers</span>
+                </div>
+                <div class="floating-card card-2">
+                    <i class="fas fa-clock"></i>
+                    <span>Available 24/7</span>
+                </div>
+                <div class="image-container">
+                    <img src="https://images.unsplash.com/photo-1576765608535-5f04d1e3f289?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Compassionate Care" class="hero-img">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Preview Section -->
+    <section class="services-preview">
+        <div class="container">
+            <div class="section-header">
+                <h2>Our Care Services</h2>
+                <p>Comprehensive in-home care tailored to individual needs</p>
+            </div>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-user-shield"></i>
+                    </div>
+                    <h3>Personal Care</h3>
+                    <p>Assistance with bathing, grooming, dressing, and mobility to maintain dignity and independence.</p>
+                    <a href="services/personal-care.html" class="btn-service">Learn More</a>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                    <h3>Companion Care</h3>
+                    <p>Meaningful companionship, conversation, and assistance with daily activities and socialization.</p>
+                    <a href="services/companion-care.html" class="btn-service">Learn More</a>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <h3>Dementia Care</h3>
+                    <p>Specialized care for Alzheimer's and dementia patients with trained, compassionate caregivers.</p>
+                    <a href="services/dementia-care.html" class="btn-service">Learn More</a>
+                </div>
+            </div>
+            <div class="text-center">
+                <a href="services.html" class="btn btn-primary">View All Services</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Appointment Modal -->
+    <div id="appointmentModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2>Schedule Your Free Consultation</h2>
+            <form id="appointmentForm" class="appointment-form">
+                <div class="form-group">
+                    <label for="name">Full Name *</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email Address *</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="phone">Phone Number *</label>
+                    <input type="tel" id="phone" name="phone" required>
+                </div>
+                <div class="form-group">
+                    <label for="service">Service Interested In</label>
+                    <select id="service" name="service">
+                        <option value="">Select a service</option>
+                        <option value="personal">Personal Care</option>
+                        <option value="companion">Companion Care</option>
+                        <option value="dementia">Dementia Care</option>
+                        <option value="respite">Respite Care</option>
+                        <option value="not-sure">Not Sure</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="date">Preferred Date</label>
+                    <input type="date" id="date" name="date">
+                </div>
+                <div class="form-group">
+                    <label for="message">Additional Information</label>
+                    <textarea id="message" name="message" rows="4" placeholder="Tell us about your specific needs..."></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary btn-full">
+                    <i class="fas fa-paper-plane"></i>
+                    Schedule Consultation
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Success Modal -->
+    <div id="successModal" class="modal success">
+        <div class="modal-content">
+            <div class="success-icon">
+                <i class="fas fa-check-circle"></i>
+            </div>
+            <h2>Thank You!</h2>
+            <p>Your consultation request has been received. We'll contact you within 24 hours to schedule your free assessment.</p>
+            <button class="btn btn-primary" id="closeSuccess">Close</button>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="logo">
+                        <i class="fas fa-heartbeat"></i>
+                        <span>ZamZam</span>
+                    </div>
+                    <p>Providing compassionate, professional in-home care services for seniors in Coeur d'Alene and surrounding areas.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="services.html">Services</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="testimonials.html">Testimonials</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact Info</h3>
+                    <div class="contact-info">
+                        <p><i class="fas fa-map-marker-alt"></i> 407 W. Appleway Ave., Coeur d'Alene, ID 83814</p>
+                        <p><i class="fas fa-phone"></i> <a href="tel:2086641507">(208) 664-1507</a></p>
+                        <p><i class="fas fa-envelope"></i> <a href="mailto:care@comfortcarecdl.com">care@zamzam.com</a></p>
+                        <p><i class="fas fa-clock"></i> Available 24/7</p>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 ZamZam. All rights reserved.</p>
+                <p class="designer"><i>Designed by T.Nelson <i class="fas fa-clock"></i>MetaVolt Tech<i class="fas fa-clock"></i> <b>+256 775781560</b></i></p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
