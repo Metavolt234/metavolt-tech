@@ -1,0 +1,12 @@
+metavolt-tech/
+├── index.html
+├── about.html
+├── services.html
+├── team.html
+├── testimonials.html
+├── blog.html
+├── contact.html
+├── styles.css
+├── script.js
+└── assets/
+    └── (images if needed)

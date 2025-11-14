@@ -1,0 +1,13 @@
+mkt-retail-wholesalers/
+├── index.html
+├── about.html
+├── store.html
+├── contact.html
+├── books.html
+├── css/
+│   └── style.css
+├── js/
+│   └── script.js
+└── images/
+    ├── logo.png
+    └── products/
