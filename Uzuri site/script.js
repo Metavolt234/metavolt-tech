@@ -17,7 +17,7 @@ class ParticleSystem {
         this.container = container;
         this.particles = [];
         this.canvas = document.createElement('canvas');
-        this.ctx = this.canvas.getContext('2d');
+        this.ctx = this.canvas.getContext('d');
         this.container.appendChild(this.canvas);
         
         this.resize();
