@@ -1446,7 +1446,7 @@ body {
     box-shadow: 0 5px 20px rgba(0,0,0,0.1);
     display: block;
     align-items: center;
-    gap: 1rem;
+    gap: 2px;
     font-weight: 500;
     animation: float 3s ease-in-out infinite;
 }
