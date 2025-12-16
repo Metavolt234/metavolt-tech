@@ -1439,14 +1439,14 @@ body {
 
 /* Floating Cards in Hero */
 .floating-card {
-    position: absolute;
+    position: relative;
     background: white;
     padding: 0.75rem 1.5rem;
     border-radius: 25px;
     box-shadow: 0 5px 20px rgba(0,0,0,0.1);
-    display: flex;
+    display: block;
     align-items: center;
-    gap: 0.5rem;
+    gap: 1rem;
     font-weight: 500;
     animation: float 3s ease-in-out infinite;
 }
