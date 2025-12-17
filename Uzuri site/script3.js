@@ -275,7 +275,7 @@ function closeModal(modal) {
 // ============================================
 // 5. CONTACT FORM HANDLING (UPDATED FOR FORMSPREE)
 // ============================================
-/*
+
 function initializeContactForms() {
     const appointmentForm = document.getElementById('appointmentForm');
     
@@ -422,97 +422,8 @@ Please contact this person within 24 hours.
     // Open in new tab
     window.open(mailtoLink, '_blank');
 }
-*/
-function handleFormSubmit(e) {
-    e.preventDefault();
-    
-    const form = e.target;
-    const formData = new FormData(form);
-    const data = Object.fromEntries(formData);
-    
-    // Validate form
-    if (!validateForm(data)) {
-        showNotification('Please fill in all required fields correctly.', 'error');
-        return;
-    }
-    
-    // Show loading state
-    const submitBtn = form.querySelector('button[type="submit"]');
-    const originalText = submitBtn.innerHTML;
-    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
-    submitBtn.disabled = true;
-    
-    // Send data to PHP script
-    fetch('send-email.php', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-            name: data.name,
-            email: data.email,
-            phone: data.phone,
-            service: data.service || 'General Inquiry',
-            date: data.date || 'Not specified',
-            message: data.message || 'No additional message'
-        })
-    })
-    .then(response => response.json())
-    .then(result => {
-        if (result.success) {
-            // Show success message
-            showNotification('Appointment request sent successfully! We\'ll contact you soon.', 'success');
-            
-            // Close appointment modal
-            closeModal(document.getElementById('appointmentModal'));
-            
-            // Open success modal
-            openModal(document.getElementById('successModal'));
-            
-            // Reset form
-            form.reset();
-            
-            // Save to localStorage for records
-            saveConsultationToStorage(data);
-            
-            // Log interaction
-            logInteraction('consultation_submitted', { 
-                service: data.service,
-                email_status: 'sent'
-            });
-        } else {
-            throw new Error(result.error || 'Form submission failed');
-        }
-    })
-    .catch(error => {
-        console.error('Form submission error:', error);
-        
-        // Show error message
-        showNotification(`Error: ${error.message}. Please try again or call us directly.`, 'error');
-        
-        // Fallback to mailto method
-        setTimeout(() => {
-            sendEmailViaMailto(data);
-        }, 1000);
-    })
-    .finally(() => {
-        // Restore button state
-        submitBtn.innerHTML = originalText;
-        submitBtn.disabled = false;
-    });
-}
 
-function saveConsultationToStorage(data) {
-    const consultations = JSON.parse(localStorage.getItem('consultations') || '[]');
-    consultations.push({
-        ...data,
-        id: Date.now(),
-        timestamp: new Date().toISOString(),
-        status: 'pending',
-        source: 'php_mail'
-    });
-    localStorage.setItem('consultations', JSON.stringify(consultations.slice(-50)));
-}
+
 
 // ============================================
 // 6. EMAILJS INITIALIZATION FUNCTION
