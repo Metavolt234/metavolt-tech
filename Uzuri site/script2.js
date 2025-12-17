@@ -8,7 +8,7 @@ const CONFIG = {
         name: "Nzuri Care LLC",
         phone: "+14705299891",
         whatsapp: "+14705299891",
-        email: "nzurillc04@gmail.com",
+        email: "nelsonsabastian94@gmail.com",
         address: "3078 Clairmount RD NE, Utah"
     },
     services: {
