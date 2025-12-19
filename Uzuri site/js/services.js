@@ -1,21 +1,25 @@
-// ==========================================================
-// NZURI CARE LLC - JAVASCRIPT FILE/FUNCTIONALITY ON BUTTONS
+ // ==========================================================
+// UZURI CARE LLC - JAVASCRIPT FILE/FUNCTIONALITY ON BUTTONS
 // ==========================================================
 
-// Configuration
+// Configuration for Uzuri Care LLC
 const CONFIG = {
     company: {
-        name: "Nzuri Care LLC",
-        phone: "+14705299891",
+        name: "Uzuri Care LLC",
+        phone: "+1 (470) 529-9891",
         whatsapp: "+14705299891",
-        email: "nelsonsabastian94@gmail.com",
-        address: "3078 Clairmount RD NE, Utah"
+        email: "nzurillc04@gmail.com",
+        address: "3078 Clairmount RD NE"
     },
     services: {
         personal: "Personal Care",
-        companion: "Companion Care",
+        companion: "Companion Care", 
         dementia: "Dementia Care",
         respite: "Respite Care"
+    },
+    // Formspree Configuration
+    formspree: {
+        formId: "movggkbq" //  Formspree form ID
     }
 };
 
@@ -28,7 +32,7 @@ let isMobileMenuOpen = false;
 // ============================================
 
 document.addEventListener('DOMContentLoaded', function() {
-    console.log('Nzuri Care LLC - Page Loading...');
+    console.log('Uzuri Care LLC - Page Loading...');
     
     // Initialize all components
     initializeNavigation();
@@ -38,16 +42,16 @@ document.addEventListener('DOMContentLoaded', function() {
     createCommunicationButtons();
     setupPhoneCalls();
     setupWhatsAppLinks();
-    initializeCounters();
-    initializeParticles();
     setupServiceCards();
     setupFooterLinks();
     setupEmailLinks();
     
-    // Show welcome message
-    setTimeout(() => {
-        showNotification('Welcome to Nzuri Care! We provide compassionate senior care services.', 'info');
-    }, 1500);
+    // Show welcome message on home page only
+    if (window.location.pathname.includes('index.html') || window.location.pathname === '/') {
+        setTimeout(() => {
+            showNotification('Welcome to Uzuri Care! We provide compassionate senior care services.', 'info');
+        }, 1500);
+    }
     
     console.log('Page initialized successfully!');
 });
@@ -199,7 +203,11 @@ function initializeModals() {
     const appointmentModal = document.getElementById('appointmentModal');
     const successModal = document.getElementById('successModal');
     
-    if (!appointmentModal || !successModal) return;
+    // Check if modals exist on this page
+    if (!appointmentModal || !successModal) {
+        console.log('No modals found on this page');
+        return;
+    }
     
     // Open consultation modal buttons
     const consultationButtons = [
@@ -264,7 +272,7 @@ function closeModal(modal) {
 }
 
 // ============================================
-// 5. CONTACT FORM HANDLING
+// 5. CONTACT FORM HANDLING (USING FORMSPREE) - FIXED
 // ============================================
 
 function initializeContactForms() {
@@ -294,102 +302,130 @@ function handleFormSubmit(e) {
     submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
     submitBtn.disabled = true;
     
-    // Simulate form submission
-    setTimeout(() => {
-        // Process the form data
-        processConsultationRequest(data);
+    // Send data to Formspree
+    fetch(`https://formspree.io/f/${CONFIG.formspree.formId}`, {
+        method: 'POST',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            name: data.name,
+            email: data.email,
+            phone: data.phone,
+            service: data.service || 'General Inquiry',
+            date: data.date || 'Not specified',
+            message: data.message || 'No additional message',
+            _subject: `New Appointment Request: ${data.name} - Uzuri Care`
+        })
+    })
+    .then(response => {
+        if (response.ok) {
+            // Show success message
+            showNotification('Appointment request sent successfully! We\'ll contact you soon.', 'success');
+            
+            // Close appointment modal if exists
+            const appointmentModal = document.getElementById('appointmentModal');
+            if (appointmentModal) {
+                closeModal(appointmentModal);
+            }
+            
+            // Open success modal if exists
+            const successModal = document.getElementById('successModal');
+            if (successModal) {
+                openModal(successModal);
+            }
+            
+            // Reset form
+            form.reset();
+            
+            // Save to localStorage for records
+            saveConsultationToStorage(data);
+            
+            // Log interaction
+            logInteraction('consultation_submitted', { 
+                service: data.service,
+                email_status: 'sent'
+            });
+        } else {
+            throw new Error('Form submission failed');
+        }
+    })
+    .catch(error => {
+        console.error('Form submission error:', error);
         
-        // Show success
-        closeModal(document.getElementById('appointmentModal'));
-        openModal(document.getElementById('successModal'));
+        // Show error message
+        showNotification('Failed to send appointment request. Please try again or call us directly.', 'error');
         
-        // Reset form
-        form.reset();
-        
-        // Restore button
+        // Fallback to mailto method
+        setTimeout(() => {
+            sendEmailViaMailto(data);
+        }, 1000);
+    })
+    .finally(() => {
+        // Restore button state
         submitBtn.innerHTML = originalText;
         submitBtn.disabled = false;
-        
-        // Log submission
-        logInteraction('consultation_submitted', { service: data.service });
-        
-    }, 2000);
+    });
+}
+
+function saveConsultationToStorage(data) {
+    const consultations = JSON.parse(localStorage.getItem('consultations') || '[]');
+    consultations.push({
+        ...data,
+        id: Date.now(),
+        timestamp: new Date().toISOString(),
+        status: 'pending',
+        source: 'formspree'
+    });
+    localStorage.setItem('consultations', JSON.stringify(consultations.slice(-50)));
 }
 
 function validateForm(data) {
     // Required fields
     if (!data.name || !data.email || !data.phone) {
+        showNotification('Please fill in Name, Email, and Phone fields.', 'error');
         return false;
     }
     
     // Email validation
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(data.email)) {
+        showNotification('Please enter a valid email address.', 'error');
         return false;
     }
     
     // Phone validation
-    const phoneRegex = /^[\d\s\-\+\(\)]{10,}$/;
     const cleanedPhone = data.phone.replace(/\D/g, '');
     if (cleanedPhone.length < 10) {
+        showNotification('Please enter a valid phone number (at least 10 digits).', 'error');
         return false;
     }
     
     return true;
 }
 
-function processConsultationRequest(data) {
-    // Save to localStorage for demo
-    const consultations = JSON.parse(localStorage.getItem('consultations') || '[]');
-    consultations.push({
-        ...data,
-        id: Date.now(),
-        timestamp: new Date().toISOString(),
-        status: 'pending'
-    });
-    localStorage.setItem('consultations', JSON.stringify(consultations));
-    
-    // Send email notification
-    sendEmailNotification(data);
-    
-    // Send SMS alert (simulated)
-    sendSMSAlert(data);
-}
-
-function sendEmailNotification(data) {
-    const subject = `New Consultation Request: ${data.name}`;
+function sendEmailViaMailto(data) {
+    const subject = `New Consultation Request: ${data.name} - Uzuri Care`;
     const body = `
-        NEW CONSULTATION REQUEST
-        
-        Name: ${data.name}
-        Email: ${data.email}
-        Phone: ${data.phone}
-        Service: ${data.service || 'Not specified'}
-        Preferred Date: ${data.date || 'Not specified'}
-        Message: ${data.message || 'No additional message'}
-        
-        Received: ${new Date().toLocaleString()}
-        
-        Please contact this person within 24 hours.
-    `;
+NEW CONSULTATION REQUEST - UZURI CARE LLC
+
+Name: ${data.name}
+Email: ${data.email}
+Phone: ${data.phone}
+Service: ${data.service || 'Not specified'}
+Preferred Date: ${data.date || 'Not specified'}
+Message: ${data.message || 'No additional message'}
+
+Received: ${new Date().toLocaleString()}
+
+Please contact this person within 24 hours.
+    `.trim();
     
-    // Create mailto link
     const mailtoLink = `mailto:${CONFIG.company.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
     
-    // For demo purposes, we'll log it
-    console.log('Email would be sent:', { subject, body });
-    
-    
-    //  open the mail client
-    setTimeout(() => {
-        window.open(mailtoLink, '_blank');
-    }, 500);
-}
-
-function sendSMSAlert(data) {
-    const message = `New consultation: ${data.name} (${data.phone}) - ${data.service || 'General inquiry'}`;
-    console.log('SMS Alert:', message);
-    
+    // Open in new tab
+    window.open(mailtoLink, '_blank');
 }
 
 // ============================================
@@ -408,40 +444,26 @@ function setupPhoneCalls() {
     
     // Make phone numbers in text clickable
     const phoneRegex = /(\+?1?\s?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4})/g;
-    const walker = document.createTreeWalker(
-        document.body,
-        NodeFilter.SHOW_TEXT,
-        null,
-        false
-    );
     
-    let node;
-    const textNodes = [];
-    while (node = walker.nextNode()) {
-        if (phoneRegex.test(node.textContent)) {
-            textNodes.push(node);
-        }
-    }
-    
-    textNodes.forEach(textNode => {
-        const parent = textNode.parentNode;
-        if (parent.tagName !== 'A' && !parent.closest('a')) {
-            const html = textNode.textContent.replace(phoneRegex, 
+    // Look for phone numbers in text content
+    document.querySelectorAll('p, span, div, li').forEach(element => {
+        if (element.textContent.match(phoneRegex) && 
+            !element.closest('a') && 
+            element.textContent.indexOf('tel:') === -1) {
+            const newHTML = element.innerHTML.replace(phoneRegex, 
                 '<a href="tel:$1" class="phone-link">$1</a>'
             );
-            const span = document.createElement('span');
-            span.innerHTML = html;
-            parent.replaceChild(span, textNode);
+            element.innerHTML = newHTML;
         }
     });
     
     // Add click handlers to new phone links
-    document.querySelectorAll('.phone-link').forEach(link => {
-        link.addEventListener('click', function(e) {
+    document.addEventListener('click', function(e) {
+        if (e.target.classList.contains('phone-link')) {
             e.preventDefault();
-            const phoneNumber = this.textContent;
+            const phoneNumber = e.target.textContent;
             makePhoneCall(phoneNumber);
-        });
+        }
     });
 }
 
@@ -497,7 +519,7 @@ function setupWhatsAppLinks() {
 
 function openWhatsApp() {
     const phoneNumber = CONFIG.company.whatsapp.replace(/\D/g, '');
-    const message = encodeURIComponent("Hello Nzuri Care! I'm interested in your senior care services. Can you help me?");
+    const message = encodeURIComponent("Hello Uzuri Care! I'm interested in your senior care services. Can you help me?");
     const whatsappUrl = `https://wa.me/${phoneNumber}?text=${message}`;
     
     window.open(whatsappUrl, '_blank');
@@ -520,8 +542,8 @@ function setupEmailLinks() {
 }
 
 function sendDirectEmail(email = CONFIG.company.email) {
-    const subject = encodeURIComponent("Inquiry about Nzuri Care Services");
-    const body = encodeURIComponent(`Dear Nzuri Care Team,\n\nI would like to learn more about your senior care services.\n\nCould you please send me more information?\n\nBest regards,\n[Your Name]`);
+    const subject = encodeURIComponent("Inquiry about Uzuri Care Services");
+    const body = encodeURIComponent(`Dear Uzuri Care Team,\n\nI would like to learn more about your senior care services.\n\nCould you please send me more information?\n\nBest regards,\n[Your Name]`);
     const mailtoLink = `mailto:${email}?subject=${subject}&body=${body}`;
     
     window.open(mailtoLink, '_blank');
@@ -569,10 +591,17 @@ function createCommunicationButtons() {
             icon: 'fas fa-comments',
             text: 'Live Chat',
             color: '#9b59b6',
-            action: sendSMSAlert     
-
-        }
-        ,
+            action: () => {
+                const chatWidget = document.getElementById('chatWidget');
+                if (chatWidget) {
+                    chatWidget.classList.toggle('active');
+                    isChatOpen = !isChatOpen;
+                } else {
+                    createChatWidget();
+                }
+                logInteraction('chat_toggled', { isOpen: isChatOpen });
+            }
+        },
         {
             id: 'consultBtn',
             icon: 'fas fa-calendar-check',
@@ -580,7 +609,12 @@ function createCommunicationButtons() {
             color: '#2ecc71',
             action: () => {
                 const modal = document.getElementById('appointmentModal');
-                if (modal) openModal(modal);
+                if (modal) {
+                    openModal(modal);
+                } else {
+                    // If no modal, redirect to contact page
+                    window.location.href = 'contact.html';
+                }
             }
         }
     ];
@@ -641,7 +675,7 @@ function toggleChat() {
     if (!chatWidget) {
         createChatWidget();
     } else {
-        isChatOpen = !chatOpen;
+        isChatOpen = !isChatOpen;
         chatWidget.classList.toggle('active');
     }
     
@@ -660,7 +694,7 @@ function createChatWidget() {
                     <i class="fas fa-headset"></i>
                 </div>
                 <div>
-                    <h4>Nzuri Care Support</h4>
+                    <h4>Uzuri Care Support</h4>
                     <p class="chat-status">Online • Typically replies in minutes</p>
                 </div>
             </div>
@@ -671,9 +705,9 @@ function createChatWidget() {
         
         <div class="chat-messages">
             <div class="message bot">
-                <div class="message-avatar">NC</div>
+                <div class="message-avatar">UC</div>
                 <div class="message-content">
-                    <div class="message-text">Hello! 👋 I'm here from Nzuri Care. How can I help you today?</div>
+                    <div class="message-text">Hello! 👋 I'm here from Uzuri Care. How can I help you today?</div>
                     <div class="message-time">${getCurrentTime()}</div>
                 </div>
             </div>
@@ -792,7 +826,7 @@ function addChatMessage(text, sender) {
         `;
     } else {
         messageDiv.innerHTML = `
-            <div class="message-avatar">NC</div>
+            <div class="message-avatar">UC</div>
             <div class="message-content">
                 <div class="message-text">${text}</div>
                 <div class="message-time">${getCurrentTime()}</div>
@@ -809,14 +843,14 @@ function generateChatResponse(userMessage) {
     let response = "Thank you for your message! Our care coordinator will respond shortly.";
     
     if (lowerMessage.includes('price') || lowerMessage.includes('cost') || lowerMessage.includes('rate')) {
-        response = "Our pricing depends on the level of care needed. We offer competitive rates and accept most insurance plans. Would you like a personalized quote?";
+        response = "Our pricing depends on the level of care needed. We offer competitive rates starting at $25/hour. Would you like a personalized quote?";
         
         setTimeout(() => {
             const chatMessages = document.querySelector('.chat-messages');
             const actionDiv = document.createElement('div');
             actionDiv.className = 'chat-action';
             actionDiv.innerHTML = `
-                <button class="btn btn-small" onclick="openModal(document.getElementById('appointmentModal'))">
+                <button class="btn btn-small" onclick="window.location.href='contact.html'">
                     <i class="fas fa-calendar-check"></i> Get Free Quote
                 </button>
             `;
@@ -835,7 +869,7 @@ function generateChatResponse(userMessage) {
             const actionDiv = document.createElement('div');
             actionDiv.className = 'chat-action';
             actionDiv.innerHTML = `
-                <button class="btn btn-small" onclick="openModal(document.getElementById('appointmentModal'))">
+                <button class="btn btn-small" onclick="window.location.href='contact.html'">
                     <i class="fas fa-calendar"></i> Schedule Now
                 </button>
             `;
@@ -858,60 +892,8 @@ function getCurrentTime() {
 }
 
 // ============================================
-// 11. PAGE ENHANCEMENTS
+// 11. SERVICE CARDS FUNCTIONALITY
 // ============================================
-
-function initializeCounters() {
-    const counters = document.querySelectorAll('[data-count]');
-    
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                const counter = entry.target;
-                const target = parseInt(counter.getAttribute('data-count'));
-                animateCounter(counter, target);
-                observer.unobserve(counter);
-            }
-        });
-    }, { threshold: 0.5 });
-    
-    counters.forEach(counter => observer.observe(counter));
-}
-
-function animateCounter(element, target) {
-    let current = 0;
-    const increment = target / 100;
-    const timer = setInterval(() => {
-        current += increment;
-        if (current >= target) {
-            element.textContent = target + (element.textContent.includes('+') ? '+' : '');
-            clearInterval(timer);
-        } else {
-            element.textContent = Math.floor(current) + (element.textContent.includes('+') ? '+' : '');
-        }
-    }, 20);
-}
-
-function initializeParticles() {
-    const particlesContainer = document.getElementById('particles');
-    if (!particlesContainer) return;
-    
-    // Clear existing particles
-    particlesContainer.innerHTML = '';
-    
-    // Create particles
-    for (let i = 0; i < 25; i++) {
-        const particle = document.createElement('div');
-        particle.className = 'particle';
-        particle.style.left = `${Math.random() * 100}%`;
-        particle.style.top = `${Math.random() * 100}%`;
-        particle.style.width = `${Math.random() * 3 + 2}px`;
-        particle.style.height = particle.style.width;
-        particle.style.animationDelay = `${Math.random() * 3}s`;
-        particle.style.animationDuration = `${Math.random() * 10 + 10}s`;
-        particlesContainer.appendChild(particle);
-    }
-}
 
 function setupServiceCards() {
     const serviceCards = document.querySelectorAll('.service-card');
@@ -921,14 +903,15 @@ function setupServiceCards() {
         card.style.cursor = 'pointer';
         
         card.addEventListener('click', function(e) {
-            if (!e.target.closest('a')) {
-                const link = this.querySelector('a');
+            if (!e.target.closest('a') && !e.target.closest('button')) {
+                const link = this.querySelector('a.btn-service');
                 if (link) {
                     e.preventDefault();
                     window.location.href = link.href;
                 }
             }
         });
+        
         
         // Hover effects
         card.addEventListener('mouseenter', function() {
@@ -942,6 +925,10 @@ function setupServiceCards() {
         });
     });
 }
+
+// ============================================
+// 12. FOOTER LINKS FUNCTIONALITY
+// ============================================
 
 function setupFooterLinks() {
     // Make footer phone numbers clickable
@@ -964,7 +951,7 @@ function setupFooterLinks() {
 }
 
 // ============================================
-// 12. UTILITY FUNCTIONS
+// 13. UTILITY FUNCTIONS
 // ============================================
 
 function showNotification(message, type = 'info') {
@@ -1036,7 +1023,7 @@ function logInteraction(type, data = {}) {
 }
 
 // ============================================
-// 13. STYLE INJECTIONS
+// 14. STYLE INJECTIONS
 // ============================================
 
 function addComButtonsStyles() {
@@ -1438,7 +1425,7 @@ function addChatWidgetStyles() {
 }
 
 // ============================================
-// 14. GLOBAL EXPORTS
+// 15. GLOBAL EXPORTS
 // ============================================
 
 // Make functions available globally
@@ -1450,4 +1437,4 @@ window.openModal = openModal;
 window.closeModal = closeModal;
 window.showNotification = showNotification;
 
-console.log('Nzuri Care JavaScript fully loaded!');
+console.log('Uzuri Care JavaScript fully loaded!');

@@ -699,7 +699,7 @@ body {
 
 /* Page Header */
 .page-header {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, #1797a8 0%, #c03e99 100%);
     color: white;
     padding: 8rem 0 4rem;
     text-align: center;
@@ -1237,6 +1237,28 @@ body {
     border: 2px solid transparent;
 }
 
+/*=======services ICONS only=========*/
+/* Add orange background to service icons */
+.service-icon {
+    background-color: #FF9800; /* Orange color */
+    color: white;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px auto;
+    font-size: 32px;
+}
+
+/* Optional: Hover effect */
+.service-card:hover .service-icon {
+    background-color: #F57C00; /* Darker orange on hover */
+    transform: scale(1.1);
+    transition: all 0.3s ease;
+}
+/*=====END======*/
 .package-card.featured {
     border-color: var(--primary);
     transform: scale(1.05);
