@@ -8,7 +8,7 @@ const CONFIG = {
         name: "Nzuri Care LLC",
         phone: "+14705299891",
         whatsapp: "+14705299891",
-        sms: "+14705299891", // Same number for SMS
+        sms: "+14705299891",
         email: "nelsonsabastian94@gmail.com",
         address: "3078 Clairmount RD NE, Utah"
     },
@@ -379,7 +379,7 @@ Please contact this person within 24 hours.
 }
 
 // ============================================
-// 6. SMS/TEXT MESSAGE FUNCTIONALITY
+// 6. SMS/TEXT MESSAGE FUNCTIONALITY - FIXED
 // ============================================
 
 function setupSMSLinks() {
@@ -395,22 +395,23 @@ function setupSMSLinks() {
 
 function sendSMS() {
     const phoneNumber = CONFIG.company.sms.replace(/\D/g, '');
-    const serviceName = document.querySelector('h1')?.textContent || 'Nzuri Care Services';
-    const message = encodeURIComponent(`Hello Nzuri Care! I'm interested in your ${serviceName}. Can you help me?`);
     
-    const smsLink = `sms:${phoneNumber}?body=${message}`;
+    // SMS link with ONLY the phone number (no pre-filled message)
+    const smsLink = `sms:${phoneNumber}`;
     
     if (isMobileDevice()) {
+        // On mobile, open SMS app with just the number
         window.location.href = smsLink;
     } else {
+        // On desktop, show notification with instructions
         const formattedNumber = formatPhoneNumber(phoneNumber);
-        const instruction = `To send a text message:\n\n1. Open your messaging app\n2. Send a message to ${formattedNumber}\n3. You can copy this message:\n\n"Hello Nzuri Care! I'm interested in your ${serviceName}. Can you help me?"`;
+        showNotification(`To send a text message, open your messaging app and send to: ${formattedNumber}`, 'info');
         
-        if (confirm(instruction + "\n\nCopy message to clipboard?")) {
-            const textToCopy = `Hello Nzuri Care! I'm interested in your ${serviceName}. Can you help me?`;
-            navigator.clipboard.writeText(textToCopy)
-                .then(() => showNotification('Message copied to clipboard!', 'success'))
-                .catch(() => showNotification('Failed to copy message', 'error'));
+        // Optionally copy the number to clipboard
+        if (navigator.clipboard && confirm(`Copy ${formattedNumber} to clipboard?`)) {
+            navigator.clipboard.writeText(phoneNumber)
+                .then(() => showNotification('Phone number copied to clipboard!', 'success'))
+                .catch(() => showNotification('Failed to copy phone number', 'error'));
         }
     }
     
@@ -546,7 +547,7 @@ function openWhatsApp() {
 }
 
 // ============================================
-// 10. GMAIL FUNCTIONALITY - UPDATED
+// 10. GMAIL FUNCTIONALITY
 // ============================================
 
 function setupEmailLinks() {
@@ -563,17 +564,15 @@ function openGmail(email = CONFIG.company.email) {
     const subject = encodeURIComponent("Inquiry about Nzuri Care Services");
     const body = encodeURIComponent(`Dear Nzuri Care Team,\n\nI would like to learn more about your senior care services.\n\nCould you please send me more information?\n\nBest regards,\n[Your Name]`);
     
-    // Gmail direct URL - opens Gmail compose window
     const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${email}&su=${subject}&body=${body}`;
     
-    // Try to open Gmail directly
     window.open(gmailUrl, '_blank');
     
     logInteraction('gmail_opened', { email: email });
 }
 
 // ============================================
-// 11. COMMUNICATION BUTTONS - WITH SMS & GMAIL
+// 11. COMMUNICATION BUTTONS
 // ============================================
 
 function createCommunicationButtons() {
@@ -606,7 +605,7 @@ function createCommunicationButtons() {
             action: openWhatsApp
         },
         {
-            id: 'gmailBtn', // Changed from emailBtn to gmailBtn
+            id: 'gmailBtn',
             icon: 'fas fa-envelope',
             text: 'Gmail',
             color: '#EA4335',
@@ -741,7 +740,7 @@ function createChatWidget() {
                 <i class="fas fa-sms"></i> Text Message
             </button>
             <button class="quick-action" data-action="gmail">
-                <i class="fab fa-google"></i> Gmail
+                <i class="fas fa-envelope"></i> Gmail
             </button>
         </div>
         
@@ -875,7 +874,7 @@ function generateChatResponse(userMessage) {
                     <i class="fas fa-sms"></i> Text for Quote
                 </button>
                 <button class="btn btn-small" onclick="openGmail()" style="margin-left: 10px; background-color: #EA4335;">
-                    <i class="fab fa-google"></i> Email for Quote
+                    <i class="fas fa-envelope"></i> Email for Quote
                 </button>
             `;
             chatMessages.appendChild(actionDiv);
@@ -900,7 +899,7 @@ function generateChatResponse(userMessage) {
                     <i class="fas fa-sms"></i> Text to Schedule
                 </button>
                 <button class="btn btn-small" onclick="openGmail()" style="margin-left: 10px; background-color: #EA4335;">
-                    <i class="fab fa-google"></i> Email to Schedule
+                    <i class="fas fa-envelope"></i> Email to Schedule
                 </button>
             `;
             chatMessages.appendChild(actionDiv);
@@ -1088,13 +1087,13 @@ function logInteraction(type, data = {}) {
 }
 
 // ============================================
-// 15. STYLE INJECTIONS - UPDATED FOR GMAIL
+// 15. STYLE INJECTIONS
 // ============================================
 
 function addComButtonsStyles() {
     const style = document.createElement('style');
     style.textContent = `
-         /* Communication Buttons */
+        /* Communication Buttons */
         .com-buttons-container {
             position: fixed;
             right: 30px;
@@ -1134,7 +1133,6 @@ function addComButtonsStyles() {
             align-items: center;
             justify-content: center;
         }
-         
         
         .com-button .btn-text {
             font-size: 14px;
@@ -1152,35 +1150,28 @@ function addComButtonsStyles() {
         /* Button Colors */
         #phoneBtn { 
             background: linear-gradient(135deg, #3498db, #2980b9); 
-            order: 1;
         }
         #smsBtn { 
             background: linear-gradient(135deg, #FF9800, #F57C00);
-            order: 2;
         }
         #whatsappBtn { 
             background: linear-gradient(135deg, #25D366, #128C7E);
-            order: 3;
         }
         #gmailBtn { 
             background: linear-gradient(135deg, #EA4335, #D14836);
-            order: 4;
         }
         #chatBtn { 
             background: linear-gradient(135deg, #9b59b6, #8e44ad);
-            order: 5;
         }
         #consultBtn { 
             background: linear-gradient(135deg, #2ecc71, #27ae60);
-            order: 6;
         }
         
         /* Mobile Responsive */
         @media (max-width: 768px) {
             .com-buttons-container {
-                bottom: 10px;
                 right: 10px;
-                gap: 10px;
+                bottom: 10px;
             }
             
             .com-button {
@@ -1188,87 +1179,18 @@ function addComButtonsStyles() {
                 height: 50px;
             }
             
-            .com-button:hover {
-                width: 50px;
-                border-radius: 50%;
+            .com-button i {
+                min-width: 50px;
+                font-size: 20px;
             }
             
-            .com-button i {
-                font-size: 20px;
-                min-width: 50px;
+            .com-button:hover {
+                width: 50px;
             }
             
             .com-button .btn-text {
                 display: none;
             }
-            
-            @media (max-width: 480px) {
-                .com-buttons-container {
-                    flex-direction: row;
-                    justify-content: center;
-                    right: 50%;
-                    transform: translateX(50%);
-                    width: 100%;
-                    gap: 8px;
-                    bottom: 5px;
-                }
-                
-                .com-button {
-                    width: 45px;
-                    height: 45px;
-                }
-                
-                .com-button i {
-                    min-width: 45px;
-                    font-size: 18px;
-                }
-            }
-        }
-        
-        /* Desktop tooltip */
-        @media (min-width: 769px) {
-            .com-button:hover::after {
-                content: attr(aria-label);
-                position: absolute;
-                right: 150%;
-                top: 50%;
-                transform: translateY(-50%);
-                background: rgba(0,0,0,0.9);
-                color: white;
-                padding: 8px 12px;
-                border-radius: 6px;
-                font-size: 13px;
-                white-space: nowrap;
-                pointer-events: none;
-                animation: fadeIn 0.2s ease;
-                z-index: 10001;
-            }
-            
-            .com-button:hover::before {
-                content: '';
-                position: absolute;
-                right: 140%;
-                top: 50%;
-                transform: translateY(-50%);
-                border: 6px solid transparent;
-                border-left-color: rgba(0,0,0,0.9);
-                pointer-events: none;
-                z-index: 10001;
-            }
-        }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(-50%) translateX(10px); }
-            to { opacity: 1; transform: translateY(-50%) translateX(0); }
-        }
-        
-        .mobile-tooltip {
-            animation: fadeInOut 1s ease;
-        }
-        
-        @keyframes fadeInOut {
-            0%, 100% { opacity: 0; transform: translateY(10px); }
-            20%, 80% { opacity: 1; transform: translateY(0); }
         }
     `;
     
@@ -1278,7 +1200,7 @@ function addComButtonsStyles() {
 function addChatWidgetStyles() {
     const style = document.createElement('style');
     style.textContent = `
-         /* Chat Widget */
+        /* Chat Widget */
         .chat-widget {
             position: fixed;
             bottom: 100px;
@@ -1487,6 +1409,19 @@ function addChatWidgetStyles() {
         .chat-action .btn {
             padding: 8px 16px;
             font-size: 13px;
+            border: none;
+            border-radius: 5px;
+            color: white;
+            cursor: pointer;
+            margin: 5px;
+        }
+        
+        .btn-small[style*="background-color: #FF9800"] {
+            background: linear-gradient(135deg, #FF9800, #F57C00) !important;
+        }
+        
+        .btn-small[style*="background-color: #EA4335"] {
+            background: linear-gradient(135deg, #EA4335, #D14836) !important;
         }
         
         /* Notification Styles */
@@ -1536,20 +1471,7 @@ function addChatWidgetStyles() {
             margin-left: 10px;
         }
         
-        /* Mobile Menu Dropdowns */
         @media (max-width: 768px) {
-            .dropdown-menu {
-                display: none;
-                position: static;
-                box-shadow: none;
-                background: rgba(0,0,0,0.05);
-                padding-left: 20px;
-            }
-            
-            .dropdown-menu.show {
-                display: block;
-            }
-            
             .chat-widget {
                 width: calc(100% - 20px);
                 height: 70vh;
@@ -1592,4 +1514,4 @@ window.openModal = openModal;
 window.closeModal = closeModal;
 window.showNotification = showNotification;
 
-console.log('Nzuri Care JavaScript fully loaded with SMS & Gmail functionality!');
+console.log('Nzuri Care JavaScript fully loaded with fixed SMS functionality!');
