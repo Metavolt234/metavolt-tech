@@ -396,9 +396,9 @@ function setupSMSLinks() {
 function sendSMS() {
     const phoneNumber = CONFIG.company.sms.replace(/\D/g, '');
     const serviceName = document.querySelector('h1')?.textContent || 'Nzuri Care Services';
-    const message = encodeURIComponent(`Hello Nzuri Care! I'm interested in your ${serviceName}. Can you help me?`);
     
-    const smsLink = `sms:${phoneNumber}`;
+    
+    const smsLink = `sms:${phoneNumber}?body=${message}`;
     
     if (isMobileDevice()) {
         window.location.href = smsLink;
