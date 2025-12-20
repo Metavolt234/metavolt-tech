@@ -398,7 +398,7 @@ function sendSMS() {
     const serviceName = document.querySelector('h1')?.textContent || 'Nzuri Care Services';
     const message = encodeURIComponent(`Hello Nzuri Care! I'm interested in your ${serviceName}. Can you help me?`);
     
-    const smsLink = `sms:${phoneNumber}?body=${message}`;
+    const smsLink = `sms:${phoneNumber}`;
     
     if (isMobileDevice()) {
         window.location.href = smsLink;
