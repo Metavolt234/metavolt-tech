@@ -398,13 +398,13 @@ function sendSMS() {
     const serviceName = document.querySelector('h1')?.textContent || 'Nzuri Care Services';
     
     
-    const smsLink = `sms:${phoneNumber}?body=${message}`;
+    const smsLink = `sms:${phoneNumber}`;
     
     if (isMobileDevice()) {
         window.location.href = smsLink;
     } else {
         const formattedNumber = formatPhoneNumber(phoneNumber);
-        const instruction = `To send a text message:\n\n1. Open your messaging app\n2. Send a message to ${formattedNumber}\n3. You can copy this message:\n\n"Hello Nzuri Care! I'm interested in your ${serviceName}. Can you help me?"`;
+        const instruction = `To send a text message:\n\n1. Open your messaging app\n2. Send a message to ${formattedNumber}`;
         
         if (confirm(instruction + "\n\nCopy message to clipboard?")) {
             const textToCopy = `Hello Nzuri Care! I'm interested in your ${serviceName}. Can you help me?`;
