@@ -8,6 +8,7 @@ const CONFIG = {
         name: "Nzuri Care LLC",
         phone: "+14705299891",
         whatsapp: "+14705299891",
+        sms: "+14705299891", // Same number for SMS
         email: "nelsonsabastian94@gmail.com",
         address: "3078 Clairmount RD NE, Utah"
     },
@@ -17,11 +18,10 @@ const CONFIG = {
         dementia: "Dementia Care",
         respite: "Respite Care"
     },
-    // EmailJS Configuration - UPDATE THESE VALUES
     emailjs: {
-        serviceID: "YOUR_SERVICE_ID", // Get from EmailJS dashboard
-        templateID: "YOUR_TEMPLATE_ID", // Get from EmailJS dashboard
-        publicKey: "YOUR_PUBLIC_KEY" // Get from EmailJS dashboard
+        serviceID: "YOUR_SERVICE_ID",
+        templateID: "YOUR_TEMPLATE_ID",
+        publicKey: "YOUR_PUBLIC_KEY"
     }
 };
 
@@ -30,16 +30,13 @@ let isChatOpen = false;
 let isMobileMenuOpen = false;
 
 // ============================================
-// 1. MAIN INITIALIZATION (UPDATED)
+// 1. MAIN INITIALIZATION
 // ============================================
 
 document.addEventListener('DOMContentLoaded', function() {
     console.log('Nzuri Care LLC - Page Loading...');
     
-    // Initialize EmailJS
     initializeEmailJS();
-    
-    // Initialize all components
     initializeNavigation();
     initializeHamburgerMenu();
     initializeModals();
@@ -47,13 +44,13 @@ document.addEventListener('DOMContentLoaded', function() {
     createCommunicationButtons();
     setupPhoneCalls();
     setupWhatsAppLinks();
+    setupSMSLinks();
     initializeCounters();
     initializeParticles();
     setupServiceCards();
     setupFooterLinks();
     setupEmailLinks();
     
-    // Show welcome message
     setTimeout(() => {
         showNotification('Welcome to Nzuri Care! We provide compassionate senior care services.', 'info');
     }, 1500);
@@ -72,13 +69,11 @@ function initializeHamburgerMenu() {
     
     if (!hamburger || !navMenu) return;
     
-    // Toggle menu on hamburger click
     hamburger.addEventListener('click', function(e) {
         e.stopPropagation();
         toggleMobileMenu();
     });
     
-    // Close menu when clicking on a nav link
     navLinks.forEach(link => {
         link.addEventListener('click', function() {
             if (isMobileMenuOpen) {
@@ -87,7 +82,6 @@ function initializeHamburgerMenu() {
         });
     });
     
-    // Close menu when clicking outside
     document.addEventListener('click', function(e) {
         if (isMobileMenuOpen && 
             !navMenu.contains(e.target) && 
@@ -96,7 +90,6 @@ function initializeHamburgerMenu() {
         }
     });
     
-    // Handle dropdowns on mobile
     const dropdowns = document.querySelectorAll('.dropdown > .nav-link');
     dropdowns.forEach(dropdownLink => {
         dropdownLink.addEventListener('click', function(e) {
@@ -110,7 +103,6 @@ function initializeHamburgerMenu() {
         });
     });
     
-    // Close dropdowns when clicking elsewhere
     document.addEventListener('click', function(e) {
         if (window.innerWidth <= 768) {
             document.querySelectorAll('.dropdown-menu.show').forEach(menu => {
@@ -131,11 +123,8 @@ function toggleMobileMenu() {
     isMobileMenuOpen = !isMobileMenuOpen;
     hamburger.classList.toggle('active');
     navMenu.classList.toggle('active');
-    
-    // Toggle body scroll
     document.body.style.overflow = isMobileMenuOpen ? 'hidden' : 'auto';
     
-    // Close all dropdowns when closing menu
     if (!isMobileMenuOpen) {
         document.querySelectorAll('.dropdown-menu.show').forEach(menu => {
             menu.classList.remove('show');
@@ -148,10 +137,8 @@ function toggleMobileMenu() {
 // ============================================
 
 function initializeNavigation() {
-    // Set active navigation link
     setActiveNavLink();
     
-    // Handle dropdown hover on desktop
     if (window.innerWidth > 768) {
         const dropdowns = document.querySelectorAll('.dropdown');
         dropdowns.forEach(dropdown => {
@@ -167,16 +154,13 @@ function initializeNavigation() {
         });
     }
     
-    // Update on window resize
     window.addEventListener('resize', function() {
         if (window.innerWidth > 768) {
-            // Reset mobile menu state
             isMobileMenuOpen = false;
             document.querySelector('.hamburger')?.classList.remove('active');
             document.querySelector('.nav-menu')?.classList.remove('active');
             document.body.style.overflow = 'auto';
             
-            // Reset dropdowns
             document.querySelectorAll('.dropdown-menu').forEach(menu => {
                 menu.style.display = '';
                 menu.classList.remove('show');
@@ -210,7 +194,6 @@ function initializeModals() {
     
     if (!appointmentModal || !successModal) return;
     
-    // Open consultation modal buttons
     const consultationButtons = [
         document.getElementById('consultationBtn'),
         document.getElementById('heroConsultation')
@@ -225,7 +208,6 @@ function initializeModals() {
         }
     });
     
-    // Close buttons
     const closeButtons = document.querySelectorAll('.close-modal, #closeSuccess');
     closeButtons.forEach(button => {
         button.addEventListener('click', function() {
@@ -234,14 +216,12 @@ function initializeModals() {
         });
     });
     
-    // Close modal when clicking outside
     window.addEventListener('click', function(e) {
         if (e.target.classList.contains('modal')) {
             closeModal(e.target);
         }
     });
     
-    // Close with Escape key
     document.addEventListener('keydown', function(e) {
         if (e.key === 'Escape') {
             const openModal = document.querySelector('.modal[style*="display: flex"]');
@@ -249,7 +229,6 @@ function initializeModals() {
         }
     });
     
-    // Set minimum date for appointment form
     const dateInput = document.getElementById('date');
     if (dateInput) {
         const today = new Date().toISOString().split('T')[0];
@@ -273,7 +252,7 @@ function closeModal(modal) {
 }
 
 // ============================================
-// 5. CONTACT FORM HANDLING (UPDATED FOR FORMSPREE)
+// 5. CONTACT FORM HANDLING
 // ============================================
 
 function initializeContactForms() {
@@ -291,19 +270,16 @@ function handleFormSubmit(e) {
     const formData = new FormData(form);
     const data = Object.fromEntries(formData);
     
-    // Validate form
     if (!validateForm(data)) {
         showNotification('Please fill in all required fields correctly.', 'error');
         return;
     }
     
-    // Show loading state
     const submitBtn = form.querySelector('button[type="submit"]');
     const originalText = submitBtn.innerHTML;
     submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
     submitBtn.disabled = true;
     
-    // Send data to Formspree
     fetch('https://formspree.io/f/movggkbq', {
         method: 'POST',
         headers: {
@@ -322,22 +298,11 @@ function handleFormSubmit(e) {
     })
     .then(response => {
         if (response.ok) {
-            // Show success message
             showNotification('Appointment request sent successfully! We\'ll contact you soon.', 'success');
-            
-            // Close appointment modal
             closeModal(document.getElementById('appointmentModal'));
-            
-            // Open success modal
             openModal(document.getElementById('successModal'));
-            
-            // Reset form
             form.reset();
-            
-            // Save to localStorage for records
             saveConsultationToStorage(data);
-            
-            // Log interaction
             logInteraction('consultation_submitted', { 
                 service: data.service,
                 email_status: 'sent'
@@ -348,17 +313,12 @@ function handleFormSubmit(e) {
     })
     .catch(error => {
         console.error('Form submission error:', error);
-        
-        // Show error message
         showNotification('Failed to send appointment request. Please try again or call us directly.', 'error');
-        
-        // Fallback to mailto method
         setTimeout(() => {
             sendEmailViaMailto(data);
         }, 1000);
     })
     .finally(() => {
-        // Restore button state
         submitBtn.innerHTML = originalText;
         submitBtn.disabled = false;
     });
@@ -377,20 +337,17 @@ function saveConsultationToStorage(data) {
 }
 
 function validateForm(data) {
-    // Required fields
     if (!data.name || !data.email || !data.phone) {
         showNotification('Please fill in Name, Email, and Phone fields.', 'error');
         return false;
     }
     
-    // Email validation
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(data.email)) {
         showNotification('Please enter a valid email address.', 'error');
         return false;
     }
     
-    // Phone validation
     const cleanedPhone = data.phone.replace(/\D/g, '');
     if (cleanedPhone.length < 10) {
         showNotification('Please enter a valid phone number (at least 10 digits).', 'error');
@@ -418,51 +375,78 @@ Please contact this person within 24 hours.
     `.trim();
     
     const mailtoLink = `mailto:${CONFIG.company.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-    
-    // Open in new tab
     window.open(mailtoLink, '_blank');
 }
 
+// ============================================
+// 6. SMS/TEXT MESSAGE FUNCTIONALITY
+// ============================================
 
+function setupSMSLinks() {
+    document.addEventListener('click', function(e) {
+        if (e.target.closest('#smsBtn') || 
+            e.target.closest('[data-sms]') ||
+            e.target.closest('.sms-link')) {
+            e.preventDefault();
+            sendSMS();
+        }
+    });
+}
+
+function sendSMS() {
+    const phoneNumber = CONFIG.company.sms.replace(/\D/g, '');
+    const serviceName = document.querySelector('h1')?.textContent || 'Nzuri Care Services';
+    const message = encodeURIComponent(`Hello Nzuri Care! I'm interested in your ${serviceName}. Can you help me?`);
+    
+    const smsLink = `sms:${phoneNumber}?body=${message}`;
+    
+    if (isMobileDevice()) {
+        window.location.href = smsLink;
+    } else {
+        const formattedNumber = formatPhoneNumber(phoneNumber);
+        const instruction = `To send a text message:\n\n1. Open your messaging app\n2. Send a message to ${formattedNumber}\n3. You can copy this message:\n\n"Hello Nzuri Care! I'm interested in your ${serviceName}. Can you help me?"`;
+        
+        if (confirm(instruction + "\n\nCopy message to clipboard?")) {
+            const textToCopy = `Hello Nzuri Care! I'm interested in your ${serviceName}. Can you help me?`;
+            navigator.clipboard.writeText(textToCopy)
+                .then(() => showNotification('Message copied to clipboard!', 'success'))
+                .catch(() => showNotification('Failed to copy message', 'error'));
+        }
+    }
+    
+    logInteraction('sms_initiated', { number: phoneNumber });
+}
 
 // ============================================
-// 6. EMAILJS INITIALIZATION FUNCTION
+// 7. EMAILJS INITIALIZATION
 // ============================================
 
 function initializeEmailJS() {
-    // Check if EmailJS is loaded
     if (typeof emailjs === 'undefined') {
         console.warn('EmailJS not loaded. Loading now...');
         
-        // Load EmailJS SDK
         const script = document.createElement('script');
         script.src = 'https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js';
         script.async = true;
         script.onload = function() {
-            // Initialize EmailJS with your public key
             if (CONFIG.emailjs.publicKey !== "YOUR_PUBLIC_KEY") {
                 emailjs.init(CONFIG.emailjs.publicKey);
                 console.log('EmailJS initialized successfully');
-            } else {
-                console.warn('Please update EmailJS public key in CONFIG');
             }
         };
         document.head.appendChild(script);
     } else {
-        // EmailJS already loaded, just initialize
         if (CONFIG.emailjs.publicKey !== "YOUR_PUBLIC_KEY") {
             emailjs.init(CONFIG.emailjs.publicKey);
-            console.log('EmailJS re-initialized');
         }
     }
 }
 
 // ============================================
-// 7. PHONE CALL FUNCTIONALITY
+// 8. PHONE CALL FUNCTIONALITY
 // ============================================
 
 function setupPhoneCalls() {
-    // Make all phone links clickable
     document.querySelectorAll('a[href^="tel:"]').forEach(link => {
         link.addEventListener('click', function(e) {
             e.preventDefault();
@@ -471,7 +455,6 @@ function setupPhoneCalls() {
         });
     });
     
-    // Make phone numbers in text clickable
     const phoneRegex = /(\+?1?\s?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4})/g;
     const walker = document.createTreeWalker(
         document.body,
@@ -500,7 +483,6 @@ function setupPhoneCalls() {
         }
     });
     
-    // Add click handlers to new phone links
     document.querySelectorAll('.phone-link').forEach(link => {
         link.addEventListener('click', function(e) {
             e.preventDefault();
@@ -513,19 +495,14 @@ function setupPhoneCalls() {
 function makePhoneCall(phoneNumber = CONFIG.company.phone) {
     const formattedNumber = formatPhoneNumber(phoneNumber);
     
-    // Ask for confirmation on desktop
     if (!isMobileDevice()) {
         const confirmed = confirm(`Call ${formattedNumber}?`);
         if (!confirmed) return;
     }
     
-    // Log the call
     logInteraction('phone_call_attempted', { number: phoneNumber });
-    
-    // Initiate the call
     window.location.href = `tel:${phoneNumber.replace(/\D/g, '')}`;
     
-    // Show notification for desktop users
     if (!isMobileDevice()) {
         showNotification(`Calling ${formattedNumber}...`, 'info');
     }
@@ -545,11 +522,10 @@ function isMobileDevice() {
 }
 
 // ============================================
-// 8. WHATSAPP FUNCTIONALITY
+// 9. WHATSAPP FUNCTIONALITY
 // ============================================
 
 function setupWhatsAppLinks() {
-    // Create WhatsApp button event
     document.addEventListener('click', function(e) {
         if (e.target.closest('#whatsappBtn') || 
             e.target.closest('[data-whatsapp]') ||
@@ -570,43 +546,43 @@ function openWhatsApp() {
 }
 
 // ============================================
-// 9. EMAIL FUNCTIONALITY
+// 10. GMAIL FUNCTIONALITY - UPDATED
 // ============================================
 
 function setupEmailLinks() {
-    // Make email links functional
     document.querySelectorAll('a[href^="mailto:"]').forEach(link => {
         link.addEventListener('click', function(e) {
             e.preventDefault();
             const email = this.getAttribute('href').replace('mailto:', '');
-            sendDirectEmail(email);
+            openGmail(email);
         });
     });
 }
 
-function sendDirectEmail(email = CONFIG.company.email) {
+function openGmail(email = CONFIG.company.email) {
     const subject = encodeURIComponent("Inquiry about Nzuri Care Services");
     const body = encodeURIComponent(`Dear Nzuri Care Team,\n\nI would like to learn more about your senior care services.\n\nCould you please send me more information?\n\nBest regards,\n[Your Name]`);
-    const mailtoLink = `mailto:${email}?subject=${subject}&body=${body}`;
     
-    window.open(mailtoLink, '_blank');
-    logInteraction('email_initiated');
+    // Gmail direct URL - opens Gmail compose window
+    const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${email}&su=${subject}&body=${body}`;
+    
+    // Try to open Gmail directly
+    window.open(gmailUrl, '_blank');
+    
+    logInteraction('gmail_opened', { email: email });
 }
 
 // ============================================
-// 10. COMMUNICATION BUTTONS
+// 11. COMMUNICATION BUTTONS - WITH SMS & GMAIL
 // ============================================
 
 function createCommunicationButtons() {
-    // Remove any existing buttons
     const existingContainer = document.querySelector('.com-buttons-container');
     if (existingContainer) existingContainer.remove();
     
-    // Create container
     const container = document.createElement('div');
     container.className = 'com-buttons-container';
     
-    // Define buttons
     const buttons = [
         {
             id: 'phoneBtn',
@@ -616,6 +592,13 @@ function createCommunicationButtons() {
             action: () => makePhoneCall(CONFIG.company.phone)
         },
         {
+            id: 'smsBtn',
+            icon: 'fas fa-sms',
+            text: 'Text Message',
+            color: '#FF9800',
+            action: sendSMS
+        },
+        {
             id: 'whatsappBtn',
             icon: 'fab fa-whatsapp',
             text: 'WhatsApp',
@@ -623,11 +606,11 @@ function createCommunicationButtons() {
             action: openWhatsApp
         },
         {
-            id: 'emailBtn',
+            id: 'gmailBtn', // Changed from emailBtn to gmailBtn
             icon: 'fas fa-envelope',
-            text: 'Email',
+            text: 'Gmail',
             color: '#EA4335',
-            action: sendDirectEmail
+            action: () => openGmail(CONFIG.company.email)
         },
         {
             id: 'chatBtn',
@@ -657,16 +640,12 @@ function createCommunicationButtons() {
         }
     ];
     
-    // Create buttons
     buttons.forEach((btn, index) => {
         const button = createComButton(btn, index);
         container.appendChild(button);
     });
     
-    // Add to page
     document.body.appendChild(container);
-    
-    // Add styles
     addComButtonsStyles();
 }
 
@@ -680,11 +659,9 @@ function createComButton(config, index) {
         <span class="btn-text">${config.text}</span>
     `;
     
-    // Style
     button.style.backgroundColor = config.color;
     button.style.bottom = `${20 + (index * 70)}px`;
     
-    // Hover effects for desktop
     if (window.innerWidth > 768) {
         button.addEventListener('mouseenter', () => {
             button.style.width = '140px';
@@ -697,14 +674,13 @@ function createComButton(config, index) {
         });
     }
     
-    // Click action
     button.addEventListener('click', config.action);
     
     return button;
 }
 
 // ============================================
-// 11. LIVE CHAT FUNCTIONALITY
+// 12. LIVE CHAT FUNCTIONALITY
 // ============================================
 
 function toggleChat() {
@@ -745,7 +721,7 @@ function createChatWidget() {
             <div class="message bot">
                 <div class="message-avatar">NC</div>
                 <div class="message-content">
-                    <div class="message-text">Hello! 👋 I'm here from Nzuri Care. How can I help you today?</div>
+                    <div class="message-text">Hello! 👋 I'm here from Nzuri Care LLC. How can I help you today?</div>
                     <div class="message-time">${getCurrentTime()}</div>
                 </div>
             </div>
@@ -760,6 +736,12 @@ function createChatWidget() {
             </button>
             <button class="quick-action" data-action="consultation">
                 <i class="fas fa-calendar"></i> Free Consultation
+            </button>
+            <button class="quick-action" data-action="sms">
+                <i class="fas fa-sms"></i> Text Message
+            </button>
+            <button class="quick-action" data-action="gmail">
+                <i class="fab fa-google"></i> Gmail
             </button>
         </div>
         
@@ -776,8 +758,6 @@ function createChatWidget() {
     
     document.body.appendChild(chatWidget);
     isChatOpen = true;
-    
-    // Setup chat functionality
     setupChatFunctionality();
     addChatWidgetStyles();
 }
@@ -792,20 +772,15 @@ function setupChatFunctionality() {
     const quickActions = chatWidget.querySelectorAll('.quick-action');
     const chatMessages = chatWidget.querySelector('.chat-messages');
     
-    // Send message function
     const sendMessage = () => {
         const message = chatInput.value.trim();
         if (!message) return;
         
-        // Add user message
         addChatMessage(message, 'user');
         chatInput.value = '';
-        
-        // Generate bot response
         setTimeout(() => generateChatResponse(message), 1000);
     };
     
-    // Event listeners
     sendButton.addEventListener('click', sendMessage);
     chatInput.addEventListener('keypress', (e) => {
         if (e.key === 'Enter') sendMessage();
@@ -823,7 +798,6 @@ function setupChatFunctionality() {
         });
     });
     
-    // Focus input when chat opens
     setTimeout(() => chatInput.focus(), 300);
 }
 
@@ -840,6 +814,12 @@ function handleQuickAction(action) {
         case 'consultation':
             message = "I'd like to schedule a free consultation";
             break;
+        case 'sms':
+            sendSMS();
+            return;
+        case 'gmail':
+            openGmail();
+            return;
     }
     
     if (message) {
@@ -891,6 +871,12 @@ function generateChatResponse(userMessage) {
                 <button class="btn btn-small" onclick="openModal(document.getElementById('appointmentModal'))">
                     <i class="fas fa-calendar-check"></i> Get Free Quote
                 </button>
+                <button class="btn btn-small" onclick="sendSMS()" style="margin-left: 10px; background-color: #FF9800;">
+                    <i class="fas fa-sms"></i> Text for Quote
+                </button>
+                <button class="btn btn-small" onclick="openGmail()" style="margin-left: 10px; background-color: #EA4335;">
+                    <i class="fab fa-google"></i> Email for Quote
+                </button>
             `;
             chatMessages.appendChild(actionDiv);
             chatMessages.scrollTop = chatMessages.scrollHeight;
@@ -910,13 +896,19 @@ function generateChatResponse(userMessage) {
                 <button class="btn btn-small" onclick="openModal(document.getElementById('appointmentModal'))">
                     <i class="fas fa-calendar"></i> Schedule Now
                 </button>
+                <button class="btn btn-small" onclick="sendSMS()" style="margin-left: 10px; background-color: #FF9800;">
+                    <i class="fas fa-sms"></i> Text to Schedule
+                </button>
+                <button class="btn btn-small" onclick="openGmail()" style="margin-left: 10px; background-color: #EA4335;">
+                    <i class="fab fa-google"></i> Email to Schedule
+                </button>
             `;
             chatMessages.appendChild(actionDiv);
             chatMessages.scrollTop = chatMessages.scrollHeight;
         }, 500);
         
     } else if (lowerMessage.includes('emergency') || lowerMessage.includes('urgent')) {
-        response = `For immediate assistance, please call us at ${formatPhoneNumber(CONFIG.company.phone)}. Our emergency team is available 24/7.`;
+        response = `For immediate assistance, please call us at ${formatPhoneNumber(CONFIG.company.phone)} or send a text message to ${formatPhoneNumber(CONFIG.company.sms)}. Our emergency team is available 24/7.`;
         
     } else if (lowerMessage.includes('service') || lowerMessage.includes('care') || lowerMessage.includes('help')) {
         response = "We offer Personal Care, Companion Care, Dementia Care, and Respite Care. Each service is tailored to individual needs. Which service interests you most?";
@@ -930,7 +922,7 @@ function getCurrentTime() {
 }
 
 // ============================================
-// 12. PAGE ENHANCEMENTS
+// 13. PAGE ENHANCEMENTS
 // ============================================
 
 function initializeCounters() {
@@ -968,10 +960,8 @@ function initializeParticles() {
     const particlesContainer = document.getElementById('particles');
     if (!particlesContainer) return;
     
-    // Clear existing particles
     particlesContainer.innerHTML = '';
     
-    // Create particles
     for (let i = 0; i < 25; i++) {
         const particle = document.createElement('div');
         particle.className = 'particle';
@@ -989,7 +979,6 @@ function setupServiceCards() {
     const serviceCards = document.querySelectorAll('.service-card');
     
     serviceCards.forEach(card => {
-        // Make entire card clickable
         card.style.cursor = 'pointer';
         
         card.addEventListener('click', function(e) {
@@ -1002,7 +991,6 @@ function setupServiceCards() {
             }
         });
         
-        // Hover effects
         card.addEventListener('mouseenter', function() {
             this.style.transform = 'translateY(-10px)';
             this.style.boxShadow = '0 15px 30px rgba(0,0,0,0.15)';
@@ -1016,7 +1004,6 @@ function setupServiceCards() {
 }
 
 function setupFooterLinks() {
-    // Make footer phone numbers clickable
     document.querySelectorAll('footer a[href^="tel:"]').forEach(link => {
         link.addEventListener('click', function(e) {
             e.preventDefault();
@@ -1025,26 +1012,23 @@ function setupFooterLinks() {
         });
     });
     
-    // Make footer emails clickable
     document.querySelectorAll('footer a[href^="mailto:"]').forEach(link => {
         link.addEventListener('click', function(e) {
             e.preventDefault();
             const email = this.getAttribute('href').replace('mailto:', '');
-            sendDirectEmail(email);
+            openGmail(email);
         });
     });
 }
 
 // ============================================
-// 13. UTILITY FUNCTIONS
+// 14. UTILITY FUNCTIONS
 // ============================================
 
 function showNotification(message, type = 'info') {
-    // Remove existing notification
     const existing = document.querySelector('.notification');
     if (existing) existing.remove();
     
-    // Create notification
     const notification = document.createElement('div');
     notification.className = `notification ${type}`;
     
@@ -1065,15 +1049,12 @@ function showNotification(message, type = 'info') {
     
     document.body.appendChild(notification);
     
-    // Show with animation
     setTimeout(() => notification.classList.add('show'), 10);
     
-    // Auto-hide after 5 seconds
     const timeout = setTimeout(() => {
         hideNotification(notification);
     }, 5000);
     
-    // Close button
     notification.querySelector('.notification-close').addEventListener('click', () => {
         clearTimeout(timeout);
         hideNotification(notification);
@@ -1097,7 +1078,6 @@ function logInteraction(type, data = {}) {
         page: window.location.pathname
     };
     
-    // Store in localStorage for analytics
     try {
         const logs = JSON.parse(localStorage.getItem('interaction_logs') || '[]');
         logs.push(log);
@@ -1108,13 +1088,13 @@ function logInteraction(type, data = {}) {
 }
 
 // ============================================
-// 14. STYLE INJECTIONS
+// 15. STYLE INJECTIONS - UPDATED FOR GMAIL
 // ============================================
 
 function addComButtonsStyles() {
     const style = document.createElement('style');
     style.textContent = `
-        /* Communication Buttons */
+         /* Communication Buttons */
         .com-buttons-container {
             position: fixed;
             right: 30px;
@@ -1154,6 +1134,7 @@ function addComButtonsStyles() {
             align-items: center;
             justify-content: center;
         }
+         
         
         .com-button .btn-text {
             font-size: 14px;
@@ -1169,17 +1150,37 @@ function addComButtonsStyles() {
         }
         
         /* Button Colors */
-        #phoneBtn { background: linear-gradient(135deg, #3498db, #2980b9); }
-        #whatsappBtn { background: linear-gradient(135deg, #25D366, #128C7E); }
-        #emailBtn { background: linear-gradient(135deg, #EA4335, #D14836); }
-        #chatBtn { background: linear-gradient(135deg, #9b59b6, #8e44ad); }
-        #consultBtn { background: linear-gradient(135deg, #2ecc71, #27ae60); }
+        #phoneBtn { 
+            background: linear-gradient(135deg, #3498db, #2980b9); 
+            order: 1;
+        }
+        #smsBtn { 
+            background: linear-gradient(135deg, #FF9800, #F57C00);
+            order: 2;
+        }
+        #whatsappBtn { 
+            background: linear-gradient(135deg, #25D366, #128C7E);
+            order: 3;
+        }
+        #gmailBtn { 
+            background: linear-gradient(135deg, #EA4335, #D14836);
+            order: 4;
+        }
+        #chatBtn { 
+            background: linear-gradient(135deg, #9b59b6, #8e44ad);
+            order: 5;
+        }
+        #consultBtn { 
+            background: linear-gradient(135deg, #2ecc71, #27ae60);
+            order: 6;
+        }
         
         /* Mobile Responsive */
         @media (max-width: 768px) {
             .com-buttons-container {
-                right: 10px;
                 bottom: 10px;
+                right: 10px;
+                gap: 10px;
             }
             
             .com-button {
@@ -1187,18 +1188,87 @@ function addComButtonsStyles() {
                 height: 50px;
             }
             
-            .com-button i {
-                min-width: 50px;
-                font-size: 20px;
-            }
-            
             .com-button:hover {
                 width: 50px;
+                border-radius: 50%;
+            }
+            
+            .com-button i {
+                font-size: 20px;
+                min-width: 50px;
             }
             
             .com-button .btn-text {
                 display: none;
             }
+            
+            @media (max-width: 480px) {
+                .com-buttons-container {
+                    flex-direction: row;
+                    justify-content: center;
+                    right: 50%;
+                    transform: translateX(50%);
+                    width: 100%;
+                    gap: 8px;
+                    bottom: 5px;
+                }
+                
+                .com-button {
+                    width: 45px;
+                    height: 45px;
+                }
+                
+                .com-button i {
+                    min-width: 45px;
+                    font-size: 18px;
+                }
+            }
+        }
+        
+        /* Desktop tooltip */
+        @media (min-width: 769px) {
+            .com-button:hover::after {
+                content: attr(aria-label);
+                position: absolute;
+                right: 150%;
+                top: 50%;
+                transform: translateY(-50%);
+                background: rgba(0,0,0,0.9);
+                color: white;
+                padding: 8px 12px;
+                border-radius: 6px;
+                font-size: 13px;
+                white-space: nowrap;
+                pointer-events: none;
+                animation: fadeIn 0.2s ease;
+                z-index: 10001;
+            }
+            
+            .com-button:hover::before {
+                content: '';
+                position: absolute;
+                right: 140%;
+                top: 50%;
+                transform: translateY(-50%);
+                border: 6px solid transparent;
+                border-left-color: rgba(0,0,0,0.9);
+                pointer-events: none;
+                z-index: 10001;
+            }
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-50%) translateX(10px); }
+            to { opacity: 1; transform: translateY(-50%) translateX(0); }
+        }
+        
+        .mobile-tooltip {
+            animation: fadeInOut 1s ease;
+        }
+        
+        @keyframes fadeInOut {
+            0%, 100% { opacity: 0; transform: translateY(10px); }
+            20%, 80% { opacity: 1; transform: translateY(0); }
         }
     `;
     
@@ -1208,7 +1278,7 @@ function addComButtonsStyles() {
 function addChatWidgetStyles() {
     const style = document.createElement('style');
     style.textContent = `
-        /* Chat Widget */
+         /* Chat Widget */
         .chat-widget {
             position: fixed;
             bottom: 100px;
@@ -1510,16 +1580,16 @@ function addChatWidgetStyles() {
 }
 
 // ============================================
-// 15. GLOBAL EXPORTS
+// 16. GLOBAL EXPORTS
 // ============================================
 
-// Make functions available globally
 window.makePhoneCall = makePhoneCall;
 window.openWhatsApp = openWhatsApp;
-window.sendDirectEmail = sendDirectEmail;
+window.openGmail = openGmail;
+window.sendSMS = sendSMS;
 window.toggleChat = toggleChat;
 window.openModal = openModal;
 window.closeModal = closeModal;
 window.showNotification = showNotification;
 
-console.log('Nzuri Care JavaScript fully loaded!');
+console.log('Nzuri Care JavaScript fully loaded with SMS & Gmail functionality!');
