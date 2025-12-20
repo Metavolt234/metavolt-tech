@@ -396,18 +396,17 @@ function setupSMSLinks() {
 function sendSMS() {
     const phoneNumber = CONFIG.company.sms.replace(/\D/g, '');
     const serviceName = document.querySelector('h1')?.textContent || 'Nzuri Care Services';
+    const message = encodeURIComponent(`Hello Nzuri Care! I'm interested in your ${serviceName}. Can you help me?`);
     
-    
-    const smsLink = `sms:${phoneNumber}`;
+    const smsLink = `sms:${phoneNumber}?body=${message}`;
     
     if (isMobileDevice()) {
         window.location.href = smsLink;
     } else {
         const formattedNumber = formatPhoneNumber(phoneNumber);
-        const instruction = `To send a text message:\n\n1. Open your messaging app\n2. Send a message to ${formattedNumber}`;
+        const instruction = `To send a text message:\n\n1. Open your messaging app\n2. Send a message to ${formattedNumber}\n3. You can copy this message:\n\n"Hello Nzuri Care! I'm interested in your ${serviceName}. Can you help me?"`;
         
         if (confirm(instruction + "\n\nCopy message to clipboard?")) {
-            const textToCopy = `Hello Nzuri Care! I'm interested in your ${serviceName}. Can you help me?`;
             navigator.clipboard.writeText(textToCopy)
                 .then(() => showNotification('Message copied to clipboard!', 'success'))
                 .catch(() => showNotification('Failed to copy message', 'error'));
