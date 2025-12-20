@@ -10,7 +10,7 @@ const CONFIG = {
         whatsapp: "+14705299891",
         sms: "+14705299891",
         email: "nelsonsabastian94@gmail.com",
-        address: "3078 Clairmount RD NE, Utah"
+        address: "3078 Claimont Rd, Ne Atlanta"
     },
     services: {
         personal: "Personal Care",
