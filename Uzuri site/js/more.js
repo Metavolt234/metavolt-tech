@@ -471,12 +471,122 @@ function makePhoneCall(phoneNumber = CONFIG.company.phone) {
     window.location.href = `tel:${phoneNumber.replace(/\D/g, '')}`;
 }
 
+// NEW SMS FUNCTION
+function sendDirectSMS(phoneNumber = CONFIG.company.phone) {
+    const formattedNumber = formatPhoneNumber(phoneNumber);
+    const serviceName = "Nzuri Care Services";
+    const message = `Hello Nzuri Care! I visited your Learn More page and would like to learn more about your ${serviceName}. Can you help me?`;
+    
+    // Clean the phone number for SMS link
+    const cleanNumber = phoneNumber.replace(/\D/g, '');
+    
+    if (isMobileDevice()) {
+        // For mobile devices - open native SMS app
+        const smsLink = `sms:${cleanNumber}?body=${encodeURIComponent(message)}`;
+        window.location.href = smsLink;
+    } else {
+        // For desktop - show a text area with the message and number
+        const smsModal = document.createElement('div');
+        smsModal.className = 'sms-modal';
+        smsModal.innerHTML = `
+            <div class="sms-modal-content">
+                <h3>Send SMS to ${formattedNumber}</h3>
+                <p>On mobile, this would open your messaging app. For desktop, copy the text below:</p>
+                <div class="sms-preview">
+                    <p><strong>To:</strong> ${formattedNumber}</p>
+                    <textarea readonly class="sms-message">${message}</textarea>
+                </div>
+                <div class="sms-actions">
+                    <button class="btn btn-secondary" id="copySMSBtn">
+                        <i class="fas fa-copy"></i> Copy Text
+                    </button>
+                    <button class="btn btn-primary" id="closeSMSModal">
+                        <i class="fas fa-times"></i> Close
+                    </button>
+                </div>
+            </div>
+        `;
+        
+        // Style the modal
+        smsModal.style.cssText = `
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+        `;
+        
+        smsModal.querySelector('.sms-modal-content').style.cssText = `
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            max-width: 500px;
+            width: 90%;
+        `;
+        
+        smsModal.querySelector('.sms-message').style.cssText = `
+            width: 100%;
+            height: 100px;
+            margin: 10px 0;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            resize: vertical;
+        `;
+        
+        smsModal.querySelector('.sms-actions').style.cssText = `
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        `;
+        
+        // Add functionality
+        smsModal.querySelector('#copySMSBtn').addEventListener('click', function() {
+            const textarea = smsModal.querySelector('.sms-message');
+            textarea.select();
+            document.execCommand('copy');
+            showNotification('SMS text copied to clipboard!', 'success');
+        });
+        
+        smsModal.querySelector('#closeSMSModal').addEventListener('click', function() {
+            document.body.removeChild(smsModal);
+        });
+        
+        // Close when clicking outside
+        smsModal.addEventListener('click', function(e) {
+            if (e.target === smsModal) {
+                document.body.removeChild(smsModal);
+            }
+        });
+        
+        document.body.appendChild(smsModal);
+        
+        // Auto-select the text
+        setTimeout(() => {
+            smsModal.querySelector('.sms-message').select();
+        }, 100);
+    }
+}
+
 function sendDirectEmail(email = CONFIG.company.email) {
     const subject = encodeURIComponent('Inquiry about Nzuri Care Services');
     const body = encodeURIComponent(`Dear Nzuri Care Team,\n\nI visited your Learn More page and would like to learn more about your services.\n\nCould you please send me more information?\n\nBest regards,\n[Your Name]`);
     const mailtoLink = `mailto:${email}?subject=${subject}&body=${body}`;
     
     window.location.href = mailtoLink;
+}
+
+function openWhatsApp() {
+    const phoneNumber = CONFIG.company.whatsapp.replace(/\D/g, '');
+    const message = encodeURIComponent(`Hello Nzuri Care! I visited your Learn More page and would like to learn more about your services. Can you help me?`);
+    const whatsappUrl = `https://wa.me/${phoneNumber}?text=${message}`;
+    
+    window.open(whatsappUrl, '_blank');
 }
 
 function openGoogleMaps(address = CONFIG.company.address) {
@@ -550,7 +660,7 @@ function openModal(modal) {
 }
 
 // ============================================
-// 9. COMMUNICATION BUTTONS
+// 9. COMMUNICATION BUTTONS (UPDATED WITH SMS)
 // ============================================
 
 function createCommunicationButtons() {
@@ -567,6 +677,13 @@ function createCommunicationButtons() {
             text: 'Call Us',
             color: '#3498db',
             action: () => makePhoneCall(CONFIG.company.phone)
+        },
+        {
+            id: 'smsBtn',
+            icon: 'fas fa-sms',
+            text: 'Text Us',
+            color: '#9b59b6', // Purple color for SMS
+            action: () => sendDirectSMS(CONFIG.company.phone)
         },
         {
             id: 'whatsappBtn',
@@ -652,6 +769,9 @@ function isMobileDevice() {
 }
 
 function showNotification(message, type = 'info') {
+    // Remove existing notifications first
+    document.querySelectorAll('.notification').forEach(n => n.remove());
+    
     const notification = document.createElement('div');
     notification.className = `notification ${type}`;
     notification.innerHTML = `
@@ -680,17 +800,25 @@ function showNotification(message, type = 'info') {
     
     setTimeout(() => {
         notification.style.animation = 'slideOut 0.3s ease';
-        setTimeout(() => notification.remove(), 300);
+        setTimeout(() => {
+            if (notification.parentNode) {
+                notification.parentNode.removeChild(notification);
+            }
+        }, 300);
     }, 5000);
     
     notification.querySelector('.notification-close').addEventListener('click', () => {
         notification.style.animation = 'slideOut 0.3s ease';
-        setTimeout(() => notification.remove(), 300);
+        setTimeout(() => {
+            if (notification.parentNode) {
+                notification.parentNode.removeChild(notification);
+            }
+        }, 300);
     });
 }
 
 // ============================================
-// 11. STYLE INJECTIONS
+// 11. STYLE INJECTIONS (UPDATED)
 // ============================================
 
 function addComButtonsStyles() {
@@ -748,10 +876,56 @@ function addComButtonsStyles() {
             opacity: 1;
         }
         
-        #phoneBtn { background: #3498db; }
-        #whatsappBtn { background: #25D366; }
-        #emailBtn { background: #EA4335; }
-        #consultBtn { background: #2ecc71; }
+        #phoneBtn { background: linear-gradient(135deg, #3498db, #2980b9); }
+        #smsBtn { background: linear-gradient(135deg, #9b59b6, #8e44ad); }
+        #whatsappBtn { background: linear-gradient(135deg, #25D366, #128C7E); }
+        #emailBtn { background: linear-gradient(135deg, #EA4335, #D14836); }
+        #consultBtn { background: linear-gradient(135deg, #2ecc71, #27ae60); }
+        
+        /* SMS Modal Styles */
+        .sms-modal-content h3 {
+            color: #9b59b6;
+            margin-bottom: 10px;
+        }
+        
+        .sms-preview {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 15px 0;
+        }
+        
+        .sms-preview strong {
+            color: #333;
+        }
+        
+        .sms-message {
+            font-family: inherit;
+            font-size: 14px;
+        }
+        
+        /* Notification animations */
+        @keyframes slideIn {
+            from {
+                transform: translateX(400px);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+        
+        @keyframes slideOut {
+            from {
+                transform: translateX(0);
+                opacity: 1;
+            }
+            to {
+                transform: translateX(400px);
+                opacity: 0;
+            }
+        }
         
         @media (max-width: 768px) {
             .com-buttons-container {
@@ -783,13 +957,14 @@ function addComButtonsStyles() {
 }
 
 // ============================================
-// 12. GLOBAL EXPORTS
+// 12. GLOBAL EXPORTS (UPDATED)
 // ============================================
 
 window.makePhoneCall = makePhoneCall;
+window.sendDirectSMS = sendDirectSMS;
 window.sendDirectEmail = sendDirectEmail;
 window.openWhatsApp = openWhatsApp;
 window.showNotification = showNotification;
 window.closeVideoPlayer = closeVideoPlayer;
 
-console.log('Nzuri Care Learn More JavaScript fully loaded!');
+console.log('Nzuri Care Learn More JavaScript fully loaded with SMS!');
