@@ -471,34 +471,37 @@ function makePhoneCall(phoneNumber = CONFIG.company.phone) {
     window.location.href = `tel:${phoneNumber.replace(/\D/g, '')}`;
 }
 
-// NEW SMS FUNCTION
+// UPDATED SMS FUNCTION - PHONE NUMBER ONLY IN "TO:" FIELD
 function sendDirectSMS(phoneNumber = CONFIG.company.phone) {
     const formattedNumber = formatPhoneNumber(phoneNumber);
-    const serviceName = "Nzuri Care Services";
-    const message = `Hello Nzuri Care! I visited your Learn More page and would like to learn more about your ${serviceName}. Can you help me?`;
-    
-    // Clean the phone number for SMS link
     const cleanNumber = phoneNumber.replace(/\D/g, '');
     
     if (isMobileDevice()) {
-        // For mobile devices - open native SMS app
-        const smsLink = `sms:${cleanNumber}?body=${encodeURIComponent(message)}`;
+        // For mobile devices - open native SMS app with ONLY phone number in "To:" field
+        // Empty body parameter ensures only phone number appears
+        const smsLink = `sms:${cleanNumber}`;
         window.location.href = smsLink;
     } else {
-        // For desktop - show a text area with the message and number
+        // For desktop - show a text area with the phone number
         const smsModal = document.createElement('div');
         smsModal.className = 'sms-modal';
         smsModal.innerHTML = `
             <div class="sms-modal-content">
-                <h3>Send SMS to ${formattedNumber}</h3>
-                <p>On mobile, this would open your messaging app. For desktop, copy the text below:</p>
+                <h3>Send SMS to Nzuri Care</h3>
+                <p>On mobile, this would open your messaging app with the number pre-filled. For desktop, copy the number below:</p>
                 <div class="sms-preview">
                     <p><strong>To:</strong> ${formattedNumber}</p>
-                    <textarea readonly class="sms-message">${message}</textarea>
+                    <div class="phone-number-display">
+                        <span class="phone-number">${formattedNumber}</span>
+                        <button class="copy-number-btn" title="Copy number">
+                            <i class="fas fa-copy"></i>
+                        </button>
+                    </div>
+                    <p class="sms-tip"><i class="fas fa-lightbulb"></i> Tip: On mobile, clicking SMS will open your messaging app with this number ready to text.</p>
                 </div>
                 <div class="sms-actions">
-                    <button class="btn btn-secondary" id="copySMSBtn">
-                        <i class="fas fa-copy"></i> Copy Text
+                    <button class="btn btn-secondary" id="copyNumberBtn">
+                        <i class="fas fa-copy"></i> Copy Number
                     </button>
                     <button class="btn btn-primary" id="closeSMSModal">
                         <i class="fas fa-times"></i> Close
@@ -529,30 +532,76 @@ function sendDirectSMS(phoneNumber = CONFIG.company.phone) {
             width: 90%;
         `;
         
-        smsModal.querySelector('.sms-message').style.cssText = `
-            width: 100%;
-            height: 100px;
-            margin: 10px 0;
-            padding: 10px;
-            border: 1px solid #ddd;
+        smsModal.querySelector('.phone-number-display').style.cssText = `
+            background: #f8f9fa;
+            padding: 15px;
             border-radius: 5px;
-            resize: vertical;
+            margin: 15px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border: 1px solid #ddd;
+        `;
+        
+        smsModal.querySelector('.phone-number').style.cssText = `
+            font-size: 18px;
+            font-weight: bold;
+            color: #333;
+        `;
+        
+        smsModal.querySelector('.copy-number-btn').style.cssText = `
+            background: #9b59b6;
+            color: white;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        `;
+        
+        smsModal.querySelector('.copy-number-btn:hover').style.cssText = `
+            background: #8e44ad;
+            transform: scale(1.1);
+        `;
+        
+        smsModal.querySelector('.sms-tip').style.cssText = `
+            background: #e8f4fc;
+            padding: 10px;
+            border-radius: 5px;
+            margin-top: 15px;
+            font-size: 14px;
+            color: #3498db;
+        `;
+        
+        smsModal.querySelector('.sms-tip i').style.cssText = `
+            margin-right: 5px;
         `;
         
         smsModal.querySelector('.sms-actions').style.cssText = `
             display: flex;
             gap: 10px;
-            margin-top: 15px;
+            margin-top: 20px;
         `;
         
-        // Add functionality
-        smsModal.querySelector('#copySMSBtn').addEventListener('click', function() {
-            const textarea = smsModal.querySelector('.sms-message');
-            textarea.select();
+        // Add copy functionality
+        const copyNumber = function() {
+            const tempInput = document.createElement('input');
+            tempInput.value = cleanNumber;
+            document.body.appendChild(tempInput);
+            tempInput.select();
             document.execCommand('copy');
-            showNotification('SMS text copied to clipboard!', 'success');
-        });
+            document.body.removeChild(tempInput);
+            showNotification('Phone number copied to clipboard!', 'success');
+        };
         
+        smsModal.querySelector('#copyNumberBtn').addEventListener('click', copyNumber);
+        smsModal.querySelector('.copy-number-btn').addEventListener('click', copyNumber);
+        
+        // Close functionality
         smsModal.querySelector('#closeSMSModal').addEventListener('click', function() {
             document.body.removeChild(smsModal);
         });
@@ -565,11 +614,6 @@ function sendDirectSMS(phoneNumber = CONFIG.company.phone) {
         });
         
         document.body.appendChild(smsModal);
-        
-        // Auto-select the text
-        setTimeout(() => {
-            smsModal.querySelector('.sms-message').select();
-        }, 100);
     }
 }
 
@@ -899,9 +943,53 @@ function addComButtonsStyles() {
             color: #333;
         }
         
-        .sms-message {
-            font-family: inherit;
+        .phone-number-display {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 15px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border: 1px solid #ddd;
+        }
+        
+        .phone-number {
+            font-size: 18px;
+            font-weight: bold;
+            color: #333;
+        }
+        
+        .copy-number-btn {
+            background: #9b59b6;
+            color: white;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+        
+        .copy-number-btn:hover {
+            background: #8e44ad;
+            transform: scale(1.1);
+        }
+        
+        .sms-tip {
+            background: #e8f4fc;
+            padding: 10px;
+            border-radius: 5px;
+            margin-top: 15px;
             font-size: 14px;
+            color: #3498db;
+        }
+        
+        .sms-tip i {
+            margin-right: 5px;
         }
         
         /* Notification animations */
