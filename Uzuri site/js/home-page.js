@@ -1093,16 +1093,17 @@ function logInteraction(type, data = {}) {
 function addComButtonsStyles() {
     const style = document.createElement('style');
     style.textContent = `
-        /* Communication Buttons */
+       /* Communication Buttons */
         .com-buttons-container {
             position: fixed;
             right: 30px;
             bottom: 20px;
             z-index: 1000;
-            display: block;
+            display: flex;
             flex-direction: column;
             gap: 10px;
             align-items: flex-end;
+            padding: 5px;
         }
         
         .com-button {
@@ -1112,13 +1113,12 @@ function addComButtonsStyles() {
             border: none;
             color: white;
             cursor: pointer;
+            display: flex;
             align-items: center;
             overflow: hidden;
             transition: all 0.3s ease;
             box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-            position: right;
             padding: 0;
-            margin: 15px 3px;
         }
         
         .com-button:hover {
@@ -1128,8 +1128,8 @@ function addComButtonsStyles() {
         
         .com-button i {
             font-size: 22px;
-            min-width: 50px;
-            display:flex;
+            min-width: 60px;
+            display: flex;
             align-items: center;
             justify-content: center;
         }

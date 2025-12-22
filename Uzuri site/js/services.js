@@ -1,13 +1,14 @@
- // ==========================================================
-// UZURI CARE LLC - JAVASCRIPT FILE/FUNCTIONALITY ON BUTTONS
+// ==========================================================
+// Nzuri CARE LLC - JAVASCRIPT FILE/FUNCTIONALITY ON BUTTONS
 // ==========================================================
 
-// Configuration for Uzuri Care LLC
+// Configuration for Nzuri Care LLC
 const CONFIG = {
     company: {
-        name: "Uzuri Care LLC",
+        name: "Nzuri Care LLC",
         phone: "+1 (470) 529-9891",
         whatsapp: "+14705299891",
+        sms: "+14705299891",
         email: "nzurillc04@gmail.com",
         address: "3078 Claimont Rd, Ne Atlanta"
     },
@@ -19,7 +20,7 @@ const CONFIG = {
     },
     // Formspree Configuration
     formspree: {
-        formId: "movggkbq" //  Formspree form ID
+        formId: "movggkbq" // Formspree form ID
     }
 };
 
@@ -32,7 +33,7 @@ let isMobileMenuOpen = false;
 // ============================================
 
 document.addEventListener('DOMContentLoaded', function() {
-    console.log('Uzuri Care LLC - Page Loading...');
+    console.log('Nzuri Care LLC - Page Loading...');
     
     // Initialize all components
     initializeNavigation();
@@ -42,6 +43,7 @@ document.addEventListener('DOMContentLoaded', function() {
     createCommunicationButtons();
     setupPhoneCalls();
     setupWhatsAppLinks();
+    setupSMSLinks();
     setupServiceCards();
     setupFooterLinks();
     setupEmailLinks();
@@ -49,7 +51,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Show welcome message on home page only
     if (window.location.pathname.includes('index.html') || window.location.pathname === '/') {
         setTimeout(() => {
-            showNotification('Welcome to Uzuri Care! We provide compassionate senior care services.', 'info');
+            showNotification('Welcome to Nzuri Care! We provide compassionate senior care services.', 'info');
         }, 1500);
     }
     
@@ -67,13 +69,11 @@ function initializeHamburgerMenu() {
     
     if (!hamburger || !navMenu) return;
     
-    // Toggle menu on hamburger click
     hamburger.addEventListener('click', function(e) {
         e.stopPropagation();
         toggleMobileMenu();
     });
     
-    // Close menu when clicking on a nav link
     navLinks.forEach(link => {
         link.addEventListener('click', function() {
             if (isMobileMenuOpen) {
@@ -82,7 +82,6 @@ function initializeHamburgerMenu() {
         });
     });
     
-    // Close menu when clicking outside
     document.addEventListener('click', function(e) {
         if (isMobileMenuOpen && 
             !navMenu.contains(e.target) && 
@@ -91,7 +90,6 @@ function initializeHamburgerMenu() {
         }
     });
     
-    // Handle dropdowns on mobile
     const dropdowns = document.querySelectorAll('.dropdown > .nav-link');
     dropdowns.forEach(dropdownLink => {
         dropdownLink.addEventListener('click', function(e) {
@@ -105,7 +103,6 @@ function initializeHamburgerMenu() {
         });
     });
     
-    // Close dropdowns when clicking elsewhere
     document.addEventListener('click', function(e) {
         if (window.innerWidth <= 768) {
             document.querySelectorAll('.dropdown-menu.show').forEach(menu => {
@@ -126,11 +123,8 @@ function toggleMobileMenu() {
     isMobileMenuOpen = !isMobileMenuOpen;
     hamburger.classList.toggle('active');
     navMenu.classList.toggle('active');
-    
-    // Toggle body scroll
     document.body.style.overflow = isMobileMenuOpen ? 'hidden' : 'auto';
     
-    // Close all dropdowns when closing menu
     if (!isMobileMenuOpen) {
         document.querySelectorAll('.dropdown-menu.show').forEach(menu => {
             menu.classList.remove('show');
@@ -143,10 +137,8 @@ function toggleMobileMenu() {
 // ============================================
 
 function initializeNavigation() {
-    // Set active navigation link
     setActiveNavLink();
     
-    // Handle dropdown hover on desktop
     if (window.innerWidth > 768) {
         const dropdowns = document.querySelectorAll('.dropdown');
         dropdowns.forEach(dropdown => {
@@ -162,16 +154,13 @@ function initializeNavigation() {
         });
     }
     
-    // Update on window resize
     window.addEventListener('resize', function() {
         if (window.innerWidth > 768) {
-            // Reset mobile menu state
             isMobileMenuOpen = false;
             document.querySelector('.hamburger')?.classList.remove('active');
             document.querySelector('.nav-menu')?.classList.remove('active');
             document.body.style.overflow = 'auto';
             
-            // Reset dropdowns
             document.querySelectorAll('.dropdown-menu').forEach(menu => {
                 menu.style.display = '';
                 menu.classList.remove('show');
@@ -203,13 +192,8 @@ function initializeModals() {
     const appointmentModal = document.getElementById('appointmentModal');
     const successModal = document.getElementById('successModal');
     
-    // Check if modals exist on this page
-    if (!appointmentModal || !successModal) {
-        console.log('No modals found on this page');
-        return;
-    }
+    if (!appointmentModal || !successModal) return;
     
-    // Open consultation modal buttons
     const consultationButtons = [
         document.getElementById('consultationBtn'),
         document.getElementById('heroConsultation')
@@ -224,7 +208,6 @@ function initializeModals() {
         }
     });
     
-    // Close buttons
     const closeButtons = document.querySelectorAll('.close-modal, #closeSuccess');
     closeButtons.forEach(button => {
         button.addEventListener('click', function() {
@@ -233,14 +216,12 @@ function initializeModals() {
         });
     });
     
-    // Close modal when clicking outside
     window.addEventListener('click', function(e) {
         if (e.target.classList.contains('modal')) {
             closeModal(e.target);
         }
     });
     
-    // Close with Escape key
     document.addEventListener('keydown', function(e) {
         if (e.key === 'Escape') {
             const openModal = document.querySelector('.modal[style*="display: flex"]');
@@ -248,7 +229,6 @@ function initializeModals() {
         }
     });
     
-    // Set minimum date for appointment form
     const dateInput = document.getElementById('date');
     if (dateInput) {
         const today = new Date().toISOString().split('T')[0];
@@ -272,7 +252,7 @@ function closeModal(modal) {
 }
 
 // ============================================
-// 5. CONTACT FORM HANDLING (USING FORMSPREE) - FIXED
+// 5. CONTACT FORM HANDLING
 // ============================================
 
 function initializeContactForms() {
@@ -290,19 +270,16 @@ function handleFormSubmit(e) {
     const formData = new FormData(form);
     const data = Object.fromEntries(formData);
     
-    // Validate form
     if (!validateForm(data)) {
         showNotification('Please fill in all required fields correctly.', 'error');
         return;
     }
     
-    // Show loading state
     const submitBtn = form.querySelector('button[type="submit"]');
     const originalText = submitBtn.innerHTML;
     submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
     submitBtn.disabled = true;
     
-    // Send data to Formspree
     fetch(`https://formspree.io/f/${CONFIG.formspree.formId}`, {
         method: 'POST',
         headers: {
@@ -316,33 +293,16 @@ function handleFormSubmit(e) {
             service: data.service || 'General Inquiry',
             date: data.date || 'Not specified',
             message: data.message || 'No additional message',
-            _subject: `New Appointment Request: ${data.name} - Uzuri Care`
+            _subject: `New Appointment Request: ${data.name} - Nzuri Care`
         })
     })
     .then(response => {
         if (response.ok) {
-            // Show success message
             showNotification('Appointment request sent successfully! We\'ll contact you soon.', 'success');
-            
-            // Close appointment modal if exists
-            const appointmentModal = document.getElementById('appointmentModal');
-            if (appointmentModal) {
-                closeModal(appointmentModal);
-            }
-            
-            // Open success modal if exists
-            const successModal = document.getElementById('successModal');
-            if (successModal) {
-                openModal(successModal);
-            }
-            
-            // Reset form
+            closeModal(document.getElementById('appointmentModal'));
+            openModal(document.getElementById('successModal'));
             form.reset();
-            
-            // Save to localStorage for records
             saveConsultationToStorage(data);
-            
-            // Log interaction
             logInteraction('consultation_submitted', { 
                 service: data.service,
                 email_status: 'sent'
@@ -353,17 +313,12 @@ function handleFormSubmit(e) {
     })
     .catch(error => {
         console.error('Form submission error:', error);
-        
-        // Show error message
         showNotification('Failed to send appointment request. Please try again or call us directly.', 'error');
-        
-        // Fallback to mailto method
         setTimeout(() => {
             sendEmailViaMailto(data);
         }, 1000);
     })
     .finally(() => {
-        // Restore button state
         submitBtn.innerHTML = originalText;
         submitBtn.disabled = false;
     });
@@ -382,20 +337,17 @@ function saveConsultationToStorage(data) {
 }
 
 function validateForm(data) {
-    // Required fields
     if (!data.name || !data.email || !data.phone) {
         showNotification('Please fill in Name, Email, and Phone fields.', 'error');
         return false;
     }
     
-    // Email validation
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(data.email)) {
         showNotification('Please enter a valid email address.', 'error');
         return false;
     }
     
-    // Phone validation
     const cleanedPhone = data.phone.replace(/\D/g, '');
     if (cleanedPhone.length < 10) {
         showNotification('Please enter a valid phone number (at least 10 digits).', 'error');
@@ -406,9 +358,9 @@ function validateForm(data) {
 }
 
 function sendEmailViaMailto(data) {
-    const subject = `New Consultation Request: ${data.name} - Uzuri Care`;
+    const subject = `New Consultation Request: ${data.name} - Nzuri Care`;
     const body = `
-NEW CONSULTATION REQUEST - UZURI CARE LLC
+NEW CONSULTATION REQUEST - Nzuri CARE LLC
 
 Name: ${data.name}
 Email: ${data.email}
@@ -423,17 +375,51 @@ Please contact this person within 24 hours.
     `.trim();
     
     const mailtoLink = `mailto:${CONFIG.company.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-    
-    // Open in new tab
     window.open(mailtoLink, '_blank');
 }
 
 // ============================================
-// 6. PHONE CALL FUNCTIONALITY
+// 6. SMS FUNCTIONALITY
+// ============================================
+
+function setupSMSLinks() {
+    document.addEventListener('click', function(e) {
+        if (e.target.closest('#smsBtn') || 
+            e.target.closest('[data-sms]') ||
+            e.target.closest('.sms-link')) {
+            e.preventDefault();
+            sendSMS();
+        }
+    });
+}
+
+function sendSMS() {
+    const phoneNumber = CONFIG.company.sms.replace(/\D/g, '');
+    
+    // SMS link with ONLY the phone number (no pre-filled message)
+    const smsLink = `sms:${phoneNumber}`;
+    
+    if (isMobileDevice()) {
+        window.location.href = smsLink;
+    } else {
+        const formattedNumber = formatPhoneNumber(phoneNumber);
+        showNotification(`To send a text message, open your messaging app and send to: ${formattedNumber}`, 'info');
+        
+        if (navigator.clipboard && confirm(`Copy ${formattedNumber} to clipboard?`)) {
+            navigator.clipboard.writeText(phoneNumber)
+                .then(() => showNotification('Phone number copied to clipboard!', 'success'))
+                .catch(() => showNotification('Failed to copy phone number', 'error'));
+        }
+    }
+    
+    logInteraction('sms_initiated', { number: phoneNumber });
+}
+
+// ============================================
+// 7. PHONE CALL FUNCTIONALITY
 // ============================================
 
 function setupPhoneCalls() {
-    // Make all phone links clickable
     document.querySelectorAll('a[href^="tel:"]').forEach(link => {
         link.addEventListener('click', function(e) {
             e.preventDefault();
@@ -442,10 +428,8 @@ function setupPhoneCalls() {
         });
     });
     
-    // Make phone numbers in text clickable
     const phoneRegex = /(\+?1?\s?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4})/g;
     
-    // Look for phone numbers in text content
     document.querySelectorAll('p, span, div, li').forEach(element => {
         if (element.textContent.match(phoneRegex) && 
             !element.closest('a') && 
@@ -457,7 +441,6 @@ function setupPhoneCalls() {
         }
     });
     
-    // Add click handlers to new phone links
     document.addEventListener('click', function(e) {
         if (e.target.classList.contains('phone-link')) {
             e.preventDefault();
@@ -470,19 +453,14 @@ function setupPhoneCalls() {
 function makePhoneCall(phoneNumber = CONFIG.company.phone) {
     const formattedNumber = formatPhoneNumber(phoneNumber);
     
-    // Ask for confirmation on desktop
     if (!isMobileDevice()) {
         const confirmed = confirm(`Call ${formattedNumber}?`);
         if (!confirmed) return;
     }
     
-    // Log the call
     logInteraction('phone_call_attempted', { number: phoneNumber });
-    
-    // Initiate the call
     window.location.href = `tel:${phoneNumber.replace(/\D/g, '')}`;
     
-    // Show notification for desktop users
     if (!isMobileDevice()) {
         showNotification(`Calling ${formattedNumber}...`, 'info');
     }
@@ -502,11 +480,10 @@ function isMobileDevice() {
 }
 
 // ============================================
-// 7. WHATSAPP FUNCTIONALITY
+// 8. WHATSAPP FUNCTIONALITY
 // ============================================
 
 function setupWhatsAppLinks() {
-    // Create WhatsApp button event
     document.addEventListener('click', function(e) {
         if (e.target.closest('#whatsappBtn') || 
             e.target.closest('[data-whatsapp]') ||
@@ -519,7 +496,7 @@ function setupWhatsAppLinks() {
 
 function openWhatsApp() {
     const phoneNumber = CONFIG.company.whatsapp.replace(/\D/g, '');
-    const message = encodeURIComponent("Hello Uzuri Care! I'm interested in your senior care services. Can you help me?");
+    const message = encodeURIComponent("Hello Nzuri Care! I'm interested in your senior care services. Can you help me?");
     const whatsappUrl = `https://wa.me/${phoneNumber}?text=${message}`;
     
     window.open(whatsappUrl, '_blank');
@@ -527,43 +504,57 @@ function openWhatsApp() {
 }
 
 // ============================================
-// 8. EMAIL FUNCTIONALITY
+// 9. EMAIL FUNCTIONALITY - UPDATED TO OPEN GMAIL DIRECTLY
 // ============================================
 
 function setupEmailLinks() {
-    // Make email links functional
     document.querySelectorAll('a[href^="mailto:"]').forEach(link => {
         link.addEventListener('click', function(e) {
             e.preventDefault();
             const email = this.getAttribute('href').replace('mailto:', '');
-            sendDirectEmail(email);
+            openGmailCompose(email);
         });
     });
 }
 
-function sendDirectEmail(email = CONFIG.company.email) {
-    const subject = encodeURIComponent("Inquiry about Uzuri Care Services");
-    const body = encodeURIComponent(`Dear Uzuri Care Team,\n\nI would like to learn more about your senior care services.\n\nCould you please send me more information?\n\nBest regards,\n[Your Name]`);
-    const mailtoLink = `mailto:${email}?subject=${subject}&body=${body}`;
+function openGmailCompose(email = CONFIG.company.email) {
+    const subject = encodeURIComponent("Inquiry about Nzuri Care Senior Care Services");
+    const body = encodeURIComponent(`Dear Nzuri Care Team,\n\nI would like to learn more about your senior care services.\n\nPlease send me information about:\n- Available services and pricing\n- Consultation availability\n- Insurance coverage\n- Service areas\n\nBest regards,\n[Your Name]\n[Your Phone Number]`);
     
-    window.open(mailtoLink, '_blank');
-    logInteraction('email_initiated');
+    // Check if user is on mobile or desktop
+    const isMobile = isMobileDevice();
+    
+    if (isMobile) {
+        // For mobile, try to open Gmail app directly
+        const gmailAppUrl = `googlechrome://compose?to=${email}&subject=${subject}&body=${body}`;
+        const gmailWebUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${email}&su=${subject}&body=${body}`;
+        
+        // Try to open Gmail app, fallback to web
+        window.location.href = gmailAppUrl;
+        setTimeout(() => {
+            window.open(gmailWebUrl, '_blank');
+        }, 500);
+    } else {
+        // For desktop, open Gmail in new tab
+        const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${email}&su=${subject}&body=${body}`;
+        window.open(gmailUrl, '_blank');
+    }
+    
+    logInteraction('gmail_opened', { platform: isMobile ? 'mobile' : 'desktop' });
 }
 
 // ============================================
-// 9. COMMUNICATION BUTTONS
+// 10. COMMUNICATION BUTTONS - UPDATED WITH GMAIL
 // ============================================
 
 function createCommunicationButtons() {
-    // Remove any existing buttons
     const existingContainer = document.querySelector('.com-buttons-container');
     if (existingContainer) existingContainer.remove();
     
-    // Create container
     const container = document.createElement('div');
     container.className = 'com-buttons-container';
     
-    // Define buttons
+    // Define buttons - UPDATED WITH GMAIL ACTION
     const buttons = [
         {
             id: 'phoneBtn',
@@ -571,6 +562,13 @@ function createCommunicationButtons() {
             text: 'Call Us',
             color: '#3498db',
             action: () => makePhoneCall(CONFIG.company.phone)
+        },
+        {
+            id: 'smsBtn',
+            icon: 'fas fa-sms',
+            text: 'Text Message',
+            color: '#FF9800',
+            action: sendSMS
         },
         {
             id: 'whatsappBtn',
@@ -582,9 +580,9 @@ function createCommunicationButtons() {
         {
             id: 'emailBtn',
             icon: 'fas fa-envelope',
-            text: 'Email',
+            text: 'Gmail', // Changed from "Email" to "Gmail"
             color: '#EA4335',
-            action: sendDirectEmail
+            action: () => openGmailCompose(CONFIG.company.email) // Updated to use Gmail
         },
         {
             id: 'chatBtn',
@@ -612,23 +610,18 @@ function createCommunicationButtons() {
                 if (modal) {
                     openModal(modal);
                 } else {
-                    // If no modal, redirect to contact page
                     window.location.href = 'contact.html';
                 }
             }
         }
     ];
     
-    // Create buttons
     buttons.forEach((btn, index) => {
         const button = createComButton(btn, index);
         container.appendChild(button);
     });
     
-    // Add to page
     document.body.appendChild(container);
-    
-    // Add styles
     addComButtonsStyles();
 }
 
@@ -642,11 +635,9 @@ function createComButton(config, index) {
         <span class="btn-text">${config.text}</span>
     `;
     
-    // Style
     button.style.backgroundColor = config.color;
     button.style.bottom = `${20 + (index * 70)}px`;
     
-    // Hover effects for desktop
     if (window.innerWidth > 768) {
         button.addEventListener('mouseenter', () => {
             button.style.width = '140px';
@@ -659,14 +650,13 @@ function createComButton(config, index) {
         });
     }
     
-    // Click action
     button.addEventListener('click', config.action);
     
     return button;
 }
 
 // ============================================
-// 10. LIVE CHAT FUNCTIONALITY
+// 11. LIVE CHAT FUNCTIONALITY - UPDATED WITH GMAIL
 // ============================================
 
 function toggleChat() {
@@ -694,7 +684,7 @@ function createChatWidget() {
                     <i class="fas fa-headset"></i>
                 </div>
                 <div>
-                    <h4>Uzuri Care Support</h4>
+                    <h4>Nzuri Care Support</h4>
                     <p class="chat-status">Online • Typically replies in minutes</p>
                 </div>
             </div>
@@ -707,7 +697,7 @@ function createChatWidget() {
             <div class="message bot">
                 <div class="message-avatar">UC</div>
                 <div class="message-content">
-                    <div class="message-text">Hello! 👋 I'm here from Uzuri Care. How can I help you today?</div>
+                    <div class="message-text">Hello! 👋 I'm here from Nzuri Care. How can I help you today?</div>
                     <div class="message-time">${getCurrentTime()}</div>
                 </div>
             </div>
@@ -722,6 +712,12 @@ function createChatWidget() {
             </button>
             <button class="quick-action" data-action="consultation">
                 <i class="fas fa-calendar"></i> Free Consultation
+            </button>
+            <button class="quick-action" data-action="sms">
+                <i class="fas fa-sms"></i> Text Message
+            </button>
+            <button class="quick-action" data-action="gmail">
+                <i class="fas fa-envelope"></i> Gmail
             </button>
         </div>
         
@@ -738,8 +734,6 @@ function createChatWidget() {
     
     document.body.appendChild(chatWidget);
     isChatOpen = true;
-    
-    // Setup chat functionality
     setupChatFunctionality();
     addChatWidgetStyles();
 }
@@ -754,20 +748,15 @@ function setupChatFunctionality() {
     const quickActions = chatWidget.querySelectorAll('.quick-action');
     const chatMessages = chatWidget.querySelector('.chat-messages');
     
-    // Send message function
     const sendMessage = () => {
         const message = chatInput.value.trim();
         if (!message) return;
         
-        // Add user message
         addChatMessage(message, 'user');
         chatInput.value = '';
-        
-        // Generate bot response
         setTimeout(() => generateChatResponse(message), 1000);
     };
     
-    // Event listeners
     sendButton.addEventListener('click', sendMessage);
     chatInput.addEventListener('keypress', (e) => {
         if (e.key === 'Enter') sendMessage();
@@ -785,7 +774,6 @@ function setupChatFunctionality() {
         });
     });
     
-    // Focus input when chat opens
     setTimeout(() => chatInput.focus(), 300);
 }
 
@@ -802,6 +790,12 @@ function handleQuickAction(action) {
         case 'consultation':
             message = "I'd like to schedule a free consultation";
             break;
+        case 'sms':
+            sendSMS();
+            return;
+        case 'gmail':
+            openGmailCompose();
+            return;
     }
     
     if (message) {
@@ -853,6 +847,12 @@ function generateChatResponse(userMessage) {
                 <button class="btn btn-small" onclick="window.location.href='contact.html'">
                     <i class="fas fa-calendar-check"></i> Get Free Quote
                 </button>
+                <button class="btn btn-small" onclick="sendSMS()" style="margin-left: 10px; background-color: #FF9800;">
+                    <i class="fas fa-sms"></i> Text for Quote
+                </button>
+                <button class="btn btn-small" onclick="openGmailCompose()" style="margin-left: 10px; background-color: #EA4335;">
+                    <i class="fas fa-envelope"></i> Email for Quote
+                </button>
             `;
             chatMessages.appendChild(actionDiv);
             chatMessages.scrollTop = chatMessages.scrollHeight;
@@ -872,13 +872,19 @@ function generateChatResponse(userMessage) {
                 <button class="btn btn-small" onclick="window.location.href='contact.html'">
                     <i class="fas fa-calendar"></i> Schedule Now
                 </button>
+                <button class="btn btn-small" onclick="sendSMS()" style="margin-left: 10px; background-color: #FF9800;">
+                    <i class="fas fa-sms"></i> Text to Schedule
+                </button>
+                <button class="btn btn-small" onclick="openGmailCompose()" style="margin-left: 10px; background-color: #EA4335;">
+                    <i class="fas fa-envelope"></i> Email to Schedule
+                </button>
             `;
             chatMessages.appendChild(actionDiv);
             chatMessages.scrollTop = chatMessages.scrollHeight;
         }, 500);
         
     } else if (lowerMessage.includes('emergency') || lowerMessage.includes('urgent')) {
-        response = `For immediate assistance, please call us at ${formatPhoneNumber(CONFIG.company.phone)}. Our emergency team is available 24/7.`;
+        response = `For immediate assistance, please call us at ${formatPhoneNumber(CONFIG.company.phone)} or send a text message to ${formatPhoneNumber(CONFIG.company.sms)}. Our emergency team is available 24/7.`;
         
     } else if (lowerMessage.includes('service') || lowerMessage.includes('care') || lowerMessage.includes('help')) {
         response = "We offer Personal Care, Companion Care, Dementia Care, and Respite Care. Each service is tailored to individual needs. Which service interests you most?";
@@ -892,14 +898,13 @@ function getCurrentTime() {
 }
 
 // ============================================
-// 11. SERVICE CARDS FUNCTIONALITY
+// 12. SERVICE CARDS FUNCTIONALITY
 // ============================================
 
 function setupServiceCards() {
     const serviceCards = document.querySelectorAll('.service-card');
     
     serviceCards.forEach(card => {
-        // Make entire card clickable
         card.style.cursor = 'pointer';
         
         card.addEventListener('click', function(e) {
@@ -912,8 +917,6 @@ function setupServiceCards() {
             }
         });
         
-        
-        // Hover effects
         card.addEventListener('mouseenter', function() {
             this.style.transform = 'translateY(-10px)';
             this.style.boxShadow = '0 15px 30px rgba(0,0,0,0.15)';
@@ -927,11 +930,10 @@ function setupServiceCards() {
 }
 
 // ============================================
-// 12. FOOTER LINKS FUNCTIONALITY
+// 13. FOOTER LINKS FUNCTIONALITY
 // ============================================
 
 function setupFooterLinks() {
-    // Make footer phone numbers clickable
     document.querySelectorAll('footer a[href^="tel:"]').forEach(link => {
         link.addEventListener('click', function(e) {
             e.preventDefault();
@@ -940,26 +942,23 @@ function setupFooterLinks() {
         });
     });
     
-    // Make footer emails clickable
     document.querySelectorAll('footer a[href^="mailto:"]').forEach(link => {
         link.addEventListener('click', function(e) {
             e.preventDefault();
             const email = this.getAttribute('href').replace('mailto:', '');
-            sendDirectEmail(email);
+            openGmailCompose(email);
         });
     });
 }
 
 // ============================================
-// 13. UTILITY FUNCTIONS
+// 14. UTILITY FUNCTIONS
 // ============================================
 
 function showNotification(message, type = 'info') {
-    // Remove existing notification
     const existing = document.querySelector('.notification');
     if (existing) existing.remove();
     
-    // Create notification
     const notification = document.createElement('div');
     notification.className = `notification ${type}`;
     
@@ -980,15 +979,12 @@ function showNotification(message, type = 'info') {
     
     document.body.appendChild(notification);
     
-    // Show with animation
     setTimeout(() => notification.classList.add('show'), 10);
     
-    // Auto-hide after 5 seconds
     const timeout = setTimeout(() => {
         hideNotification(notification);
     }, 5000);
     
-    // Close button
     notification.querySelector('.notification-close').addEventListener('click', () => {
         clearTimeout(timeout);
         hideNotification(notification);
@@ -1012,7 +1008,6 @@ function logInteraction(type, data = {}) {
         page: window.location.pathname
     };
     
-    // Store in localStorage for analytics
     try {
         const logs = JSON.parse(localStorage.getItem('interaction_logs') || '[]');
         logs.push(log);
@@ -1023,7 +1018,7 @@ function logInteraction(type, data = {}) {
 }
 
 // ============================================
-// 14. STYLE INJECTIONS
+// 15. STYLE INJECTIONS
 // ============================================
 
 function addComButtonsStyles() {
@@ -1035,10 +1030,11 @@ function addComButtonsStyles() {
             right: 30px;
             bottom: 20px;
             z-index: 1000;
-            display: block;
+            display: flex;
             flex-direction: column;
             gap: 10px;
             align-items: flex-end;
+            padding: 5px;
         }
         
         .com-button {
@@ -1048,13 +1044,12 @@ function addComButtonsStyles() {
             border: none;
             color: white;
             cursor: pointer;
+            display: flex;
             align-items: center;
             overflow: hidden;
             transition: all 0.3s ease;
             box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-            position: right;
             padding: 0;
-            margin: 15px 3px;
         }
         
         .com-button:hover {
@@ -1064,8 +1059,8 @@ function addComButtonsStyles() {
         
         .com-button i {
             font-size: 22px;
-            min-width: 50px;
-            display:flex;
+            min-width: 60px;
+            display: flex;
             align-items: center;
             justify-content: center;
         }
@@ -1085,6 +1080,7 @@ function addComButtonsStyles() {
         
         /* Button Colors */
         #phoneBtn { background: linear-gradient(135deg, #3498db, #2980b9); }
+        #smsBtn { background: linear-gradient(135deg, #FF9800, #F57C00); }
         #whatsappBtn { background: linear-gradient(135deg, #25D366, #128C7E); }
         #emailBtn { background: linear-gradient(135deg, #EA4335, #D14836); }
         #chatBtn { background: linear-gradient(135deg, #9b59b6, #8e44ad); }
@@ -1334,6 +1330,17 @@ function addChatWidgetStyles() {
             font-size: 13px;
         }
         
+        /* SMS Button in Chat Actions */
+        .btn-small[style*="background-color: #FF9800"] {
+            background: linear-gradient(135deg, #FF9800, #F57C00) !important;
+            border: none;
+            color: white;
+        }
+        
+        .btn-small[style*="background-color: #FF9800"]:hover {
+            background: linear-gradient(135deg, #F57C00, #E65100) !important;
+        }
+        
         /* Notification Styles */
         .notification {
             position: fixed;
@@ -1381,20 +1388,7 @@ function addChatWidgetStyles() {
             margin-left: 10px;
         }
         
-        /* Mobile Menu Dropdowns */
         @media (max-width: 768px) {
-            .dropdown-menu {
-                display: none;
-                position: static;
-                box-shadow: none;
-                background: rgba(0,0,0,0.05);
-                padding-left: 20px;
-            }
-            
-            .dropdown-menu.show {
-                display: block;
-            }
-            
             .chat-widget {
                 width: calc(100% - 20px);
                 height: 70vh;
@@ -1425,16 +1419,16 @@ function addChatWidgetStyles() {
 }
 
 // ============================================
-// 15. GLOBAL EXPORTS
+// 16. GLOBAL EXPORTS - UPDATED
 // ============================================
 
-// Make functions available globally
 window.makePhoneCall = makePhoneCall;
 window.openWhatsApp = openWhatsApp;
-window.sendDirectEmail = sendDirectEmail;
+window.openGmailCompose = openGmailCompose; // Updated export
+window.sendSMS = sendSMS;
 window.toggleChat = toggleChat;
 window.openModal = openModal;
 window.closeModal = closeModal;
 window.showNotification = showNotification;
 
-console.log('Uzuri Care JavaScript fully loaded!');
+console.log('Nzuri Care JavaScript fully loaded with all buttons functionality!');

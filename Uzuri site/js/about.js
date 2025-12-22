@@ -1,5 +1,5 @@
 // ==========================================================
-// Nzuri CARE SERVICES - JAVASCRIPT FOR SERVICE PAGES
+// NZURI CARE LLC - JAVASCRIPT FOR ABOUT PAGE
 // ==========================================================
 
 // Configuration for Nzuri Care LLC
@@ -7,14 +7,22 @@ const CONFIG = {
     company: {
         name: "Nzuri Care LLC",
         phone: "+1 (470) 529-9891",
+        phone2: "+1 (208) 664-1507", // From call button
         whatsapp: "+14705299891",
         email: "nzurillc04@gmail.com",
-        address: "3078 Clairmount RD NE"
+        email2: "nelsonsabastian94@gmail.com", // From footer
+        address: "3078 Clairmount RD NE, Atlanta",
+        hours: "Available 24/7"
+    },
+    social: {
+        facebook: "#",
+        twitter: "#",
+        instagram: "#",
+        linkedin: "#"
     }
 };
 
 // Global State
-let isChatOpen = false;
 let isMobileMenuOpen = false;
 
 // ============================================
@@ -22,7 +30,7 @@ let isMobileMenuOpen = false;
 // ============================================
 
 document.addEventListener('DOMContentLoaded', function() {
-    console.log('Nzuri Care Services - Page Loading...');
+    console.log('Nzuri Care About Page - Initializing...');
     
     // Initialize all components
     initializeNavigation();
@@ -34,11 +42,9 @@ document.addEventListener('DOMContentLoaded', function() {
     setupServiceCards();
     setupFooterLinks();
     setupEmailLinks();
+    setupAllIcons(); // Setup all icon interactions
     
-    // Apply orange background to service icons
-    styleServiceIcons();
-    
-    console.log('Service page initialized successfully!');
+    console.log('About page initialized successfully!');
 });
 
 // ============================================
@@ -88,17 +94,6 @@ function initializeHamburgerMenu() {
                 }
             }
         });
-    });
-    
-    // Close dropdowns when clicking elsewhere
-    document.addEventListener('click', function(e) {
-        if (window.innerWidth <= 768) {
-            document.querySelectorAll('.dropdown-menu.show').forEach(menu => {
-                if (!menu.contains(e.target) && !menu.previousElementSibling.contains(e.target)) {
-                    menu.classList.remove('show');
-                }
-            });
-        }
     });
 }
 
@@ -170,22 +165,10 @@ function setActiveNavLink() {
     const navLinks = document.querySelectorAll('.nav-link');
     
     navLinks.forEach(link => {
-        const linkHref = link.getAttribute('href');
-        // Check for service pages
-        if (linkHref === currentPage || 
-            linkHref.includes(currentPage) ||
-            (currentPage.includes('care.html') && linkHref.includes('services.html'))) {
+        if (link.getAttribute('href') === currentPage) {
             link.classList.add('active');
         } else {
             link.classList.remove('active');
-        }
-    });
-    
-    // Highlight current service in dropdown
-    const dropdownLinks = document.querySelectorAll('.dropdown-menu a');
-    dropdownLinks.forEach(link => {
-        if (link.getAttribute('href').includes(currentPage)) {
-            link.classList.add('active');
         }
     });
 }
@@ -204,7 +187,7 @@ function initializeModals() {
                 openModal(appointmentModal);
             } else {
                 // If no modal, redirect to contact page
-                window.location.href = '../contact.html';
+                window.location.href = 'contact.html';
             }
         });
     }
@@ -250,29 +233,37 @@ function closeModal(modal) {
 }
 
 // ============================================
-// 5. SERVICE ICONS - ORANGE BACKGROUND
+// 5. ALL ICONS FUNCTIONALITY
 // ============================================
 
-function styleServiceIcons() {
+function setupAllIcons() {
+    console.log('Setting up all icon interactions...');
+    
+    // 1. LOGO ICON (Heartbeat)
+    const logoIcon = document.querySelector('.logo i.fa-heartbeat');
+    if (logoIcon) {
+        logoIcon.addEventListener('click', function(e) {
+            e.preventDefault();
+            window.location.href = 'index.html';
+        });
+        
+        // Add hover effect
+        logoIcon.style.transition = 'all 0.3s ease';
+        logoIcon.addEventListener('mouseenter', () => {
+            logoIcon.style.transform = 'scale(1.2)';
+            logoIcon.style.color = '#e74c3c';
+        });
+        logoIcon.addEventListener('mouseleave', () => {
+            logoIcon.style.transform = 'scale(1)';
+            logoIcon.style.color = '';
+        });
+    }
+    
+    // 2. SERVICE ICONS (Compassion, Excellence, Family Focus)
     const serviceIcons = document.querySelectorAll('.service-icon');
-    
-    // Different orange shades for different service pages
-    const getOrangeShade = () => {
-        const currentPage = window.location.pathname.split('/').pop();
-        
-        if (currentPage.includes('personal-care')) return '#FF9800'; // Bright orange
-        if (currentPage.includes('companion-care')) return '#F57C00'; // Dark orange
-        if (currentPage.includes('dementia-care')) return '#FFB74D'; // Light orange
-        if (currentPage.includes('respite-care')) return '#FF5722'; // Deep orange
-        
-        return '#FF9800'; // Default orange
-    };
-    
-    const orangeColor = getOrangeShade();
-    
-    serviceIcons.forEach(icon => {
+    serviceIcons.forEach((icon, index) => {
         // Apply orange background and white text
-        icon.style.backgroundColor = orangeColor;
+        icon.style.backgroundColor = '#FF9800';
         icon.style.color = 'white';
         
         // Make it circular
@@ -286,57 +277,158 @@ function styleServiceIcons() {
         icon.style.fontSize = '32px';
         icon.style.transition = 'all 0.3s ease';
         
-        // Add hover effect
-        icon.addEventListener('mouseenter', () => {
-            icon.style.transform = 'scale(1.1) rotate(5deg)';
-            icon.style.boxShadow = '0 8px 25px rgba(255, 152, 0, 0.4)';
+        // Add click effect
+        icon.addEventListener('click', function() {
+            const title = this.parentElement.querySelector('h3').textContent;
+            showNotification(`Learn more about our ${title} value`, 'info');
         });
         
-        icon.addEventListener('mouseleave', () => {
-            icon.style.transform = 'scale(1) rotate(0deg)';
-            icon.style.boxShadow = 'none';
+        // Hover effects
+        icon.addEventListener('mouseenter', function() {
+            this.style.transform = 'scale(1.1) rotate(5deg)';
+            this.style.boxShadow = '0 8px 25px rgba(255, 152, 0, 0.4)';
+        });
+        
+        icon.addEventListener('mouseleave', function() {
+            this.style.transform = 'scale(1) rotate(0deg)';
+            this.style.boxShadow = 'none';
         });
     });
     
-    console.log(`Styled ${serviceIcons.length} service icons with ${orangeColor} background`);
-}
-
-// ============================================
-// 6. SERVICE CARDS FUNCTIONALITY
-// ============================================
-
-function setupServiceCards() {
-    const serviceCards = document.querySelectorAll('.service-card');
+    // 3. PHONE ICONS
+    const phoneIcons = document.querySelectorAll('i.fa-phone');
+    phoneIcons.forEach(icon => {
+        icon.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            makePhoneCall(CONFIG.company.phone);
+        });
+        
+        // Add hover effect
+        icon.style.cursor = 'pointer';
+        icon.style.transition = 'all 0.3s ease';
+        icon.addEventListener('mouseenter', () => {
+            icon.style.color = '#3498db';
+            icon.style.transform = 'scale(1.2)';
+        });
+        icon.addEventListener('mouseleave', () => {
+            icon.style.color = '';
+            icon.style.transform = 'scale(1)';
+        });
+    });
     
-    serviceCards.forEach(card => {
-        // Make entire card clickable if it has a link
-        const link = card.querySelector('a.btn, a.btn-service, a.btn-large');
-        if (link && !card.hasAttribute('data-no-click')) {
-            card.style.cursor = 'pointer';
-            
-            card.addEventListener('click', function(e) {
-                if (!e.target.closest('a') && !e.target.closest('button')) {
-                    e.preventDefault();
-                    window.location.href = link.href;
-                }
+    // 4. EMAIL ICONS
+    const emailIcons = document.querySelectorAll('i.fa-envelope');
+    emailIcons.forEach(icon => {
+        icon.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            sendDirectEmail(CONFIG.company.email);
+        });
+        
+        // Add hover effect
+        icon.style.cursor = 'pointer';
+        icon.style.transition = 'all 0.3s ease';
+        icon.addEventListener('mouseenter', () => {
+            icon.style.color = '#EA4335';
+            icon.style.transform = 'scale(1.2)';
+        });
+        icon.addEventListener('mouseleave', () => {
+            icon.style.color = '';
+            icon.style.transform = 'scale(1)';
+        });
+    });
+    
+    // 5. LOCATION ICONS
+    const locationIcons = document.querySelectorAll('i.fa-map-marker-alt');
+    locationIcons.forEach(icon => {
+        icon.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            openGoogleMaps(CONFIG.company.address);
+        });
+        
+        // Add hover effect
+        icon.style.cursor = 'pointer';
+        icon.style.transition = 'all 0.3s ease';
+        icon.addEventListener('mouseenter', () => {
+            icon.style.color = '#e74c3c';
+            icon.style.transform = 'scale(1.2)';
+        });
+        icon.addEventListener('mouseleave', () => {
+            icon.style.color = '';
+            icon.style.transform = 'scale(1)';
+        });
+    });
+    
+    // 6. CLOCK ICONS
+    const clockIcons = document.querySelectorAll('i.fa-clock');
+    clockIcons.forEach(icon => {
+        icon.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            showNotification(`We're ${CONFIG.company.hours}! Call us anytime.`, 'info');
+        });
+        
+        // Add hover effect
+        icon.style.cursor = 'pointer';
+        icon.style.transition = 'all 0.3s ease';
+        icon.addEventListener('mouseenter', () => {
+            icon.style.color = '#f39c12';
+            icon.style.transform = 'scale(1.2)';
+        });
+        icon.addEventListener('mouseleave', () => {
+            icon.style.color = '';
+            icon.style.transform = 'scale(1)';
+        });
+    });
+    
+    // 7. SOCIAL MEDIA ICONS
+    const socialIcons = document.querySelectorAll('.social-links i');
+    socialIcons.forEach(icon => {
+        const platform = icon.classList[1].replace('fa-', '');
+        const parentLink = icon.closest('a');
+        
+        if (parentLink && parentLink.getAttribute('href') === '#') {
+            parentLink.addEventListener('click', function(e) {
+                e.preventDefault();
+                showNotification(`Follow us on ${capitalizeFirstLetter(platform)}`, 'info');
             });
         }
         
-        // Hover effects
-        card.addEventListener('mouseenter', function() {
-            this.style.transform = 'translateY(-10px)';
-            this.style.boxShadow = '0 15px 30px rgba(0,0,0,0.15)';
+        // Add hover effects
+        icon.style.transition = 'all 0.3s ease';
+        icon.addEventListener('mouseenter', () => {
+            const colors = {
+                facebook: '#4267B2',
+                twitter: '#1DA1F2',
+                instagram: '#E1306C',
+                linkedin: '#0077B5'
+            };
+            icon.style.color = colors[platform] || '#333';
+            icon.style.transform = 'scale(1.2)';
         });
-        
-        card.addEventListener('mouseleave', function() {
-            this.style.transform = 'translateY(0)';
-            this.style.boxShadow = '0 5px 20px rgba(0,0,0,0.08)';
+        icon.addEventListener('mouseleave', () => {
+            icon.style.color = '';
+            icon.style.transform = 'scale(1)';
         });
     });
+    
+    // 8. CHEVRON DOWN ICONS (in dropdowns)
+    const chevronIcons = document.querySelectorAll('.fa-chevron-down');
+    chevronIcons.forEach(icon => {
+        // Add animation on click
+        icon.parentElement.addEventListener('click', function() {
+            icon.style.transition = 'transform 0.3s ease';
+            icon.style.transform = icon.style.transform === 'rotate(180deg)' ? 'rotate(0deg)' : 'rotate(180deg)';
+        });
+    });
+    
+    console.log(`Setup complete: ${serviceIcons.length} service icons, ${phoneIcons.length} phone icons, ${emailIcons.length} email icons`);
 }
 
 // ============================================
-// 7. PHONE CALL FUNCTIONALITY
+// 6. PHONE CALL FUNCTIONALITY
 // ============================================
 
 function setupPhoneCalls() {
@@ -376,17 +468,29 @@ function makePhoneCall(phoneNumber = CONFIG.company.phone) {
     window.location.href = `tel:${phoneNumber.replace(/\D/g, '')}`;
 }
 
-function formatPhoneNumber(phone) {
-    const cleaned = ('' + phone).replace(/\D/g, '');
-    const match = cleaned.match(/^(\d{3})(\d{3})(\d{4})$/);
-    if (match) {
-        return '(' + match[1] + ') ' + match[2] + '-' + match[3];
-    }
-    return phone;
+// ============================================
+// 7. EMAIL FUNCTIONALITY
+// ============================================
+
+function setupEmailLinks() {
+    // Make email links functional
+    document.querySelectorAll('a[href^="mailto:"]').forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            const email = this.getAttribute('href').replace('mailto:', '');
+            sendDirectEmail(email);
+        });
+    });
 }
 
-function isMobileDevice() {
-    return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+function sendDirectEmail(email = CONFIG.company.email) {
+    const serviceName = "About Nzuri-Care Services";
+    const subject = encodeURIComponent(`Inquiry about ${serviceName}`);
+    const body = encodeURIComponent(`Dear Nzuri Care Team,\n\nI visited your About page and would like to learn more about your services.\n\nCould you please send me more information?\n\nBest regards,\n[Your Name]`);
+    const mailtoLink = `mailto:${email}?subject=${subject}&body=${body}`;
+    
+    // Open directly without asking for confirmation
+    window.location.href = mailtoLink;
 }
 
 // ============================================
@@ -406,53 +510,25 @@ function setupWhatsAppLinks() {
 
 function openWhatsApp() {
     const phoneNumber = CONFIG.company.whatsapp.replace(/\D/g, '');
-    const serviceName = document.querySelector('h1')?.textContent || 'Nzuri Care Services';
-    const message = encodeURIComponent(`Hello Nzuri Care! I'm interested in your ${serviceName}. Can you help me?`);
+    const message = encodeURIComponent(`Hello Nzuri Care! I visited your About page and would like to learn more about your services. Can you help me?`);
     const whatsappUrl = `https://wa.me/${phoneNumber}?text=${message}`;
     
     window.open(whatsappUrl, '_blank');
 }
 
 // ============================================
-// 9. EMAIL FUNCTIONALITY - UPDATED
-// ============================================
-
-function setupEmailLinks() {
-    // Make email links functional
-    document.querySelectorAll('a[href^="mailto:"]').forEach(link => {
-        link.addEventListener('click', function(e) {
-            e.preventDefault();
-            const email = this.getAttribute('href').replace('mailto:', '');
-            sendDirectEmail(email);
-        });
-    });
-}
-
-function sendDirectEmail(email = CONFIG.company.email) {
-    const serviceName = document.querySelector('h1')?.textContent || 'Nzuri Care Services';
-    const subject = encodeURIComponent(`Inquiry about ${serviceName}`);
-    const body = encodeURIComponent(`Dear Nzuri Care Team,\n\nI would like to learn more about your ${serviceName}.\n\nCould you please send me more information?\n\nBest regards,\n[Your Name]`);
-    const mailtoLink = `mailto:${email}?subject=${subject}&body=${body}`;
-    
-    // Open directly without asking for confirmation
-    window.location.href = mailtoLink;
-}
-
-// ============================================
-// 10. SMS FUNCTIONALITY - NEW
+// 9. SMS FUNCTIONALITY
 // ============================================
 
 function sendSMS() {
     const phoneNumber = CONFIG.company.phone.replace(/\D/g, '');
-    const serviceName = document.querySelector('h1')?.textContent || 'Nzuri Care Services';
-    const message = encodeURIComponent(`Hello Nzuri Care! I'm interested in your ${serviceName}. Can you help me?`);
+    const message = encodeURIComponent(`Hello Nzuri Care! I visited your About page and would like to learn more about your services.`);
     
-    // For iOS and Android devices, sms: link works directly
     if (isMobileDevice()) {
         const smsLink = `sms:${phoneNumber}?body=${message}`;
         window.location.href = smsLink;
     } else {
-        // For desktop, create a more user-friendly experience
+        // For desktop
         const textArea = document.createElement('textarea');
         textArea.value = `Send this SMS to ${formatPhoneNumber(phoneNumber)}:\n\n${decodeURIComponent(message)}`;
         textArea.style.position = 'fixed';
@@ -488,13 +564,22 @@ function sendSMS() {
         document.body.appendChild(closeBtn);
         textArea.focus();
         textArea.select();
-        
-        showNotification('SMS text copied. On mobile, this would open your messaging app directly.', 'info');
     }
 }
 
 // ============================================
-// 11. COMMUNICATION BUTTONS - UPDATED
+// 10. GOOGLE MAPS FUNCTIONALITY
+// ============================================
+
+function openGoogleMaps(address = CONFIG.company.address) {
+    const encodedAddress = encodeURIComponent(address);
+    const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodedAddress}`;
+    
+    window.open(mapsUrl, '_blank');
+}
+
+// ============================================
+// 11. COMMUNICATION BUTTONS
 // ============================================
 
 function createCommunicationButtons() {
@@ -506,7 +591,7 @@ function createCommunicationButtons() {
     const container = document.createElement('div');
     container.className = 'com-buttons-container';
     
-    // Define buttons (Reordered and added SMS)
+    // Define buttons
     const buttons = [
         {
             id: 'phoneBtn',
@@ -546,7 +631,7 @@ function createCommunicationButtons() {
                 if (modal) {
                     openModal(modal);
                 } else {
-                    window.location.href = '../contact.html';
+                    window.location.href = 'contact.html';
                 }
             }
         }
@@ -602,7 +687,28 @@ function createComButton(config, index) {
 }
 
 // ============================================
-// 12. FOOTER LINKS FUNCTIONALITY
+// 12. SERVICE CARDS FUNCTIONALITY
+// ============================================
+
+function setupServiceCards() {
+    const serviceCards = document.querySelectorAll('.service-card');
+    
+    serviceCards.forEach(card => {
+        // Hover effects
+        card.addEventListener('mouseenter', function() {
+            this.style.transform = 'translateY(-10px)';
+            this.style.boxShadow = '0 15px 30px rgba(0,0,0,0.15)';
+        });
+        
+        card.addEventListener('mouseleave', function() {
+            this.style.transform = 'translateY(0)';
+            this.style.boxShadow = '0 5px 20px rgba(0,0,0,0.08)';
+        });
+    });
+}
+
+// ============================================
+// 13. FOOTER LINKS FUNCTIONALITY
 // ============================================
 
 function setupFooterLinks() {
@@ -628,20 +734,37 @@ function setupFooterLinks() {
     const footerLinks = document.querySelectorAll('footer a[href]');
     footerLinks.forEach(link => {
         const href = link.getAttribute('href');
-        if (href === 'index.html' || href === 'services.html' || 
-            href === 'about.html' || href === 'contact.html' || 
-            href === 'testimonials.html') {
-            // Ensure proper relative path
+        // Ensure proper relative paths for footer navigation
+        if (href && !href.startsWith('#') && !href.startsWith('http') && 
+            !href.startsWith('mailto:') && !href.startsWith('tel:')) {
+            // Check if link needs ../ prefix
             if (!href.startsWith('../') && !href.startsWith('/')) {
-                link.setAttribute('href', '../' + href);
+                link.setAttribute('href', href);
             }
         }
     });
 }
 
 // ============================================
-// 13. UTILITY FUNCTIONS
+// 14. UTILITY FUNCTIONS
 // ============================================
+
+function formatPhoneNumber(phone) {
+    const cleaned = ('' + phone).replace(/\D/g, '');
+    const match = cleaned.match(/^(\d{3})(\d{3})(\d{4})$/);
+    if (match) {
+        return '(' + match[1] + ') ' + match[2] + '-' + match[3];
+    }
+    return phone;
+}
+
+function isMobileDevice() {
+    return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+}
+
+function capitalizeFirstLetter(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+}
 
 function showNotification(message, type = 'info') {
     // Create notification element
@@ -695,7 +818,7 @@ function showNotification(message, type = 'info') {
 }
 
 // ============================================
-// 14. STYLE INJECTIONS - UPDATED
+// 15. STYLE INJECTIONS
 // ============================================
 
 function addComButtonsStyles() {
@@ -711,6 +834,7 @@ function addComButtonsStyles() {
             flex-direction: column;
             gap: 10px;
             align-items: flex-end;
+            padding: 5px;
         }
         
         .com-button {
@@ -761,27 +885,12 @@ function addComButtonsStyles() {
         #emailBtn { background: linear-gradient(135deg, #EA4335, #D14836); }
         #consultBtn { background: linear-gradient(135deg, #2ecc71, #27ae60); }
         
-        /* SMS Modal */
-        .sms-modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.8);
-            z-index: 1001;
-            justify-content: center;
-            align-items: center;
-        }
-        
-        .sms-content {
-            background: white;
-            padding: 30px;
-            border-radius: 10px;
-            max-width: 500px;
-            width: 90%;
-            text-align: center;
+        /* Icon Hover Effects */
+        .service-icon, 
+        .social-links i,
+        .contact-info i,
+        .logo i {
+            transition: all 0.3s ease !important;
         }
         
         /* Animations */
@@ -831,6 +940,12 @@ function addComButtonsStyles() {
             .com-button .btn-text {
                 display: none;
             }
+            
+            .service-icon {
+                width: 70px !important;
+                height: 70px !important;
+                font-size: 28px !important;
+            }
         }
     `;
     
@@ -838,7 +953,7 @@ function addComButtonsStyles() {
 }
 
 // ============================================
-// 15. GLOBAL EXPORTS
+// 16. GLOBAL EXPORTS
 // ============================================
 
 // Make functions available globally
@@ -846,8 +961,9 @@ window.makePhoneCall = makePhoneCall;
 window.openWhatsApp = openWhatsApp;
 window.sendDirectEmail = sendDirectEmail;
 window.sendSMS = sendSMS;
+window.openGoogleMaps = openGoogleMaps;
 window.openModal = openModal;
 window.closeModal = closeModal;
 window.showNotification = showNotification;
 
-console.log('Nzuri Care Services JavaScript fully loaded!');
+console.log('Nzuri Care About Page JavaScript fully loaded!');
