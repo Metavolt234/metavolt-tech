@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contact Us | Nzuri Care LLC</title>
     <link rel="stylesheet" href="css/style.css">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet">
     <style>
         /* ============================================
@@ -487,6 +489,56 @@
             border-radius: 6px;
             border-left: 3px solid #25D366;
         }
+        
+        /* Floating Contact Buttons Styles */
+        .floating-contact-buttons {
+            position: fixed;
+            bottom: 80px;
+            right: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            z-index: 999;
+        }
+        
+        .floating-btn {
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            text-decoration: none;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+        }
+        
+        .floating-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+        }
+        
+        .phone-btn { 
+            background: #3498db;
+        }
+        
+        .email-btn { 
+            background: #EA4335;
+        }
+        
+        .whatsapp-btn { 
+            background: #25D366; 
+            border: none;
+            cursor: pointer;
+        }
+        
+        @media (min-width: 768px) {
+            .floating-contact-buttons {
+                display: none;
+            }
+        }
     </style>
 </head>
 <body>
@@ -495,6 +547,7 @@
         <nav class="nav">
             <div class="nav-container">
                 <a href="index.html" class="logo">
+                    <i class="fas fa-heartbeat"></i>
                     <span>Nzuri Care LLC</span>
                 </a>
                 <ul class="nav-menu">
@@ -515,9 +568,11 @@
                 </ul>
                 <div class="nav-cta">
                     <a href="tel:2086641507" class="btn btn-secondary call-btn">
+                        <i class="fas fa-phone"></i>
                         <span class="call-text">Call Now</span>
                     </a>
                     <button class="btn btn-primary" id="consultationBtn">
+                        <i class="fas fa-calendar-check"></i>
                         <span class="consult-text">Free Consultation</span>
                     </button>
                 </div>
@@ -546,9 +601,10 @@
                 <div class="contact-info">
                     <div class="contact-item">
                         <div class="contact-details">
-                            <h3>Our Location</h3>
+                            <h3><i class="fas fa-map-marker-alt"></i> Our Location</h3>
                             <p>407 W. Appleway Ave.<br>Coeur d'Alene, ID 83814</p>
                             <button class="btn-directions" data-address="407 W. Appleway Ave, Coeur d'Alene, ID 83814">
+                                <i class="fas fa-directions"></i>
                                 <span class="directions-text">Get Directions</span>
                             </button>
                         </div>
@@ -556,18 +612,21 @@
                     
                     <div class="contact-item">
                         <div class="contact-details">
-                            <h3>Phone Numbers</h3>
+                            <h3><i class="fas fa-phone"></i> Phone Numbers</h3>
                             <p>
                                 <a href="tel:2086641507" class="phone-link">
+                                    <i class="fas fa-phone"></i>
                                     <span>(208) 664-1507</span>
                                 </a>
                             </p>
                             <p>
                                 <a href="tel:4705299891" class="phone-link">
+                                    <i class="fas fa-mobile-alt"></i>
                                     <span>(470) 529-9891</span>
                                 </a>
                             </p>
                             <p class="emergency-note">
+                                <i class="fas fa-exclamation-circle"></i>
                                 <small>Available 24/7 for emergencies</small>
                             </p>
                         </div>
@@ -575,9 +634,10 @@
                     
                     <div class="contact-item">
                         <div class="contact-details">
-                            <h3>Email Addresses</h3>
+                            <h3><i class="fas fa-envelope"></i> Email Addresses</h3>
                             <p>
                                 <a href="mailto:nzurillc04@gmail.com" class="email-link">
+                                    <i class="fas fa-envelope"></i>
                                     <span>nzurillc04@gmail.com</span>
                                 </a>
                             </p>
@@ -586,18 +646,19 @@
                     
                     <div class="contact-item">
                         <div class="contact-details">
-                            <h3>Business Hours</h3>
-                            <p>Monday - Friday: 8am - 6pm</p>
-                            <p>Saturday: 9am - 2pm</p>
-                            <p>Sunday: Emergency calls only</p>
+                            <h3><i class="fas fa-clock"></i> Business Hours</h3>
+                            <p><i class="far fa-clock"></i> Monday - Friday: 8am - 6pm</p>
+                            <p><i class="far fa-clock"></i> Saturday: 9am - 2pm</p>
+                            <p><i class="fas fa-exclamation-triangle"></i> Sunday: Emergency calls only</p>
                         </div>
                     </div>
                     
                     <div class="contact-item">
                         <div class="contact-details">
-                            <h3>Free Consultation</h3>
+                            <h3><i class="fas fa-calendar-check"></i> Free Consultation</h3>
                             <p>Schedule a free in-home assessment to discuss your specific care needs.</p>
                             <button class="btn btn-primary btn-schedule" id="contactConsultation">
+                                <i class="fas fa-calendar-plus"></i>
                                 <span class="schedule-text">Schedule Assessment</span>
                             </button>
                         </div>
@@ -607,7 +668,7 @@
                 <!-- Contact Form -->
                 <div class="contact-form">
                     <div class="form-header">
-                        <h3>Send Us a Message</h3>
+                        <h3><i class="fas fa-comment-dots"></i> Send Us a Message</h3>
                         <p class="form-subtitle">We typically respond within 2 hours</p>
                     </div>
                     
@@ -631,7 +692,9 @@
                         </div>
                         
                         <div class="form-group">
-                            <label for="contactService">Service Interested In</label>
+                            <label for="contactService">
+                                <i class="fas fa-hand-holding-heart"></i> Service Interested In
+                            </label>
                             <select id="contactService" name="service" class="service-select">
                                 <option value="">Select a service</option>
                                 <option value="personal">Personal Care</option>
@@ -659,13 +722,14 @@
                         </div>
                         
                         <button type="submit" class="btn btn-primary btn-full whatsapp-btn-submit">
+                            <i class="fab fa-whatsapp"></i>
                             <span class="submit-text">Send via WhatsApp</span>
                             <span class="btn-loader">
-                                Loading...
+                                <i class="fas fa-spinner fa-spin"></i>
                             </span>
                         </button>
                         <p class="whatsapp-note">
-                            Message will be sent directly to our WhatsApp. Make sure WhatsApp is installed on your device.
+                            <i class="fab fa-whatsapp"></i> Message will be sent directly to our WhatsApp. Make sure WhatsApp is installed on your device.
                         </p>
                     </form>
                 </div>
@@ -677,15 +741,17 @@
     <section class="content-section">
         <div class="container">
             <div class="section-header">
-                <h2>Visit Our Office</h2>
+                <h2><i class="fas fa-map-marked-alt"></i> Visit Our Office</h2>
                 <p>Stop by our location to discuss your care needs in person</p>
             </div>
             
             <div class="map-placeholder">
                 <div class="map-content">
+                    <i class="fas fa-map-marker-alt"></i>
                     <h3>407 W. Appleway Ave.</h3>
                     <p>Coeur d'Alene, ID 83814</p>
                     <button class="btn btn-white" id="openMaps">
+                        <i class="fas fa-external-link-alt"></i>
                         <span class="maps-text">Open in Google Maps</span>
                     </button>
                 </div>
@@ -699,56 +765,41 @@
             <div class="footer-content">
                 <div class="footer-section">
                     <div class="logo">
+                        <i class="fas fa-heartbeat"></i>
                         <span>Nzuri Care LLC</span>
                     </div>
-                    <p>Providing compassionate, professional in-home care services for seniors in Coeur d'Alene and surrounding areas.</p>
+                    <p>Providing compassionate, professional in-home care services for seniors in 3078 Clairmount Rd Ne Atlanta and surrounding areas.</p>
                     <div class="social-links">
-                        <a href="#" class="social-icon" data-platform="facebook" aria-label="Facebook">
-                            FB
-                        </a>
-                        <a href="#" class="social-icon" data-platform="twitter" aria-label="Twitter">
-                            TW
-                        </a>
-                        <a href="#" class="social-icon" data-platform="instagram" aria-label="Instagram">
-                            IG
-                        </a>
-                        <a href="#" class="social-icon" data-platform="linkedin" aria-label="LinkedIn">
-                            IN
-                        </a>
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
                     </div>
                 </div>
-                
                 <div class="footer-section">
                     <h3>Quick Links</h3>
                     <ul>
-                        <li><a href="index.html">Home</a></li>
-                        <li><a href="services.html">Services</a></li>
-                        <li><a href="about.html">About Us</a></li>
-                        <li><a href="testimonials.html">Testimonials</a></li>
-                        <li><a href="contact.html">Contact</a></li>
-                        <li><a href="learn-more.html">More</a></li>
+                        <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+                        <li><a href="services.html"><i class="fas fa-hand-holding-heart"></i> Services</a></li>
+                        <li><a href="about.html"><i class="fas fa-info-circle"></i> About Us</a></li>
+                        <li><a href="testimonials.html"><i class="fas fa-star"></i> Testimonials</a></li>
+                        <li><a href="contact.html"><i class="fas fa-address-book"></i> Contact</a></li>
+                        <li><a href="learn-more.html"><i class="fas fa-plus-circle"></i> More</a></li>
                     </ul>
                 </div>
-                
                 <div class="footer-section">
                     <h3>Contact Info</h3>
                     <div class="contact-info">
-                        <p>407 W. Appleway Ave.<br>Coeur d'Alene, ID 83814</p>
-                        <p><a href="tel:+12086641507">(208) 664-1507</a></p>
-                        <p><a href="tel:+14705299891">(470) 529-9891</a></p>
-                        <p><a href="mailto:nzurillc04@gmail.com">nzurillc04@gmail.com</a></p>
-                        <p>Available 24/7</p>
+                        <p><i class="fas fa-map-marker-alt"></i> 3078 Claimont Rd, Ne Atlanta</p>
+                        <p><i class="fas fa-phone"></i> <a href="tel: +1 (470)-529-9891">+1 (470) 529-9891</a></p>
+                        <p><i class="fas fa-envelope"></i> <a href="mailto:nelsonsabastian94@gmail.com">nzurillc04@gmail.com</a></p>
+                        <p><i class="fas fa-clock"></i> Available 24/7</p>
                     </div>
                 </div>
             </div>
-            
             <div class="footer-bottom">
                 <p>&copy; 2026 Nzuri Care LLC. All rights reserved.</p>
-                <p class="designer">
-                    Designed by T.Nelson 
-                    MetaVolt Tech
-                    <b>+256 775781560</b>
-                </p>
+                <p class="designer"><i>Designed by T.Nelson <i class="fas fa-bolt"></i> MetaVolt Tech <i class="fas fa-phone"></i> <b>+256 775781560</b></i></p>
             </div>
         </div>
     </footer>
@@ -758,7 +809,7 @@
         <div class="modal-content">
             <span class="close-modal" aria-label="Close">&times;</span>
             <div class="modal-header">
-                <h2>Schedule Your Free Consultation</h2>
+                <h2><i class="fas fa-calendar-check"></i> Schedule Your Free Consultation</h2>
                 <p class="modal-subtitle">No obligation. No pressure. Just compassionate care.</p>
             </div>
             
@@ -779,7 +830,9 @@
                 </div>
                 
                 <div class="form-group">
-                    <label for="service">Service Interested In</label>
+                    <label for="service">
+                        <i class="fas fa-hand-holding-heart"></i> Service Interested In
+                    </label>
                     <select id="service" name="service">
                         <option value="">Select a service</option>
                         <option value="personal">Personal Care</option>
@@ -809,13 +862,14 @@
                 </div>
                 
                 <button type="submit" class="btn btn-primary btn-full whatsapp-btn-submit">
+                    <i class="fab fa-whatsapp"></i>
                     <span>Schedule via WhatsApp</span>
                     <span class="btn-loader">
-                        Loading...
+                        <i class="fas fa-spinner fa-spin"></i>
                     </span>
                 </button>
                 <p class="whatsapp-note">
-                    Consultation request will be sent directly to our WhatsApp. Make sure WhatsApp is installed on your device.
+                    <i class="fab fa-whatsapp"></i> Consultation request will be sent directly to our WhatsApp. Make sure WhatsApp is installed on your device.
                 </p>
             </form>
         </div>
@@ -825,26 +879,26 @@
     <div id="successModal" class="modal success">
         <div class="modal-content">
             <div class="success-icon">
-                ✓
+                <i class="fas fa-check-circle"></i>
             </div>
             <h2>Thank You!</h2>
             <p>Your consultation request has been received. We'll contact you within 24 hours to schedule your free assessment.</p>
             <button class="btn btn-primary" id="closeSuccess">
-                Got It!
+                <i class="fas fa-check"></i> Got It!
             </button>
         </div>
     </div>
 
     <!-- Floating Contact Buttons for Mobile -->
     <div class="floating-contact-buttons">
-        <a href="tel:+12086641507" class="floating-btn phone-btn" aria-label="Call us">
-            Call
+        <a href="tel:+14705299891" class="floating-btn phone-btn" aria-label="Call us">
+            <i class="fas fa-phone"></i>
         </a>
         <a href="mailto:nzurillc04@gmail.com" class="floating-btn email-btn" aria-label="Email us">
-            Email
+            <i class="fas fa-envelope"></i>
         </a>
         <button class="floating-btn whatsapp-btn" id="floatingWhatsApp" aria-label="WhatsApp">
-            WhatsApp
+            <i class="fab fa-whatsapp"></i>
         </button>
     </div>
 
