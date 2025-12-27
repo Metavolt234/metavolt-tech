@@ -650,6 +650,12 @@ body {
 .footer-section ul li a:hover {
     color: white;
 }
+.contact-info {
+            background: linear-gradient(135deg, #d1bad6 5%, #1971c9 100%);
+            padding: 1.5rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(240, 18, 18, 0.05);
+        }
 
 .contact-info p {
     display: flex;
