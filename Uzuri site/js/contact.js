@@ -709,7 +709,7 @@ function showNotification(message, type = 'info') {
         <span>${message}</span>
         <button class="notification-close">×</button>
     `;
-    
+        
     notification.style.cssText = `
         position: fixed;
         top: 20px;
