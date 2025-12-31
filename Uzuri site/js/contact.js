@@ -583,7 +583,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const openMapsBtn = document.getElementById('openMaps');
     if (openMapsBtn) {
         openMapsBtn.addEventListener('click', () => {
-            openGoogleMaps("407 W. Appleway Ave, Coeur d'Alene, ID 83814");
+            openGoogleMaps("3078 Claimont Rd, Ne Atlanta");
         });
     }
     
