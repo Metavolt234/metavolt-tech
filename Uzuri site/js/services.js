@@ -9,7 +9,7 @@ const CONFIG = {
         phone: "+1 (470) 529-9891",
         whatsapp: "+14705299891",
         sms: "+14705299891",
-        email: "nzurillc04@gmail.com",
+        email: "nzurillc40@gmail.com",
         address: "3078 Claimont Rd, Ne Atlanta"
     },
     services: {

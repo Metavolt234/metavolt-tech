@@ -129,7 +129,7 @@ document.addEventListener('DOMContentLoaded', function() {
         message += `Need immediate assistance?\n`;
         message += `📞 +1 (470) 529-9891 (24/7)\n`;
         message += `📍 3078 Claimont Rd, Ne Atlanta.\n`;
-        message += `📧 nzurillc04@gmail.com\n`;
+        message += `📧 nzurillc40@gmail.com\n`;
         message += `⏰ Response time: 2-4 hours\n`;
         
         return encodeURIComponent(message);
@@ -191,7 +191,7 @@ document.addEventListener('DOMContentLoaded', function() {
         message += `⭐ ==== FREE CONSULTATION ==== ⭐\n`;
         message += `📞 +1 (470) 529-9891 (24/7)\n`;
         message += `📍 3078 Claimont Rd, Ne Atlanta.\n`;
-        message += `📧 nzurillc04@gmail.com\n`;
+        message += `📧 nzurillc40@gmail.com\n`;
         message += `⏰ We'll schedule within 24 hours\n`;
         
         return encodeURIComponent(message);
