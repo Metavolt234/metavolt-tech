@@ -10,7 +10,7 @@ const CONFIG = {
         phone2: "+1 (208) 664-1507",
         whatsapp: "+14705299891",
         email: "nzurillc40@gmail.com",
-        email2: "nelsonsabastian94@gmail.com",
+        email2: "nzurillc40@gmail.com",
         address: "3078 Clairmount Rd Ne Atlanta",
         hours: "Available 24/7"
     }
