@@ -849,7 +849,7 @@ if (!document.querySelector('#dynamic-styles')) {
         
         .auto-reply-notification {
             animation: fadeInScale 0.3s ease;
-        }
+        } 
         
         @media (min-width: 768px) {
             .floating-contact-buttons {
