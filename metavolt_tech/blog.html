@@ -9,7 +9,36 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
 <body>
-    <header id="header"><div class="container"><nav class="navbar"><a href="index.html" class="logo"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 60'%3E%3Crect width='200' height='60' fill='%230066ff' rx='10'/%3E%3Ctext x='15' y='38' font-family='Arial' font-weight='bold' font-size='22' fill='white'%3EMETAVOLT%3C/text%3E%3Ctext x='160' y='38' font-family='Arial' font-weight='bold' font-size='16' fill='%2300d4ff'%3ETECH%3C/text%3E%3C/svg%3E" alt="Logo" class="logo-img"><span>MetaVolt</span> Tech</a><div class="theme-toggle-wrapper"><button id="themeToggle" class="theme-toggle"><i class="fas fa-sun"></i><i class="fas fa-moon"></i></button></div><ul class="nav-links"><li><a href="index.html">Home</a></li><li><a href="about.html">About</a></li><li><a href="services.html">Services <i class="fas fa-chevron-down"></i></a><ul class="dropdown"><li><a href="services.html#web-development">Web Development</a></li><li><a href="services.html#mobile-apps">Mobile Apps</a></li><li><a href="services.html#electrical">Electrical Installation</a></li><li><a href="services.html#cloud-solutions">Cloud Solutions</a></li><li><a href="services.html#ai-ml">AI & ML</a></li></ul></li><li><a href="team.html">Tech Team</a></li><li><a href="testimonials.html">Testimonials</a></li><li><a href="blog.html" class="active">Blog</a></li><li><a href="contact.html">Contact</a></li></ul><div class="hamburger"><i class="fas fa-bars"></i></div></nav></div></header>
+    <header id="header">
+        <div class="container">
+            <nav class="navbar">
+                <a href="index.html" class="logo">
+                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 60'%3E%3Crect width='200' height='60' fill='%230066ff' rx='10'/%3E%3Ctext x='15' y='38' font-family='Arial' font-weight='bold' font-size='22' fill='white'%3EMETAVOLT%3C/text%3E%3Ctext x='160' y='38' font-family='Arial' font-weight='bold' font-size='16' fill='%2300d4ff'%3ETECH%3C/text%3E%3C/svg%3E" alt="Logo" class="logo-img" style="height: 50px;">
+                </a>
+                <div class="theme-toggle-wrapper">
+                    <button id="themeToggle" class="theme-toggle" onclick="toggleTheme()">🌞</button>
+                </div>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="services.html">Services <i class="fas fa-chevron-down"></i></a>
+                        <ul class="dropdown">
+                            <li><a href="services.html#web-development">Web Development</a></li>
+                            <li><a href="services.html#mobile-apps">Mobile Apps</a></li>
+                            <li><a href="services.html#electrical">Electrical Installation</a></li>
+                            <li><a href="services.html#cloud-solutions">Cloud Solutions</a></li>
+                            <li><a href="services.html#ai-ml">AI & ML</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="team.html">Tech Team</a></li>
+                    <li><a href="testimonials.html">Testimonials</a></li>
+                    <li><a href="blog.html" class="active">Blog</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+                <div class="hamburger"><i class="fas fa-bars"></i></div>
+            </nav>
+        </div>
+    </header>
 
     <section class="page-header"><div class="container"><div class="page-header-content"><h1>Our Blog</h1><ul class="breadcrumb"><li><a href="index.html">Home</a></li><li><i class="fas fa-chevron-right"></i></li><li>Blog</li></ul></div></div></section>
 
@@ -23,6 +52,50 @@
 
     <div class="chatbot-container"><div class="chatbot-toggle" id="chatbotToggle"><i class="fas fa-comment-dots"></i></div><div class="chatbot-window" id="chatbotWindow"><div class="chatbot-header"><span><i class="fas fa-robot"></i> MetaVolt AI</span><i class="fas fa-times" id="closeChat" style="cursor:pointer"></i></div><div class="chatbot-messages" id="chatbotMessages"><div class="message bot-message"><div class="message-content">Hello! Check out our latest blog posts or ask me anything!</div></div></div><div class="chatbot-input"><input type="text" id="chatbotInput" placeholder="Type..."><button id="chatbotSendBtn"><i class="fas fa-paper-plane"></i></button></div></div></div>
 
-    <script src="script.js"></script>
+    <script>
+        function toggleTheme() {
+            const body = document.body;
+            const themeBtn = document.getElementById('themeToggle');
+            if (body.classList.contains('dark-mode')) {
+                body.classList.remove('dark-mode');
+                localStorage.setItem('theme', 'light');
+                if (themeBtn) themeBtn.innerHTML = '🌞';
+            } else {
+                body.classList.add('dark-mode');
+                localStorage.setItem('theme', 'dark');
+                if (themeBtn) themeBtn.innerHTML = '🌙';
+            }
+        }
+        function loadTheme() {
+            const body = document.body;
+            const themeBtn = document.getElementById('themeToggle');
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme === 'dark') { body.classList.add('dark-mode'); if (themeBtn) themeBtn.innerHTML = '🌙'; }
+            else if (savedTheme === 'light') { body.classList.remove('dark-mode'); if (themeBtn) themeBtn.innerHTML = '🌞'; }
+        }
+        loadTheme();
+        
+        const hamburger = document.querySelector('.hamburger');
+        const navLinks = document.querySelector('.nav-links');
+        if (hamburger && navLinks) {
+            hamburger.addEventListener('click', () => {
+                navLinks.classList.toggle('active');
+                hamburger.innerHTML = navLinks.classList.contains('active') ? '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
+            });
+        }
+        document.querySelectorAll('.nav-links > li').forEach(item => {
+            const dropdown = item.querySelector('.dropdown');
+            if (dropdown) {
+                item.querySelector('> a')?.addEventListener('click', (e) => {
+                    if (window.innerWidth <= 768) { e.preventDefault(); dropdown.classList.toggle('active'); }
+                });
+            }
+        });
+        const chatbotToggle = document.getElementById('chatbotToggle');
+        const chatbotWindow = document.getElementById('chatbotWindow');
+        const closeChat = document.getElementById('closeChat');
+        if (chatbotToggle) chatbotToggle.addEventListener('click', () => { if (chatbotWindow) chatbotWindow.style.display = 'flex'; });
+        if (closeChat) closeChat.addEventListener('click', () => { if (chatbotWindow) chatbotWindow.style.display = 'none'; });
+    </script>
 </body>
 </html>

@@ -7,194 +7,6 @@
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <style>
-        /* Full Width Hero Slider Styles */
-        .hero-full {
-            position: relative;
-            width: 100%;
-            height: 100vh;
-            min-height: 600px;
-            overflow: hidden;
-            margin-top: 70px;
-        }
-        
-        .hero-slider {
-            position: relative;
-            width: 100%;
-            height: 100%;
-        }
-        
-        .hero-slider-track {
-            display: flex;
-            width: 100%;
-            height: 100%;
-            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        
-        .hero-slide {
-            min-width: 100%;
-            height: 100%;
-            position: relative;
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-        }
-        
-        .hero-slide::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.4));
-            z-index: 1;
-        }
-        
-        .hero-slide-content {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            text-align: center;
-            color: white;
-            z-index: 2;
-            width: 90%;
-            max-width: 800px;
-        }
-        
-        .hero-slide-content h1 {
-            font-size: 3.5rem;
-            margin-bottom: 1rem;
-            color: white;
-            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-        }
-        
-        .hero-slide-content p {
-            font-size: 1.2rem;
-            margin-bottom: 2rem;
-            color: rgba(255, 255, 255, 0.9);
-        }
-        
-        .hero-slide-content .btn {
-            background: var(--primary);
-            color: white;
-            padding: 12px 30px;
-            border-radius: 40px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            display: inline-block;
-        }
-        
-        .hero-slide-content .btn-outline {
-            background: transparent;
-            border: 2px solid white;
-            margin-left: 15px;
-        }
-        
-        .hero-slide-content .btn-outline:hover {
-            background: white;
-            color: var(--primary);
-        }
-        
-        .hero-slider-nav {
-            position: absolute;
-            bottom: 30px;
-            left: 50%;
-            transform: translateX(-50%);
-            display: flex;
-            gap: 15px;
-            z-index: 10;
-        }
-        
-        .hero-slider-dot {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.5);
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-        
-        .hero-slider-dot.active {
-            background: var(--primary);
-            width: 30px;
-            border-radius: 6px;
-        }
-        
-        .hero-slider-arrow {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            background: rgba(0, 0, 0, 0.5);
-            color: white;
-            border: none;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            cursor: pointer;
-            z-index: 10;
-            transition: all 0.3s ease;
-            font-size: 1.2rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        .hero-slider-arrow:hover {
-            background: var(--primary);
-        }
-        
-        .hero-slider-arrow.prev {
-            left: 20px;
-        }
-        
-        .hero-slider-arrow.next {
-            right: 20px;
-        }
-        
-        /* Scrolling code bar */
-        .code-marquee {
-            background: #1a1a2e;
-            padding: 12px 0;
-            overflow: hidden;
-            white-space: nowrap;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        }
-        
-        .code-marquee-content {
-            display: inline-block;
-            animation: scrollCode 20s linear infinite;
-            font-family: 'Courier New', monospace;
-            color: #00ff88;
-            font-size: 14px;
-        }
-        
-        .code-marquee-content span {
-            margin-right: 40px;
-        }
-        
-        @keyframes scrollCode {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(-50%); }
-        }
-        
-        @media (max-width: 768px) {
-            .hero-full { height: 80vh; min-height: 500px; }
-            .hero-slide-content h1 { font-size: 2rem; }
-            .hero-slide-content p { font-size: 1rem; }
-            .hero-slider-arrow { width: 35px; height: 35px; font-size: 0.9rem; }
-            .hero-slider-arrow.prev { left: 10px; }
-            .hero-slider-arrow.next { right: 10px; }
-        }
-        
-        @media (max-width: 576px) {
-            .hero-slide-content h1 { font-size: 1.6rem; }
-            .hero-slide-content .btn { padding: 8px 20px; font-size: 0.9rem; }
-        }
-    </style>
 </head>
 <body>
 
@@ -206,10 +18,10 @@
                     <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 60'%3E%3Crect width='200' height='60' fill='%230066ff' rx='10'/%3E%3Ctext x='15' y='38' font-family='Arial, sans-serif' font-weight='bold' font-size='22' fill='white'%3EMETAVOLT%3C/text%3E%3Ctext x='160' y='38' font-family='Arial, sans-serif' font-weight='bold' font-size='16' fill='%2300d4ff'%3ETECH%3C/text%3E%3C/svg%3E" alt="MetaVolt Tech Logo" class="logo-img" style="height: 50px;">
                 </a>
                 
+                <!-- THEME TOGGLE BUTTON - FIXED -->
                 <div class="theme-toggle-wrapper">
-                    <button id="themeToggle" class="theme-toggle" aria-label="Dark/Light Mode">
-                        <i class="fas fa-sun"></i>
-                        <i class="fas fa-moon"></i>
+                    <button id="themeToggle" class="theme-toggle" onclick="toggleTheme()">
+                        🌞
                     </button>
                 </div>
                 
@@ -300,14 +112,6 @@
     <!-- Scrolling Code Marquee -->
     <div class="code-marquee">
         <div class="code-marquee-content">
-            <span>&lt;?php echo "Innovation"; ?&gt;</span>
-            <span>function solve() { return "success"; }</span>
-            <span>const future = await AI();</span>
-            <span>npm install electrical-safety</span>
-            <span>git commit -m "Innovation"</span>
-            <span>console.log("Hello World");</span>
-            <span>docker run -d -p 80:80 nginx</span>
-            <span>pip install tensorflow</span>
             <span>&lt;?php echo "Innovation"; ?&gt;</span>
             <span>function solve() { return "success"; }</span>
             <span>const future = await AI();</span>
@@ -471,9 +275,51 @@
         </div>
     </div>
 
-    <script src="script.js"></script>
+    <!-- Theme Toggle JavaScript - FIXED -->
     <script>
-        // Full Width Hero Slider Functionality
+        // Theme toggle function - works on all pages
+        function toggleTheme() {
+            const body = document.body;
+            const themeBtn = document.getElementById('themeToggle');
+            
+            if (body.classList.contains('dark-mode')) {
+                body.classList.remove('dark-mode');
+                localStorage.setItem('theme', 'light');
+                if (themeBtn) themeBtn.innerHTML = '🌞';
+            } else {
+                body.classList.add('dark-mode');
+                localStorage.setItem('theme', 'dark');
+                if (themeBtn) themeBtn.innerHTML = '🌙';
+            }
+        }
+        
+        // Load saved theme on page load
+        function loadTheme() {
+            const body = document.body;
+            const themeBtn = document.getElementById('themeToggle');
+            const savedTheme = localStorage.getItem('theme');
+            
+            if (savedTheme === 'dark') {
+                body.classList.add('dark-mode');
+                if (themeBtn) themeBtn.innerHTML = '🌙';
+            } else if (savedTheme === 'light') {
+                body.classList.remove('dark-mode');
+                if (themeBtn) themeBtn.innerHTML = '🌞';
+            } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                // If no saved preference, check system preference
+                body.classList.add('dark-mode');
+                if (themeBtn) themeBtn.innerHTML = '🌙';
+            } else {
+                if (themeBtn) themeBtn.innerHTML = '🌞';
+            }
+        }
+        
+        // Run on page load
+        loadTheme();
+    </script>
+    
+    <!-- Hero Slider JavaScript -->
+    <script>
         const heroTrack = document.getElementById('heroTrack');
         const heroSlides = document.querySelectorAll('.hero-slide');
         const heroDots = document.querySelectorAll('.hero-slider-dot');
@@ -485,10 +331,12 @@
         let heroInterval;
         
         function updateHeroSlider() {
-            heroTrack.style.transform = `translateX(-${heroIndex * 100}%)`;
-            heroDots.forEach((dot, i) => {
-                dot.classList.toggle('active', i === heroIndex);
-            });
+            if (heroTrack) {
+                heroTrack.style.transform = `translateX(-${heroIndex * 100}%)`;
+                heroDots.forEach((dot, i) => {
+                    dot.classList.toggle('active', i === heroIndex);
+                });
+            }
         }
         
         function nextHeroSlide() {
@@ -517,15 +365,129 @@
             heroNext.addEventListener('click', nextHeroSlide);
         }
         
-        heroDots.forEach((dot, i) => {
-            dot.addEventListener('click', () => {
-                heroIndex = i;
-                updateHeroSlider();
-                resetHeroInterval();
+        if (heroDots) {
+            heroDots.forEach((dot, i) => {
+                dot.addEventListener('click', () => {
+                    heroIndex = i;
+                    updateHeroSlider();
+                    resetHeroInterval();
+                });
             });
+        }
+        
+        if (heroTotal > 0) {
+            startHeroInterval();
+        }
+    </script>
+    
+    <!-- Mobile Menu & Chatbot Script -->
+    <script>
+        // Mobile Navigation Toggle
+        const hamburger = document.querySelector('.hamburger');
+        const navLinks = document.querySelector('.nav-links');
+        
+        if (hamburger && navLinks) {
+            hamburger.addEventListener('click', () => {
+                navLinks.classList.toggle('active');
+                hamburger.innerHTML = navLinks.classList.contains('active') ? '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
+            });
+        }
+        
+        // Mobile dropdown fix
+        const dropdownParents = document.querySelectorAll('.nav-links > li');
+        dropdownParents.forEach(item => {
+            const dropdown = item.querySelector('.dropdown');
+            if (dropdown) {
+                const parentLink = item.querySelector('> a');
+                if (parentLink) {
+                    parentLink.addEventListener('click', (e) => {
+                        if (window.innerWidth <= 768) {
+                            e.preventDefault();
+                            dropdown.classList.toggle('active');
+                        }
+                    });
+                }
+            }
         });
         
-        startHeroInterval();
+        // Chatbot functionality
+        const chatbotToggleBtn = document.getElementById('chatbotToggle');
+        const chatbotWindowDiv = document.getElementById('chatbotWindow');
+        const closeChatBtn = document.getElementById('closeChat');
+        const chatbotMessagesDiv = document.getElementById('chatbotMessages');
+        const chatbotInputField = document.getElementById('chatbotInput');
+        const chatbotSendBtn = document.getElementById('chatbotSendBtn');
+        
+        if (chatbotToggleBtn && chatbotWindowDiv) {
+            chatbotToggleBtn.addEventListener('click', () => {
+                chatbotWindowDiv.style.display = 'flex';
+            });
+        }
+        
+        if (closeChatBtn && chatbotWindowDiv) {
+            closeChatBtn.addEventListener('click', () => {
+                chatbotWindowDiv.style.display = 'none';
+            });
+        }
+        
+        function addChatMessage(content, isUser = false) {
+            if (!chatbotMessagesDiv) return;
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${isUser ? 'user-message' : 'bot-message'}`;
+            const messageContent = document.createElement('div');
+            messageContent.className = 'message-content';
+            messageContent.textContent = content;
+            messageDiv.appendChild(messageContent);
+            chatbotMessagesDiv.appendChild(messageDiv);
+            chatbotMessagesDiv.scrollTop = chatbotMessagesDiv.scrollHeight;
+        }
+        
+        async function getAIResponse(userMessage) {
+            const lowerMsg = userMessage.toLowerCase();
+            if (lowerMsg.includes('service')) return "We offer Web Development, Mobile Apps, Electrical Installation, Cloud Solutions, and AI & Machine Learning. Which interests you?";
+            if (lowerMsg.includes('electrical')) return "Our electrical services include residential wiring, commercial installations, industrial electrical work, repairs, lighting, and safety inspections.";
+            if (lowerMsg.includes('price') || lowerMsg.includes('cost')) return "Pricing depends on project scope. Please WhatsApp +256 775 781560 for a free quote!";
+            if (lowerMsg.includes('contact') || lowerMsg.includes('whatsapp')) return "Reach us via WhatsApp at +256 775 781560 or email nelsonbastian94@gmail.com";
+            if (lowerMsg.includes('hello') || lowerMsg.includes('hi')) return "Hello! 👋 Welcome to MetaVolt Tech. How can I assist you today?";
+            return "Thanks for your message! For immediate assistance, please WhatsApp +256 775 781560 or email nelsonbastian94@gmail.com.";
+        }
+        
+        async function handleChatSend() {
+            const message = chatbotInputField?.value.trim();
+            if (!message) return;
+            addChatMessage(message, true);
+            if (chatbotInputField) chatbotInputField.value = '';
+            const response = await getAIResponse(message);
+            setTimeout(() => addChatMessage(response, false), 500);
+        }
+        
+        if (chatbotSendBtn) chatbotSendBtn.addEventListener('click', handleChatSend);
+        if (chatbotInputField) chatbotInputField.addEventListener('keypress', (e) => { if (e.key === 'Enter') handleChatSend(); });
+        
+        // Active nav link
+        const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            const href = link.getAttribute('href');
+            if (href === currentPage) link.classList.add('active');
+        });
+        
+        // Fade in on scroll
+        const fadeElements = document.querySelectorAll('.fade-in');
+        const fadeInOnScroll = () => {
+            fadeElements.forEach(el => {
+                if (el.getBoundingClientRect().top < window.innerHeight - 150) {
+                    el.style.opacity = "1";
+                    el.style.transform = "translateY(0)";
+                }
+            });
+        };
+        fadeElements.forEach(el => {
+            el.style.opacity = "0";
+            el.style.transform = "translateY(20px)";
+            el.style.transition = "opacity 0.8s ease, transform 0.8s ease";
+        });
+        window.addEventListener('scroll', fadeInOnScroll);
+        window.addEventListener('load', fadeInOnScroll);
     </script>
 </body>
 </html>

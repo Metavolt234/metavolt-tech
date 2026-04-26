@@ -11,17 +11,43 @@ if (hamburger) {
     });
 }
 
-// Dropdown toggle for mobile
-const dropdownParents = document.querySelectorAll('.nav-links li');
+// ==================== FIXED: Dropdown toggle for mobile ====================
+const dropdownParents = document.querySelectorAll('.nav-links > li');
 dropdownParents.forEach(item => {
-    if (item.querySelector('.dropdown')) {
-        item.addEventListener('click', (e) => {
-            if (window.innerWidth <= 768) {
-                e.preventDefault();
-                const dropdown = item.querySelector('.dropdown');
-                dropdown.classList.toggle('active');
+    const dropdown = item.querySelector('.dropdown');
+    if (dropdown) {
+        const parentLink = item.querySelector('> a');
+        if (parentLink) {
+            parentLink.addEventListener('click', (e) => {
+                if (window.innerWidth <= 768) {
+                    e.preventDefault();
+                    dropdownParents.forEach(other => {
+                        const otherDropdown = other.querySelector('.dropdown');
+                        if (otherDropdown && otherDropdown !== dropdown) {
+                            otherDropdown.classList.remove('active');
+                        }
+                    });
+                    dropdown.classList.toggle('active');
+                }
+            });
+        }
+    }
+});
+
+// Close dropdown when clicking outside
+document.addEventListener('click', function(e) {
+    if (window.innerWidth <= 768) {
+        let isClickInside = false;
+        dropdownParents.forEach(item => {
+            if (item.contains(e.target)) {
+                isClickInside = true;
             }
         });
+        if (!isClickInside) {
+            document.querySelectorAll('.dropdown.active').forEach(drop => {
+                drop.classList.remove('active');
+            });
+        }
     }
 });
 
@@ -35,12 +61,16 @@ window.addEventListener('scroll', () => {
     }
 });
 
-// ==================== DARK / LIGHT MODE TOGGLE ====================
-const themeToggle = document.getElementById('themeToggle');
-if (themeToggle) {
+// ==================== DARK / LIGHT MODE TOGGLE (FIXED) ====================
+function initTheme() {
+    const themeToggle = document.getElementById('themeToggle');
+    if (!themeToggle) return;
+    
     // Check for saved theme preference
     const savedTheme = localStorage.getItem('theme');
-    if (savedTheme === 'dark') {
+    const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    
+    if (savedTheme === 'dark' || (!savedTheme && systemPrefersDark)) {
         document.body.classList.add('dark-mode');
     }
     
@@ -48,8 +78,17 @@ if (themeToggle) {
         document.body.classList.toggle('dark-mode');
         const isDark = document.body.classList.contains('dark-mode');
         localStorage.setItem('theme', isDark ? 'dark' : 'light');
+        
+        // Optional: Add a subtle animation effect
+        themeToggle.style.transform = 'scale(0.95)';
+        setTimeout(() => {
+            themeToggle.style.transform = 'scale(1)';
+        }, 200);
     });
 }
+
+// Call init on page load
+document.addEventListener('DOMContentLoaded', initTheme);
 
 // ==================== AI CHATBOT ====================
 const chatbotToggle = document.getElementById('chatbotToggle');
@@ -111,7 +150,6 @@ async function handleChatSend() {
     addChatMessage(message, true);
     chatbotInput.value = '';
     
-    // Show typing indicator
     const typingDiv = document.createElement('div');
     typingDiv.className = 'message bot-message';
     typingDiv.innerHTML = '<div class="message-content"><i class="fas fa-spinner fa-pulse"></i> Thinking...</div>';
@@ -132,16 +170,6 @@ if (chatbotSendBtn) {
 if (chatbotInput) {
     chatbotInput.addEventListener('keypress', (e) => {
         if (e.key === 'Enter') handleChatSend();
-    });
-}
-
-// ==================== CONTACT FORM ====================
-const contactForm = document.getElementById('contactForm');
-if (contactForm) {
-    contactForm.addEventListener('submit', (e) => {
-        e.preventDefault();
-        alert('Thank you for your message! We will get back to you within 24 hours.');
-        e.target.reset();
     });
 }
 

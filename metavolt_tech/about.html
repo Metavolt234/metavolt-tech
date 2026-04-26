@@ -15,11 +15,22 @@
                 <a href="index.html" class="logo">
                     <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 60'%3E%3Crect width='200' height='60' fill='%230066ff' rx='10'/%3E%3Ctext x='15' y='38' font-family='Arial' font-weight='bold' font-size='22' fill='white'%3EMETAVOLT%3C/text%3E%3Ctext x='160' y='38' font-family='Arial' font-weight='bold' font-size='16' fill='%2300d4ff'%3ETECH%3C/text%3E%3C/svg%3E" alt="MetaVolt Tech Logo" class="logo-img" style="height: 50px;">
                 </a>
-                <div class="theme-toggle-wrapper"><button id="themeToggle" class="theme-toggle"><i class="fas fa-sun"></i><i class="fas fa-moon"></i></button></div>
+                <div class="theme-toggle-wrapper">
+                    <button id="themeToggle" class="theme-toggle" onclick="toggleTheme()">🌞</button>
+                </div>
                 <ul class="nav-links">
                     <li><a href="index.html">Home</a></li>
                     <li><a href="about.html" class="active">About</a></li>
-                    <li><a href="services.html">Services <i class="fas fa-chevron-down"></i></a><ul class="dropdown"><li><a href="services.html#web-development">Web Development</a></li><li><a href="services.html#mobile-apps">Mobile Apps</a></li><li><a href="services.html#electrical">Electrical Installation</a></li><li><a href="services.html#cloud-solutions">Cloud Solutions</a></li><li><a href="services.html#ai-ml">AI & ML</a></li></ul></li>
+                    <li>
+                        <a href="services.html">Services <i class="fas fa-chevron-down"></i></a>
+                        <ul class="dropdown">
+                            <li><a href="services.html#web-development">Web Development</a></li>
+                            <li><a href="services.html#mobile-apps">Mobile Apps</a></li>
+                            <li><a href="services.html#electrical">Electrical Installation</a></li>
+                            <li><a href="services.html#cloud-solutions">Cloud Solutions</a></li>
+                            <li><a href="services.html#ai-ml">AI & Machine Learning</a></li>
+                        </ul>
+                    </li>
                     <li><a href="team.html">Tech Team</a></li>
                     <li><a href="testimonials.html">Testimonials</a></li>
                     <li><a href="blog.html">Blog</a></li>
@@ -30,16 +41,148 @@
         </div>
     </header>
 
-    <section class="page-header"><div class="container"><div class="page-header-content"><h1>About MetaVolt Tech</h1><ul class="breadcrumb"><li><a href="index.html">Home</a></li><li><i class="fas fa-chevron-right"></i></li><li>About</li></ul></div></div></section>
+    <section class="page-header">
+        <div class="container">
+            <div class="page-header-content">
+                <h1>About MetaVolt Tech</h1>
+                <ul class="breadcrumb">
+                    <li><a href="index.html">Home</a></li>
+                    <li><i class="fas fa-chevron-right"></i></li>
+                    <li>About</li>
+                </ul>
+            </div>
+        </div>
+    </section>
 
-    <section><div class="container"><div class="about-content"><div class="about-text"><h2>Driving Digital & Electrical Transformation Since 2015</h2><p>MetaVolt Tech is a leading technology company specializing in innovative software solutions, artificial intelligence, digital transformation, and professional electrical installation services.</p><h3>Our Mission</h3><p>To empower businesses and homes with technology and electrical solutions that drive growth, efficiency, safety, and competitive advantage.</p><h3>Our Vision</h3><p>To be the most trusted technology and electrical partner for innovative solutions and transformation.</p><h3>Our Values</h3><ul style="list-style:none"><li><i class="fas fa-check" style="color:var(--primary)"></i> <strong>Innovation:</strong> Pushing boundaries</li><li><i class="fas fa-check" style="color:var(--primary)"></i> <strong>Excellence:</strong> Delivering quality solutions</li><li><i class="fas fa-check" style="color:var(--primary)"></i> <strong>Safety:</strong> Highest electrical safety standards</li><li><i class="fas fa-check" style="color:var(--primary)"></i> <strong>Integrity:</strong> Transparency and honesty</li></ul></div><div class="about-image"><img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=600&auto=format" alt="Team"></div></div></div></section>
+    <section>
+        <div class="container">
+            <div class="about-content">
+                <div class="about-text">
+                    <h2>Driving Digital & Electrical Transformation Since 2015</h2>
+                    <p>MetaVolt Tech is a leading technology company specializing in innovative software solutions, artificial intelligence, digital transformation, and professional electrical installation services. Our team of experts is dedicated to helping businesses and homeowners leverage cutting-edge technology and safe electrical solutions.</p>
+                    <h3>Our Mission</h3>
+                    <p>To empower businesses and homes with technology and electrical solutions that drive growth, efficiency, safety, and competitive advantage.</p>
+                    <h3>Our Vision</h3>
+                    <p>To be the most trusted technology and electrical partner for innovative solutions and transformation.</p>
+                    <h3>Our Values</h3>
+                    <ul style="list-style:none">
+                        <li style="margin-bottom:15px"><i class="fas fa-check" style="color:var(--primary)"></i> <strong>Innovation:</strong> Pushing boundaries and exploring new technologies</li>
+                        <li style="margin-bottom:15px"><i class="fas fa-check" style="color:var(--primary)"></i> <strong>Excellence:</strong> Delivering high-quality solutions that exceed expectations</li>
+                        <li style="margin-bottom:15px"><i class="fas fa-check" style="color:var(--primary)"></i> <strong>Safety:</strong> Ensuring all electrical work meets highest safety standards</li>
+                        <li style="margin-bottom:15px"><i class="fas fa-check" style="color:var(--primary)"></i> <strong>Integrity:</strong> Maintaining transparency and honesty in all dealings</li>
+                    </ul>
+                </div>
+                <div class="about-image">
+                    <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=600&auto=format" alt="MetaVolt Tech Team">
+                </div>
+            </div>
+        </div>
+    </section>
 
-    <footer><div class="container"><div class="footer-content"><div class="footer-column"><h3>MetaVolt Tech</h3><p>Innovative technology & electrical solutions.</p></div><div class="footer-column"><h3>Quick Links</h3><ul class="footer-links"><li><a href="index.html">Home</a></li><li><a href="about.html">About</a></li><li><a href="services.html">Services</a></li><li><a href="team.html">Team</a></li><li><a href="blog.html">Blog</a></li><li><a href="contact.html">Contact</a></li></ul></div><div class="footer-column"><h3>Services</h3><ul class="footer-links"><li><a href="services.html#web-development">Web Development</a></li><li><a href="services.html#mobile-apps">Mobile Apps</a></li><li><a href="services.html#electrical">Electrical Installation</a></li><li><a href="services.html#cloud-solutions">Cloud Solutions</a></li><li><a href="services.html#ai-ml">AI & ML</a></li></ul></div><div class="footer-column"><h3>Contact</h3><ul class="footer-links"><li><i class="fas fa-phone"></i> +256 775 781560</li><li><i class="fas fa-envelope"></i> nelsonbastian94@gmail.com</li><li><i class="fas fa-map-marker-alt"></i> Kampala, Uganda</li></ul></div></div><div class="footer-bottom"><p>&copy; 2025 MetaVolt Tech. All Rights Reserved.</p></div></div></footer>
+    <section class="services">
+        <div class="container">
+            <div class="services-grid">
+                <div class="service-card" style="text-align:center">
+                    <h2 style="font-size:3rem;color:var(--primary)">8+</h2>
+                    <h3>Years Experience</h3>
+                    <p>Delivering cutting-edge solutions</p>
+                </div>
+                <div class="service-card" style="text-align:center">
+                    <h2 style="font-size:3rem;color:var(--primary)">500+</h2>
+                    <h3>Projects Completed</h3>
+                    <p>Successful implementations</p>
+                </div>
+                <div class="service-card" style="text-align:center">
+                    <h2 style="font-size:3rem;color:var(--primary)">50+</h2>
+                    <h3>Team Members</h3>
+                    <p>Experts in tech & electrical</p>
+                </div>
+                <div class="service-card" style="text-align:center">
+                    <h2 style="font-size:3rem;color:var(--primary)">95%</h2>
+                    <h3>Client Retention</h3>
+                    <p>Long-term partnerships</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-    <div class="floating-contact"><a href="https://wa.me/256775781560" target="_blank" class="contact-icon whatsapp"><i class="fab fa-whatsapp"></i></a><a href="mailto:nelsonbastian94@gmail.com" class="contact-icon email"><i class="fas fa-envelope"></i></a><a href="tel:+256775781560" class="contact-icon call"><i class="fas fa-phone-alt"></i></a></div>
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column"><h3>MetaVolt Tech</h3><p>Innovative technology & electrical solutions.</p></div>
+                <div class="footer-column"><h3>Quick Links</h3><ul class="footer-links"><li><a href="index.html">Home</a></li><li><a href="about.html">About</a></li><li><a href="services.html">Services</a></li><li><a href="team.html">Team</a></li><li><a href="blog.html">Blog</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+                <div class="footer-column"><h3>Services</h3><ul class="footer-links"><li><a href="services.html#web-development">Web Development</a></li><li><a href="services.html#mobile-apps">Mobile Apps</a></li><li><a href="services.html#electrical">Electrical Installation</a></li><li><a href="services.html#cloud-solutions">Cloud Solutions</a></li><li><a href="services.html#ai-ml">AI & ML</a></li></ul></div>
+                <div class="footer-column"><h3>Contact</h3><ul class="footer-links"><li><i class="fas fa-phone"></i> +256 775 781560</li><li><i class="fas fa-envelope"></i> nelsonbastian94@gmail.com</li><li><i class="fas fa-map-marker-alt"></i> Kampala, Uganda</li></ul></div>
+            </div>
+            <div class="footer-bottom"><p>&copy; 2025 MetaVolt Tech. All Rights Reserved.</p></div>
+        </div>
+    </footer>
 
-    <div class="chatbot-container"><div class="chatbot-toggle" id="chatbotToggle"><i class="fas fa-comment-dots"></i></div><div class="chatbot-window" id="chatbotWindow"><div class="chatbot-header"><span><i class="fas fa-robot"></i> MetaVolt AI</span><i class="fas fa-times" id="closeChat" style="cursor:pointer"></i></div><div class="chatbot-messages" id="chatbotMessages"><div class="message bot-message"><div class="message-content">Hello! Ask me about our services!</div></div></div><div class="chatbot-input"><input type="text" id="chatbotInput" placeholder="Type..."><button id="chatbotSendBtn"><i class="fas fa-paper-plane"></i></button></div></div></div>
+    <div class="floating-contact">
+        <a href="https://wa.me/256775781560" target="_blank" class="contact-icon whatsapp"><i class="fab fa-whatsapp"></i></a>
+        <a href="mailto:nelsonbastian94@gmail.com" class="contact-icon email"><i class="fas fa-envelope"></i></a>
+        <a href="tel:+256775781560" class="contact-icon call"><i class="fas fa-phone-alt"></i></a>
+    </div>
 
-    <script src="script.js"></script>
+    <div class="chatbot-container">
+        <div class="chatbot-toggle" id="chatbotToggle"><i class="fas fa-comment-dots"></i></div>
+        <div class="chatbot-window" id="chatbotWindow">
+            <div class="chatbot-header"><span><i class="fas fa-robot"></i> MetaVolt AI</span><i class="fas fa-times" id="closeChat" style="cursor:pointer"></i></div>
+            <div class="chatbot-messages" id="chatbotMessages"><div class="message bot-message"><div class="message-content">Hello! Ask me about our services!</div></div></div>
+            <div class="chatbot-input"><input type="text" id="chatbotInput" placeholder="Type..."><button id="chatbotSendBtn"><i class="fas fa-paper-plane"></i></button></div>
+        </div>
+    </div>
+
+    <script>
+        function toggleTheme() {
+            const body = document.body;
+            const themeBtn = document.getElementById('themeToggle');
+            if (body.classList.contains('dark-mode')) {
+                body.classList.remove('dark-mode');
+                localStorage.setItem('theme', 'light');
+                if (themeBtn) themeBtn.innerHTML = '🌞';
+            } else {
+                body.classList.add('dark-mode');
+                localStorage.setItem('theme', 'dark');
+                if (themeBtn) themeBtn.innerHTML = '🌙';
+            }
+        }
+        function loadTheme() {
+            const body = document.body;
+            const themeBtn = document.getElementById('themeToggle');
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme === 'dark') {
+                body.classList.add('dark-mode');
+                if (themeBtn) themeBtn.innerHTML = '🌙';
+            } else if (savedTheme === 'light') {
+                body.classList.remove('dark-mode');
+                if (themeBtn) themeBtn.innerHTML = '🌞';
+            }
+        }
+        loadTheme();
+        
+        // Mobile menu and chatbot code
+        const hamburger = document.querySelector('.hamburger');
+        const navLinks = document.querySelector('.nav-links');
+        if (hamburger && navLinks) {
+            hamburger.addEventListener('click', () => {
+                navLinks.classList.toggle('active');
+                hamburger.innerHTML = navLinks.classList.contains('active') ? '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
+            });
+        }
+        document.querySelectorAll('.nav-links > li').forEach(item => {
+            const dropdown = item.querySelector('.dropdown');
+            if (dropdown) {
+                item.querySelector('> a')?.addEventListener('click', (e) => {
+                    if (window.innerWidth <= 768) { e.preventDefault(); dropdown.classList.toggle('active'); }
+                });
+            }
+        });
+        const chatbotToggle = document.getElementById('chatbotToggle');
+        const chatbotWindow = document.getElementById('chatbotWindow');
+        const closeChat = document.getElementById('closeChat');
+        if (chatbotToggle) chatbotToggle.addEventListener('click', () => { if (chatbotWindow) chatbotWindow.style.display = 'flex'; });
+        if (closeChat) closeChat.addEventListener('click', () => { if (chatbotWindow) chatbotWindow.style.display = 'none'; });
+    </script>
 </body>
 </html>
