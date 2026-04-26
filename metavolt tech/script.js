@@ -1,7 +1,6 @@
 // Mobile Navigation Toggle
 const hamburger = document.querySelector('.hamburger');
 const navLinks = document.querySelector('.nav-links');
-const dropdowns = document.querySelectorAll('.nav-links li');
 
 if (hamburger) {
     hamburger.addEventListener('click', () => {
@@ -13,19 +12,18 @@ if (hamburger) {
 }
 
 // Dropdown toggle for mobile
-if (dropdowns.length > 0) {
-    dropdowns.forEach(item => {
-        if (item.querySelector('.dropdown')) {
-            item.addEventListener('click', (e) => {
-                if (window.innerWidth <= 768) {
-                    e.preventDefault();
-                    const dropdown = item.querySelector('.dropdown');
-                    dropdown.classList.toggle('active');
-                }
-            });
-        }
-    });
-}
+const dropdownParents = document.querySelectorAll('.nav-links li');
+dropdownParents.forEach(item => {
+    if (item.querySelector('.dropdown')) {
+        item.addEventListener('click', (e) => {
+            if (window.innerWidth <= 768) {
+                e.preventDefault();
+                const dropdown = item.querySelector('.dropdown');
+                dropdown.classList.toggle('active');
+            }
+        });
+    }
+});
 
 // Header scroll effect
 window.addEventListener('scroll', () => {
@@ -37,13 +35,29 @@ window.addEventListener('scroll', () => {
     }
 });
 
-// Chatbot functionality
+// ==================== DARK / LIGHT MODE TOGGLE ====================
+const themeToggle = document.getElementById('themeToggle');
+if (themeToggle) {
+    // Check for saved theme preference
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'dark') {
+        document.body.classList.add('dark-mode');
+    }
+    
+    themeToggle.addEventListener('click', () => {
+        document.body.classList.toggle('dark-mode');
+        const isDark = document.body.classList.contains('dark-mode');
+        localStorage.setItem('theme', isDark ? 'dark' : 'light');
+    });
+}
+
+// ==================== AI CHATBOT ====================
 const chatbotToggle = document.getElementById('chatbotToggle');
 const chatbotWindow = document.getElementById('chatbotWindow');
-const chatbotClose = document.getElementById('chatbotClose');
 const chatbotMessages = document.getElementById('chatbotMessages');
 const chatbotInput = document.getElementById('chatbotInput');
-const chatbotSend = document.getElementById('chatbotSend');
+const chatbotSendBtn = document.getElementById('chatbotSendBtn');
+const closeChat = document.getElementById('closeChat');
 
 if (chatbotToggle) {
     chatbotToggle.addEventListener('click', () => {
@@ -51,92 +65,93 @@ if (chatbotToggle) {
     });
 }
 
-if (chatbotClose) {
-    chatbotClose.addEventListener('click', () => {
+if (closeChat) {
+    closeChat.addEventListener('click', () => {
         chatbotWindow.style.display = 'none';
     });
 }
 
-function addMessage(content, isUser = false) {
+function addChatMessage(content, isUser = false) {
     const messageDiv = document.createElement('div');
     messageDiv.className = `message ${isUser ? 'user-message' : 'bot-message'}`;
-    
     const messageContent = document.createElement('div');
     messageContent.className = 'message-content';
     messageContent.textContent = content;
-    
     messageDiv.appendChild(messageContent);
     chatbotMessages.appendChild(messageDiv);
-    
-    // Scroll to bottom
     chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
 }
 
-function handleUserMessage() {
+async function getAIResponse(userMessage) {
+    const lowerMsg = userMessage.toLowerCase();
+    
+    const responses = {
+        'service': "We offer Web Development, Mobile Apps, Electrical Installation, Cloud Solutions, and AI & Machine Learning. Which interests you?",
+        'electrical': "Our electrical services include residential wiring, commercial installations, industrial electrical work, repairs, lighting, and safety inspections. Need a quote?",
+        'price': "Pricing depends on project scope. Please WhatsApp +256 775 781560 or email nelsonbastian94@gmail.com for a free quote!",
+        'contact': "Reach us via WhatsApp at +256 775 781560, email at nelsonbastian94@gmail.com, or call the same number.",
+        'whatsapp': "Click the green WhatsApp icon on the bottom right of your screen to chat with us directly!",
+        'email': "Our email is nelsonbastian94@gmail.com. Send us a message anytime!",
+        'call': "Call us at +256 775 781560, Monday-Friday, 9am-6pm.",
+        'hello': "Hello! 👋 Welcome to MetaVolt Tech. How can I assist you with tech or electrical services today?",
+        'team': "MetaVolt Tech was founded in 2015. We have 50+ expert team members and 500+ successful projects!",
+        'default': "Thanks for your message! For immediate assistance, please WhatsApp +256 775 781560 or email nelsonbastian94@gmail.com."
+    };
+    
+    for (const [key, response] of Object.entries(responses)) {
+        if (lowerMsg.includes(key)) return response;
+    }
+    return responses.default;
+}
+
+async function handleChatSend() {
     const message = chatbotInput.value.trim();
     if (message === '') return;
     
-    addMessage(message, true);
+    addChatMessage(message, true);
     chatbotInput.value = '';
     
-    // Simulate bot response
-    setTimeout(() => {
-        let response;
-        
-        if (message.toLowerCase().includes('service') || message.toLowerCase().includes('what do you do')) {
-            response = "We offer a range of technology services including web development, mobile apps, cloud solutions, and AI services. Would you like to know more about any specific service?";
-        } else if (message.toLowerCase().includes('contact') || message.toLowerCase().includes('email') || message.toLowerCase().includes('phone')) {
-            response = "You can reach us at info@metavolttech.com or call +1 (555) 123-4567. Our office is located at 123 Tech Avenue, Silicon Valley.";
-        } else if (message.toLowerCase().includes('price') || message.toLowerCase().includes('cost')) {
-            response = "Our pricing depends on the scope and complexity of your project. We offer custom quotes after understanding your specific requirements. Would you like to schedule a consultation?";
-        } else if (message.toLowerCase().includes('hello') || message.toLowerCase().includes('hi')) {
-            response = "Hello! How can I assist you today?";
-        } else {
-            response = "I understand you're interested in " + message + ". Let me connect you with one of our specialists who can provide more detailed information.";
-            
-            // After a delay, show the "connecting to human" message
-            setTimeout(() => {
-                addMessage("Connecting you to a live agent...");
-                setTimeout(() => {
-                    addMessage("You are now connected with Sarah, our solutions specialist. How can I help you?");
-                }, 2000);
-            }, 2000);
-        }
-        
-        addMessage(response);
-    }, 1000);
+    // Show typing indicator
+    const typingDiv = document.createElement('div');
+    typingDiv.className = 'message bot-message';
+    typingDiv.innerHTML = '<div class="message-content"><i class="fas fa-spinner fa-pulse"></i> Thinking...</div>';
+    chatbotMessages.appendChild(typingDiv);
+    chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+    
+    setTimeout(async () => {
+        chatbotMessages.removeChild(typingDiv);
+        const response = await getAIResponse(message);
+        addChatMessage(response, false);
+    }, 800);
 }
 
-if (chatbotSend) {
-    chatbotSend.addEventListener('click', handleUserMessage);
+if (chatbotSendBtn) {
+    chatbotSendBtn.addEventListener('click', handleChatSend);
 }
 
 if (chatbotInput) {
     chatbotInput.addEventListener('keypress', (e) => {
-        if (e.key === 'Enter') {
-            handleUserMessage();
-        }
+        if (e.key === 'Enter') handleChatSend();
     });
 }
 
-// Contact form submission
+// ==================== CONTACT FORM ====================
 const contactForm = document.getElementById('contactForm');
 if (contactForm) {
     contactForm.addEventListener('submit', (e) => {
         e.preventDefault();
-        alert('Thank you for your message! We will get back to you soon.');
+        alert('Thank you for your message! We will get back to you within 24 hours.');
         e.target.reset();
     });
 }
 
-// Fade in elements on scroll
+// ==================== FADE IN ON SCROLL ====================
 const fadeElements = document.querySelectorAll('.fade-in');
 
 const fadeInOnScroll = () => {
     fadeElements.forEach(element => {
         const elementTop = element.getBoundingClientRect().top;
         const elementVisible = 150;
-        
         if (elementTop < window.innerHeight - elementVisible) {
             element.style.opacity = "1";
             element.style.transform = "translateY(0)";
@@ -144,7 +159,6 @@ const fadeInOnScroll = () => {
     });
 };
 
-// Set initial state for fade elements
 fadeElements.forEach(element => {
     element.style.opacity = "0";
     element.style.transform = "translateY(20px)";
@@ -152,17 +166,15 @@ fadeElements.forEach(element => {
 });
 
 window.addEventListener('scroll', fadeInOnScroll);
-// Trigger once on load
 window.addEventListener('load', fadeInOnScroll);
 
-// Set active navigation link based on current page
+// ==================== ACTIVE NAV LINK ====================
 function setActiveNavLink() {
     const currentPage = window.location.pathname.split('/').pop() || 'index.html';
     const navLinks = document.querySelectorAll('.nav-links a');
-    
     navLinks.forEach(link => {
         const href = link.getAttribute('href');
-        if (href === currentPage || (currentPage === 'index.html' && href === '#home')) {
+        if (href === currentPage || (currentPage === 'index.html' && href === 'index.html')) {
             link.classList.add('active');
         } else {
             link.classList.remove('active');
@@ -170,100 +182,20 @@ function setActiveNavLink() {
     });
 }
 
-// Initialize when DOM is loaded
-document.addEventListener('DOMContentLoaded', function() {
-    setActiveNavLink();
-    fadeInOnScroll();
-});
-
-// Set page-specific background and styling
-function setPageStyling() {
-    const currentPage = window.location.pathname.split('/').pop() || 'index.html';
-    const body = document.body;
-    
-    // Remove any existing page classes
-    body.classList.remove('home-page', 'about-page', 'services-page', 'team-page', 
-                         'testimonials-page', 'blog-page', 'contact-page');
-    
-    // Add current page class
-    switch(currentPage) {
-        case 'index.html':
-        case '':
-            body.classList.add('home-page');
-            break;
-        case 'about.html':
-            body.classList.add('about-page');
-            break;
-        case 'services.html':
-            body.classList.add('services-page');
-            break;
-        case 'team.html':
-            body.classList.add('team-page');
-            break;
-        case 'testimonials.html':
-            body.classList.add('testimonials-page');
-            break;
-        case 'blog.html':
-            body.classList.add('blog-page');
-            break;
-        case 'contact.html':
-            body.classList.add('contact-page');
-            break;
-    }
-}
-
-// Update the DOMContentLoaded event listener
-document.addEventListener('DOMContentLoaded', function() {
-    setActiveNavLink();
-    fadeInOnScroll();
-    setPageStyling(); // Add this line
-});
-
-
-// Enhance heading visibility with dynamic background adjustment
-function enhanceHeadingsVisibility() {
-    const headings = document.querySelectorAll('h1, h2, h3, h4, h5');
-    
-    headings.forEach(heading => {
-        // Add a subtle background overlay for better contrast
-        if (!heading.classList.contains('no-bg-overlay')) {
-            const rect = heading.getBoundingClientRect();
-            if (rect.width > 0 && rect.height > 0) {
-                // Create a subtle background overlay
-                const existingOverlay = heading.parentNode.querySelector('.heading-bg-overlay');
-                if (!existingOverlay) {
-                    const overlay = document.createElement('div');
-                    overlay.className = 'heading-bg-overlay';
-                    overlay.style.cssText = `
-                        position: absolute;
-                        top: -10px;
-                        left: -20px;
-                        right: -20px;
-                        bottom: -10px;
-                        background: rgba(0, 0, 0, 0.3);
-                        border-radius: 10px;
-                        z-index: -1;
-                        pointer-events: none;
-                    `;
-                    heading.style.position = 'relative';
-                    heading.style.zIndex = '1';
-                    heading.parentNode.style.position = 'relative';
-                    heading.parentNode.insertBefore(overlay, heading);
-                }
-            }
+// ==================== SMOOTH SCROLL ====================
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+        const href = this.getAttribute('href');
+        if (href === "#" || href === "") return;
+        const target = document.querySelector(href);
+        if (target) {
+            e.preventDefault();
+            target.scrollIntoView({ behavior: 'smooth' });
         }
     });
-}
-
-// Update DOMContentLoaded to include heading enhancement
-document.addEventListener('DOMContentLoaded', function() {
-    setActiveNavLink();
-    fadeInOnScroll();
-    setPageStyling();
-    enhanceHeadingsVisibility(); // Add this line
 });
 
-// Also enhance headings when images load
-window.addEventListener('load', function() {
-    enhanceHeadingsVisibility();
+document.addEventListener('DOMContentLoaded', () => {
+    setActiveNavLink();
+    fadeInOnScroll();
 });

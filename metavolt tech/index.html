@@ -2,30 +2,226 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MetaVolt Tech - Innovative Technology Solutions</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>MetaVolt Tech - Innovative Technology & Electrical Solutions</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        /* Full Width Hero Slider Styles */
+        .hero-full {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            min-height: 600px;
+            overflow: hidden;
+            margin-top: 70px;
+        }
+        
+        .hero-slider {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+        
+        .hero-slider-track {
+            display: flex;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .hero-slide {
+            min-width: 100%;
+            height: 100%;
+            position: relative;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+        
+        .hero-slide::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.4));
+            z-index: 1;
+        }
+        
+        .hero-slide-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            color: white;
+            z-index: 2;
+            width: 90%;
+            max-width: 800px;
+        }
+        
+        .hero-slide-content h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            color: white;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+        
+        .hero-slide-content p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            color: rgba(255, 255, 255, 0.9);
+        }
+        
+        .hero-slide-content .btn {
+            background: var(--primary);
+            color: white;
+            padding: 12px 30px;
+            border-radius: 40px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+        
+        .hero-slide-content .btn-outline {
+            background: transparent;
+            border: 2px solid white;
+            margin-left: 15px;
+        }
+        
+        .hero-slide-content .btn-outline:hover {
+            background: white;
+            color: var(--primary);
+        }
+        
+        .hero-slider-nav {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 15px;
+            z-index: 10;
+        }
+        
+        .hero-slider-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.5);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .hero-slider-dot.active {
+            background: var(--primary);
+            width: 30px;
+            border-radius: 6px;
+        }
+        
+        .hero-slider-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            z-index: 10;
+            transition: all 0.3s ease;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .hero-slider-arrow:hover {
+            background: var(--primary);
+        }
+        
+        .hero-slider-arrow.prev {
+            left: 20px;
+        }
+        
+        .hero-slider-arrow.next {
+            right: 20px;
+        }
+        
+        /* Scrolling code bar */
+        .code-marquee {
+            background: #1a1a2e;
+            padding: 12px 0;
+            overflow: hidden;
+            white-space: nowrap;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .code-marquee-content {
+            display: inline-block;
+            animation: scrollCode 20s linear infinite;
+            font-family: 'Courier New', monospace;
+            color: #00ff88;
+            font-size: 14px;
+        }
+        
+        .code-marquee-content span {
+            margin-right: 40px;
+        }
+        
+        @keyframes scrollCode {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+        
+        @media (max-width: 768px) {
+            .hero-full { height: 80vh; min-height: 500px; }
+            .hero-slide-content h1 { font-size: 2rem; }
+            .hero-slide-content p { font-size: 1rem; }
+            .hero-slider-arrow { width: 35px; height: 35px; font-size: 0.9rem; }
+            .hero-slider-arrow.prev { left: 10px; }
+            .hero-slider-arrow.next { right: 10px; }
+        }
+        
+        @media (max-width: 576px) {
+            .hero-slide-content h1 { font-size: 1.6rem; }
+            .hero-slide-content .btn { padding: 8px 20px; font-size: 0.9rem; }
+        }
+    </style>
 </head>
 <body>
+
     <!-- Header & Navigation -->
     <header id="header">
         <div class="container">
             <nav class="navbar">
                 <a href="index.html" class="logo">
-                    <i class="fas fa-bolt"></i>
-                    <span>MetaVolt</span> Tech
+                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 60'%3E%3Crect width='200' height='60' fill='%230066ff' rx='10'/%3E%3Ctext x='15' y='38' font-family='Arial, sans-serif' font-weight='bold' font-size='22' fill='white'%3EMETAVOLT%3C/text%3E%3Ctext x='160' y='38' font-family='Arial, sans-serif' font-weight='bold' font-size='16' fill='%2300d4ff'%3ETECH%3C/text%3E%3C/svg%3E" alt="MetaVolt Tech Logo" class="logo-img" style="height: 50px;">
                 </a>
                 
+                <div class="theme-toggle-wrapper">
+                    <button id="themeToggle" class="theme-toggle" aria-label="Dark/Light Mode">
+                        <i class="fas fa-sun"></i>
+                        <i class="fas fa-moon"></i>
+                    </button>
+                </div>
+                
                 <ul class="nav-links">
-                    <li><a href="index.html">Home</a></li>
+                    <li><a href="index.html" class="active">Home</a></li>
                     <li><a href="about.html">About</a></li>
                     <li>
                         <a href="services.html">Services <i class="fas fa-chevron-down"></i></a>
                         <ul class="dropdown">
                             <li><a href="services.html#web-development">Web Development</a></li>
                             <li><a href="services.html#mobile-apps">Mobile Apps</a></li>
+                            <li><a href="services.html#electrical">Electrical Installation</a></li>
                             <li><a href="services.html#cloud-solutions">Cloud Solutions</a></li>
                             <li><a href="services.html#ai-ml">AI & Machine Learning</a></li>
                         </ul>
@@ -43,27 +239,85 @@
         </div>
     </header>
 
-    <!-- Hero Section -->
-        <!-- Hero Section -->
-    <section class="hero" id="home">
-        <div class="container">
-            <div class="hero-content">
-                <h1 class="fade-in">Welcome to MetaVolt Tech</h1>
-                <p class="fade-in delay-1">Where Innovation Meets Excellence in Digital Transformation</p>
-                <div class="btn-container fade-in delay-2">
-                    <a href="contact.html" class="btn floating">Start Your Journey</a>
-                    <a href="services.html" class="btn btn-outline">Explore Solutions</a>
+    <!-- Full Width Hero Slider -->
+    <section class="hero-full">
+        <div class="hero-slider">
+            <button class="hero-slider-arrow prev" id="heroPrev"><i class="fas fa-chevron-left"></i></button>
+            <button class="hero-slider-arrow next" id="heroNext"><i class="fas fa-chevron-right"></i></button>
+            
+            <div class="hero-slider-track" id="heroTrack">
+                <div class="hero-slide" style="background-image: url('https://images.unsplash.com/photo-1581091226033-d5c48150dbaa?w=1600&auto=format');">
+                    <div class="hero-slide-content">
+                        <h1>Welcome to MetaVolt Tech</h1>
+                        <p>Where Innovation Meets Excellence in Technology & Electrical Solutions</p>
+                        <div>
+                            <a href="contact.html" class="btn">Start Your Journey</a>
+                            <a href="services.html" class="btn btn-outline">Explore Solutions</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="hero-slide" style="background-image: url('https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=1600&auto=format');">
+                    <div class="hero-slide-content">
+                        <h1>Code. Create. Innovate.</h1>
+                        <p>Custom Software Development & Web Applications</p>
+                        <div>
+                            <a href="services.html#web-development" class="btn">Web Development</a>
+                            <a href="services.html#mobile-apps" class="btn btn-outline">Mobile Apps</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="hero-slide" style="background-image: url('https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=1600&auto=format');">
+                    <div class="hero-slide-content">
+                        <h1>Power Your Business</h1>
+                        <p>Professional Electrical Installation & Cloud Solutions</p>
+                        <div>
+                            <a href="services.html#electrical" class="btn">Electrical Services</a>
+                            <a href="services.html#cloud-solutions" class="btn btn-outline">Cloud Solutions</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="hero-slide" style="background-image: url('https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=1600&auto=format');">
+                    <div class="hero-slide-content">
+                        <h1>AI & Machine Learning</h1>
+                        <p>Intelligent Solutions for Tomorrow's Challenges</p>
+                        <div>
+                            <a href="services.html#ai-ml" class="btn">Explore AI</a>
+                            <a href="contact.html" class="btn btn-outline">Get in Touch</a>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-        
-        <!-- Tech Elements Floating Animation -->
-        <div class="floating-tech-elements">
-            <div class="tech-circle" style="position: absolute; top: 20%; left: 10%; width: 100px; height: 100px; border: 2px solid rgba(0, 102, 255, 0.3); border-radius: 50%; animation: float 6s ease-in-out infinite;"></div>
-            <div class="tech-circle" style="position: absolute; top: 60%; right: 15%; width: 150px; height: 150px; border: 2px solid rgba(0, 212, 255, 0.3); border-radius: 50%; animation: float 8s ease-in-out infinite 1s;"></div>
-            <div class="tech-square" style="position: absolute; bottom: 30%; left: 20%; width: 80px; height: 80px; border: 2px solid rgba(255, 62, 127, 0.3); animation: float 7s ease-in-out infinite 0.5s;"></div>
+            
+            <div class="hero-slider-nav" id="heroDots">
+                <span class="hero-slider-dot active"></span>
+                <span class="hero-slider-dot"></span>
+                <span class="hero-slider-dot"></span>
+                <span class="hero-slider-dot"></span>
+            </div>
         </div>
     </section>
+
+    <!-- Scrolling Code Marquee -->
+    <div class="code-marquee">
+        <div class="code-marquee-content">
+            <span>&lt;?php echo "Innovation"; ?&gt;</span>
+            <span>function solve() { return "success"; }</span>
+            <span>const future = await AI();</span>
+            <span>npm install electrical-safety</span>
+            <span>git commit -m "Innovation"</span>
+            <span>console.log("Hello World");</span>
+            <span>docker run -d -p 80:80 nginx</span>
+            <span>pip install tensorflow</span>
+            <span>&lt;?php echo "Innovation"; ?&gt;</span>
+            <span>function solve() { return "success"; }</span>
+            <span>const future = await AI();</span>
+            <span>npm install electrical-safety</span>
+            <span>git commit -m "Innovation"</span>
+            <span>console.log("Hello World");</span>
+            <span>docker run -d -p 80:80 nginx</span>
+            <span>pip install tensorflow</span>
+        </div>
+    </div>
 
     <!-- About Section -->
     <section id="about">
@@ -73,13 +327,13 @@
             </div>
             <div class="about-content">
                 <div class="about-text">
-                    <h3>Driving Digital Transformation Since 2015</h3>
-                    <p>MetaVolt Tech is a leading technology company specializing in innovative software solutions, artificial intelligence, and digital transformation services. Our team of experts is dedicated to helping businesses leverage cutting-edge technology to achieve their goals.</p>
-                    <p>With over 8 years of experience in the industry, we've successfully delivered more than 500 projects for clients across various sectors including finance, healthcare, e-commerce, and education.</p>
+                    <h3>Driving Digital & Electrical Transformation Since 2015</h3>
+                    <p>MetaVolt Tech is a leading technology company specializing in innovative software solutions, artificial intelligence, digital transformation, and professional electrical installation services.</p>
+                    <p>With over 8 years of experience, we've successfully delivered more than 500 projects for clients across various sectors including finance, healthcare, e-commerce, education, and residential/commercial electrical systems.</p>
                     <a href="about.html" class="btn" style="margin-top: 20px;">Learn More</a>
                 </div>
                 <div class="about-image">
-                    <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="MetaVolt Tech Team">
+                    <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=600&auto=format" alt="MetaVolt Tech Team">
                 </div>
             </div>
         </div>
@@ -93,45 +347,40 @@
             </div>
             <div class="services-grid">
                 <div class="service-card fade-in">
-                    <div class="service-icon">
-                        <i class="fas fa-laptop-code"></i>
-                    </div>
+                    <div class="service-icon"><i class="fas fa-laptop-code"></i></div>
                     <h3>Web Development</h3>
-                    <p>Custom web applications and responsive websites built with the latest technologies to deliver exceptional user experiences.</p>
-                    <a href="services.html#web-development" class="read-more">Learn More</a>
+                    <p>Custom web applications and responsive websites built with the latest technologies.</p>
+                    <a href="services.html#web-development" class="read-more">Learn More <i class="fas fa-arrow-right"></i></a>
                 </div>
                 <div class="service-card fade-in delay-1">
-                    <div class="service-icon">
-                        <i class="fas fa-mobile-alt"></i>
-                    </div>
+                    <div class="service-icon"><i class="fas fa-mobile-alt"></i></div>
                     <h3>Mobile Apps</h3>
-                    <p>Native and cross-platform mobile applications for iOS and Android that engage users and drive business growth.</p>
-                    <a href="services.html#mobile-apps" class="read-more">Learn More</a>
+                    <p>Native and cross-platform mobile applications for iOS and Android.</p>
+                    <a href="services.html#mobile-apps" class="read-more">Learn More <i class="fas fa-arrow-right"></i></a>
                 </div>
                 <div class="service-card fade-in delay-2">
-                    <div class="service-icon">
-                        <i class="fas fa-cloud"></i>
-                    </div>
-                    <h3>Cloud Solutions</h3>
-                    <p>Scalable cloud infrastructure and migration services to optimize performance, security, and cost-efficiency.</p>
-                    <a href="services.html#cloud-solutions" class="read-more">Learn More</a>
+                    <div class="service-icon"><i class="fas fa-bolt"></i></div>
+                    <h3>Electrical Installation</h3>
+                    <p>Professional residential, commercial, and industrial electrical services.</p>
+                    <a href="services.html#electrical" class="read-more">Learn More <i class="fas fa-arrow-right"></i></a>
                 </div>
                 <div class="service-card fade-in delay-3">
-                    <div class="service-icon">
-                        <i class="fas fa-robot"></i>
-                    </div>
-                    <h3>AI & Machine Learning</h3>
-                    <p>Intelligent solutions powered by artificial intelligence and machine learning to automate processes and gain insights.</p>
-                    <a href="services.html#ai-ml" class="read-more">Learn More</a>
+                    <div class="service-icon"><i class="fas fa-cloud"></i></div>
+                    <h3>Cloud Solutions</h3>
+                    <p>Scalable cloud infrastructure and migration services.</p>
+                    <a href="services.html#cloud-solutions" class="read-more">Learn More <i class="fas fa-arrow-right"></i></a>
                 </div>
-            </div>
-            <div style="text-align: center; margin-top: 40px;">
-                <a href="services.html" class="btn">View All Services</a>
+                <div class="service-card fade-in delay-4">
+                    <div class="service-icon"><i class="fas fa-robot"></i></div>
+                    <h3>AI & Machine Learning</h3>
+                    <p>Intelligent solutions powered by artificial intelligence.</p>
+                    <a href="services.html#ai-ml" class="read-more">Learn More <i class="fas fa-arrow-right"></i></a>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- Team Section -->
+    <!-- Team Section Preview -->
     <section id="team">
         <div class="container">
             <div class="section-title">
@@ -139,38 +388,17 @@
             </div>
             <div class="team-grid">
                 <div class="team-member fade-in">
-                    <div class="member-image">
-                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80" alt="Alex Johnson">
-                    </div>
-                    <div class="member-info">
-                        <h3>Alex Johnson</h3>
-                        <p class="member-role">Chief Technology Officer</p>
-                        <p>15+ years in software architecture and team leadership.</p>
-                    </div>
+                    <div class="member-image"><img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&auto=format" alt="Alex Johnson"></div>
+                    <div class="member-info"><h3>Alex Johnson</h3><p class="member-role">Chief Technology Officer</p><p>15+ years in software architecture.</p></div>
                 </div>
                 <div class="team-member fade-in delay-1">
-                    <div class="member-image">
-                        <img src="https://images.unsplash.com/photo-1494790108755-2616b612b786?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80" alt="Sarah Chen">
-                    </div>
-                    <div class="member-info">
-                        <h3>Sarah Chen</h3>
-                        <p class="member-role">Lead AI Engineer</p>
-                        <p>Specializes in machine learning algorithms and data science.</p>
-                    </div>
+                    <div class="member-image"><img src="https://images.unsplash.com/photo-1494790108755-2616b612b786?w=300&auto=format" alt="Sarah Chen"></div>
+                    <div class="member-info"><h3>Sarah Chen</h3><p class="member-role">Lead AI Engineer</p><p>PhD in Computer Science from Stanford.</p></div>
                 </div>
                 <div class="team-member fade-in delay-2">
-                    <div class="member-image">
-                        <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Michael Rodriguez">
-                    </div>
-                    <div class="member-info">
-                        <h3>Michael Rodriguez</h3>
-                        <p class="member-role">Senior Full-Stack Developer</p>
-                        <p>Expert in React, Node.js, and cloud-native applications.</p>
-                    </div>
+                    <div class="member-image"><img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=300&auto=format" alt="Michael Rodriguez"></div>
+                    <div class="member-info"><h3>Michael Rodriguez</h3><p class="member-role">Senior Full-Stack Developer</p><p>10+ years of development experience.</p></div>
                 </div>
-            </div>
-            <div style="text-align: center; margin-top: 40px;">
-                <a href="team.html" class="btn">Meet Our Full Team</a>
             </div>
         </div>
     </section>
@@ -181,18 +409,11 @@
             <div class="section-title">
                 <h2>Client Testimonials</h2>
             </div>
-            <div class="testimonials-slider">
-                <div class="testimonial fade-in">
-                    <div class="client-image">
-                        <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80" alt="Robert Kim">
-                    </div>
-                    <p>"MetaVolt Tech transformed our e-commerce platform with their cutting-edge solutions. Our conversion rates increased by 45% within three months of implementation."</p>
-                    <h4 class="client-name">Robert Kim</h4>
-                    <p class="client-company">CEO, RetailTech Solutions</p>
-                </div>
-            </div>
-            <div style="text-align: center; margin-top: 40px;">
-                <a href="testimonials.html" class="btn btn-outline">View More Testimonials</a>
+            <div class="testimonial">
+                <div class="client-image"><img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=100&auto=format" alt="Robert Kim"></div>
+                <p>"MetaVolt Tech transformed our e-commerce platform. Our conversion rates increased by 45% within three months!"</p>
+                <h4 class="client-name">Robert Kim</h4>
+                <p class="client-company">CEO, RetailTech Solutions</p>
             </div>
         </div>
     </section>
@@ -205,50 +426,17 @@
             </div>
             <div class="blog-grid">
                 <div class="blog-card fade-in">
-                    <div class="blog-image">
-                        <img src="https://images.unsplash.com/photo-1555949963-aa79dcee981c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="AI Trends">
-                    </div>
-                    <div class="blog-content">
-                        <div class="blog-meta">
-                            <span><i class="far fa-calendar"></i> June 15, 2023</span>
-                            <span><i class="far fa-user"></i> Sarah Chen</span>
-                        </div>
-                        <h3>The Future of AI in Business Automation</h3>
-                        <p>Explore how artificial intelligence is revolutionizing business processes and creating new opportunities for growth and efficiency.</p>
-                        <a href="blog.html" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
-                    </div>
+                    <div class="blog-image"><img src="https://images.unsplash.com/photo-1555949963-aa79dcee981c?w=400&auto=format" alt="AI Trends"></div>
+                    <div class="blog-content"><div class="blog-meta"><span><i class="far fa-calendar"></i> June 15, 2023</span><span><i class="far fa-user"></i> Sarah Chen</span></div><h3>The Future of AI in Business Automation</h3><p>Explore how AI is revolutionizing business processes.</p><a href="blog.html" class="read-more">Read More <i class="fas fa-arrow-right"></i></a></div>
                 </div>
                 <div class="blog-card fade-in delay-1">
-                    <div class="blog-image">
-                        <img src="https://images.unsplash.com/photo-1547658719-da2b51169166?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=764&q=80" alt="Web Development">
-                    </div>
-                    <div class="blog-content">
-                        <div class="blog-meta">
-                            <span><i class="far fa-calendar"></i> May 28, 2023</span>
-                            <span><i class="far fa-user"></i> Michael Rodriguez</span>
-                        </div>
-                        <h3>Progressive Web Apps: The Future of Mobile Web</h3>
-                        <p>Discover how PWAs are bridging the gap between web and mobile applications with enhanced performance and user experience.</p>
-                        <a href="blog.html" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
-                    </div>
+                    <div class="blog-image"><img src="https://images.unsplash.com/photo-1547658719-da2b51169166?w=400&auto=format" alt="Web Development"></div>
+                    <div class="blog-content"><div class="blog-meta"><span><i class="far fa-calendar"></i> May 28, 2023</span><span><i class="far fa-user"></i> Michael Rodriguez</span></div><h3>Progressive Web Apps: The Future of Mobile Web</h3><p>Discover how PWAs are bridging the gap between web and mobile.</p><a href="blog.html" class="read-more">Read More <i class="fas fa-arrow-right"></i></a></div>
                 </div>
                 <div class="blog-card fade-in delay-2">
-                    <div class="blog-image">
-                        <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1172&q=80" alt="Cloud Computing">
-                    </div>
-                    <div class="blog-content">
-                        <div class="blog-meta">
-                            <span><i class="far fa-calendar"></i> April 12, 2023</span>
-                            <span><i class="far fa-user"></i> Alex Johnson</span>
-                        </div>
-                        <h3>Cloud Security Best Practices for 2023</h3>
-                        <p>Learn about the latest strategies and technologies to secure your cloud infrastructure against emerging threats.</p>
-                        <a href="blog.html" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
-                    </div>
+                    <div class="blog-image"><img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=400&auto=format" alt="Cloud Computing"></div>
+                    <div class="blog-content"><div class="blog-meta"><span><i class="far fa-calendar"></i> April 12, 2023</span><span><i class="far fa-user"></i> Alex Johnson</span></div><h3>Cloud Security Best Practices for 2023</h3><p>Learn about the latest strategies to secure your cloud infrastructure.</p><a href="blog.html" class="read-more">Read More <i class="fas fa-arrow-right"></i></a></div>
                 </div>
-            </div>
-            <div style="text-align: center; margin-top: 40px;">
-                <a href="blog.html" class="btn">View All Articles</a>
             </div>
         </div>
     </section>
@@ -257,83 +445,87 @@
     <footer>
         <div class="container">
             <div class="footer-content">
-                <div class="footer-column">
-                    <h3>MetaVolt Tech</h3>
-                    <p>Innovative technology solutions for tomorrow's challenges. We deliver cutting-edge software and digital transformation services.</p>
-                    <div class="social-links" style="justify-content: flex-start; margin-top: 20px;">
-                        <a href="#"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                    </div>
-                </div>
-                
-                <div class="footer-column">
-                    <h3>Quick Links</h3>
-                    <ul class="footer-links">
-                        <li><a href="index.html">Home</a></li>
-                        <li><a href="about.html">About Us</a></li>
-                        <li><a href="services.html">Services</a></li>
-                        <li><a href="team.html">Our Team</a></li>
-                        <li><a href="blog.html">Blog</a></li>
-                    </ul>
-                </div>
-                
-                <div class="footer-column">
-                    <h3>Services</h3>
-                    <ul class="footer-links">
-                        <li><a href="services.html#web-development">Web Development</a></li>
-                        <li><a href="services.html#mobile-apps">Mobile Apps</a></li>
-                        <li><a href="services.html#cloud-solutions">Cloud Solutions</a></li>
-                        <li><a href="services.html#ai-ml">AI & Machine Learning</a></li>
-                        <li><a href="services.html">Digital Transformation</a></li>
-                    </ul>
-                </div>
-                
-                <div class="footer-column">
-                    <h3>Contact Info</h3>
-                    <ul class="footer-links">
-                        <li><i class="fas fa-map-marker-alt"></i> 123 Tech Avenue, Silicon Valley, CA</li>
-                        <li><i class="fas fa-phone"></i> +1 (555) 123-4567</li>
-                        <li><i class="fas fa-envelope"></i> info@metavolttech.com</li>
-                    </ul>
-                </div>
+                <div class="footer-column"><h3>MetaVolt Tech</h3><p>Innovative technology & electrical solutions for tomorrow's challenges.</p></div>
+                <div class="footer-column"><h3>Quick Links</h3><ul class="footer-links"><li><a href="index.html">Home</a></li><li><a href="about.html">About</a></li><li><a href="services.html">Services</a></li><li><a href="team.html">Team</a></li><li><a href="blog.html">Blog</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+                <div class="footer-column"><h3>Services</h3><ul class="footer-links"><li><a href="services.html#web-development">Web Development</a></li><li><a href="services.html#mobile-apps">Mobile Apps</a></li><li><a href="services.html#electrical">Electrical Installation</a></li><li><a href="services.html#cloud-solutions">Cloud Solutions</a></li><li><a href="services.html#ai-ml">AI & ML</a></li></ul></div>
+                <div class="footer-column"><h3>Contact Info</h3><ul class="footer-links"><li><i class="fas fa-phone"></i> +256 775 781560</li><li><i class="fas fa-envelope"></i> nelsonbastian94@gmail.com</li><li><i class="fas fa-map-marker-alt"></i> Kampala, Uganda</li></ul></div>
             </div>
-            
-            <div class="footer-bottom">
-                <p>&copy; 2023 MetaVolt Tech. All Rights Reserved.</p>
-            </div>
+            <div class="footer-bottom"><p>&copy; 2025 MetaVolt Tech. All Rights Reserved.</p></div>
         </div>
     </footer>
 
-    <!-- Chatbot -->
+    <!-- Floating Contact Icons -->
+    <div class="floating-contact">
+        <a href="https://wa.me/256775781560?text=Hello%20MetaVolt%20Tech%2C%20I%20need%20assistance%20with%20your%20services" target="_blank" class="contact-icon whatsapp" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+        <a href="mailto:nelsonbastian94@gmail.com?subject=Inquiry%20from%20Website&body=Hi%20MetaVolt%2C%20I'd%20like%20to%20know%20more%20about%20your%20services" class="contact-icon email" aria-label="Email"><i class="fas fa-envelope"></i></a>
+        <a href="tel:+256775781560" class="contact-icon call" aria-label="Call"><i class="fas fa-phone-alt"></i></a>
+    </div>
+
+    <!-- AI Chatbot -->
     <div class="chatbot-container">
-        <div class="chatbot-toggle" id="chatbotToggle">
-            <i class="fas fa-comments"></i>
-        </div>
+        <div class="chatbot-toggle" id="chatbotToggle"><i class="fas fa-comment-dots"></i></div>
         <div class="chatbot-window" id="chatbotWindow">
-            <div class="chatbot-header">
-                <h3>MetaVolt Assistant</h3>
-                <button class="chatbot-close" id="chatbotClose">
-                    <i class="fas fa-times"></i>
-                </button>
-            </div>
-            <div class="chatbot-messages" id="chatbotMessages">
-                <div class="message bot-message">
-                    <div class="message-content">
-                        Hello! I'm the MetaVolt assistant. How can I help you today?
-                    </div>
-                </div>
-            </div>
-            <div class="chatbot-input">
-                <input type="text" id="chatbotInput" placeholder="Type your message...">
-                <button class="chatbot-send" id="chatbotSend">
-                    <i class="fas fa-paper-plane"></i>
-                </button>
-            </div>
+            <div class="chatbot-header"><span><i class="fas fa-robot"></i> MetaVolt AI Assistant</span><i class="fas fa-times" id="closeChat" style="cursor: pointer;"></i></div>
+            <div class="chatbot-messages" id="chatbotMessages"><div class="message bot-message"><div class="message-content">Hello! 👋 I'm MetaVolt AI. Ask me about our services, electrical installation, pricing, or anything else!</div></div></div>
+            <div class="chatbot-input"><input type="text" id="chatbotInput" placeholder="Type your message..."><button id="chatbotSendBtn"><i class="fas fa-paper-plane"></i></button></div>
         </div>
     </div>
 
     <script src="script.js"></script>
+    <script>
+        // Full Width Hero Slider Functionality
+        const heroTrack = document.getElementById('heroTrack');
+        const heroSlides = document.querySelectorAll('.hero-slide');
+        const heroDots = document.querySelectorAll('.hero-slider-dot');
+        const heroPrev = document.getElementById('heroPrev');
+        const heroNext = document.getElementById('heroNext');
+        
+        let heroIndex = 0;
+        const heroTotal = heroSlides.length;
+        let heroInterval;
+        
+        function updateHeroSlider() {
+            heroTrack.style.transform = `translateX(-${heroIndex * 100}%)`;
+            heroDots.forEach((dot, i) => {
+                dot.classList.toggle('active', i === heroIndex);
+            });
+        }
+        
+        function nextHeroSlide() {
+            heroIndex = (heroIndex + 1) % heroTotal;
+            updateHeroSlider();
+            resetHeroInterval();
+        }
+        
+        function prevHeroSlide() {
+            heroIndex = (heroIndex - 1 + heroTotal) % heroTotal;
+            updateHeroSlider();
+            resetHeroInterval();
+        }
+        
+        function startHeroInterval() {
+            heroInterval = setInterval(nextHeroSlide, 5000);
+        }
+        
+        function resetHeroInterval() {
+            clearInterval(heroInterval);
+            startHeroInterval();
+        }
+        
+        if (heroPrev && heroNext) {
+            heroPrev.addEventListener('click', prevHeroSlide);
+            heroNext.addEventListener('click', nextHeroSlide);
+        }
+        
+        heroDots.forEach((dot, i) => {
+            dot.addEventListener('click', () => {
+                heroIndex = i;
+                updateHeroSlider();
+                resetHeroInterval();
+            });
+        });
+        
+        startHeroInterval();
+    </script>
 </body>
 </html>
