@@ -17,7 +17,6 @@
     --footer-bg: #1a1f2e;
 }
 
-/* Dark Mode Variables */
 body.dark-mode {
     --primary: #3b82f6;
     --primary-dark: #2563eb;
@@ -93,15 +92,14 @@ header {
     display: flex;
     align-items: center;
     gap: 10px;
-    font-size: 1.6rem;
-    font-weight: 700;
-    color: var(--text-color);
     text-decoration: none;
 }
 
 .logo-img {
-    height: 45px;
+    height: 50px;
     width: auto;
+    max-width: 180px;
+    object-fit: contain;
 }
 
 /* Dark/Light Mode Toggle Button */
@@ -117,30 +115,11 @@ header {
     width: 55px;
     height: 30px;
     cursor: pointer;
-    position: relative;
-    transition: var(--transition);
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 0 8px;
-}
-
-.theme-toggle i {
-    font-size: 14px;
-    transition: var(--transition);
-}
-
-.theme-toggle .fa-sun {
-    color: #fbbf24;
-}
-
-.theme-toggle .fa-moon {
-    color: #94a3b8;
-}
-
-/* For dark mode, move the active indicator */
-body.dark-mode .theme-toggle {
-    background: #334155;
+    font-size: 16px;
 }
 
 .nav-links {
@@ -207,7 +186,6 @@ body.dark-mode .theme-toggle {
     display: block;
     padding: 12px 20px;
     border-bottom: 1px solid var(--gray-light);
-    color: var(--text-color);
 }
 
 .dropdown a:last-child {
@@ -234,7 +212,7 @@ body.dark-mode .theme-toggle {
     height: 100vh;
     min-height: 600px;
     overflow: hidden;
-    margin-top: 70px;
+    margin-top: 80px;
 }
 
 .hero-slider {
@@ -332,7 +310,7 @@ body.dark-mode .theme-toggle {
     border-radius: 50%;
     cursor: pointer;
     z-index: 10;
-    transition: all 0.3s ease;
+    transition: var(--transition);
     font-size: 1.2rem;
     display: flex;
     align-items: center;
@@ -920,7 +898,6 @@ footer h3 {
     justify-content: space-between;
 }
 
-.chatbot-header h3,
 .chatbot-header span {
     margin: 0;
     color: white;
@@ -996,7 +973,6 @@ footer h3 {
     border-color: var(--primary);
 }
 
-.chatbot-send,
 #chatbotSendBtn {
     width: 40px;
     height: 40px;
@@ -1010,6 +986,365 @@ footer h3 {
     justify-content: center;
 }
 
+/* ==================== CEO SECTION STYLES ==================== */
+.ceo-section {
+    background: linear-gradient(135deg, var(--light-bg) 0%, var(--white) 100%);
+    padding: 80px 0;
+}
+
+.ceo-content {
+    display: flex;
+    gap: 50px;
+    align-items: flex-start;
+    flex-wrap: wrap;
+}
+
+.ceo-image {
+    flex: 0 0 300px;
+    text-align: center;
+}
+
+.ceo-image-placeholder {
+    width: 280px;
+    height: 280px;
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    box-shadow: var(--shadow-hover);
+    transition: transform 0.3s ease;
+}
+
+.ceo-image-placeholder:hover {
+    transform: scale(1.02);
+}
+
+.ceo-image-placeholder i {
+    font-size: 120px;
+    color: white;
+    margin-bottom: 15px;
+}
+
+.ceo-image-placeholder span {
+    color: white;
+    font-size: 14px;
+    font-weight: 500;
+    background: rgba(0,0,0,0.3);
+    padding: 5px 15px;
+    border-radius: 20px;
+}
+
+.ceo-info {
+    flex: 1;
+}
+
+.ceo-info h3 {
+    font-size: 2.2rem;
+    color: var(--primary);
+    margin-bottom: 5px;
+}
+
+.ceo-title {
+    font-size: 1.1rem;
+    color: var(--gray);
+    margin-bottom: 25px;
+    font-weight: 500;
+}
+
+.ceo-quote {
+    background: var(--light-bg);
+    padding: 25px 30px;
+    border-radius: 20px;
+    margin-bottom: 30px;
+    position: relative;
+    border-left: 4px solid var(--primary);
+}
+
+.ceo-quote .fa-quote-left {
+    color: var(--primary);
+    opacity: 0.5;
+    font-size: 24px;
+    margin-right: 10px;
+}
+
+.ceo-quote .fa-quote-right {
+    color: var(--primary);
+    opacity: 0.5;
+    font-size: 24px;
+    margin-left: 10px;
+    vertical-align: bottom;
+}
+
+.ceo-quote p {
+    display: inline;
+    font-style: italic;
+    color: var(--text-color);
+}
+
+.ceo-qualifications h4,
+.ceo-skills h4,
+.ceo-experience h4 {
+    margin: 25px 0 15px 0;
+    font-size: 1.2rem;
+    color: var(--text-color);
+}
+
+.ceo-qualifications h4 i,
+.ceo-skills h4 i,
+.ceo-experience h4 i {
+    color: var(--primary);
+    margin-right: 10px;
+}
+
+.ceo-qualifications ul,
+.ceo-experience ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+.ceo-qualifications li,
+.ceo-experience li {
+    margin-bottom: 10px;
+    padding-left: 5px;
+}
+
+.ceo-qualifications li i,
+.ceo-experience li i {
+    color: var(--primary);
+    margin-right: 10px;
+}
+
+.skills-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 15px;
+}
+
+.skill-tag {
+    background: var(--light-bg);
+    border: 1px solid var(--gray-light);
+    padding: 8px 18px;
+    border-radius: 30px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    cursor: default;
+}
+
+.skill-tag i {
+    color: var(--primary);
+    margin-right: 8px;
+}
+
+.skill-tag:hover {
+    background: var(--primary);
+    color: white;
+    transform: translateY(-2px);
+}
+
+.skill-tag:hover i {
+    color: white;
+}
+
+.ceo-contact {
+    display: flex;
+    gap: 15px;
+    margin-top: 30px;
+    flex-wrap: wrap;
+}
+
+.btn-ceo {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 25px;
+    background: #25D366;
+    color: white;
+    border-radius: 40px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.btn-ceo:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(37, 211, 102, 0.3);
+}
+
+.btn-ceo-outline {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 25px;
+    background: transparent;
+    border: 2px solid var(--primary);
+    color: var(--primary);
+    border-radius: 40px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.btn-ceo-outline:hover {
+    background: var(--primary);
+    color: white;
+    transform: translateY(-2px);
+}
+
+/* Blog Post Page Styles */
+.blog-post-content {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 50px;
+}
+
+.blog-post-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    padding: 20px;
+    background: var(--light-bg);
+    border-radius: 16px;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.author-info {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.author-avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.blog-post-image {
+    margin-bottom: 30px;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.blog-post-image img {
+    width: 100%;
+    height: auto;
+}
+
+.post-content h2 {
+    font-size: 2rem;
+    margin: 30px 0 20px;
+}
+
+.post-content h3 {
+    font-size: 1.5rem;
+    margin: 25px 0 15px;
+}
+
+.post-content p {
+    margin-bottom: 20px;
+    color: var(--gray);
+}
+
+.content-highlight {
+    background: var(--light-bg);
+    padding: 25px;
+    border-radius: 16px;
+    margin: 30px 0;
+    border-left: 4px solid var(--primary);
+}
+
+.tech-stack {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.tech-tag {
+    background: var(--primary);
+    color: white;
+    padding: 6px 15px;
+    border-radius: 30px;
+    font-size: 0.85rem;
+}
+
+.post-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 30px 0;
+    padding: 20px;
+    background: var(--light-bg);
+    border-radius: 16px;
+}
+
+.tag {
+    background: var(--white);
+    color: var(--primary);
+    padding: 6px 15px;
+    border-radius: 30px;
+    text-decoration: none;
+    border: 1px solid var(--gray-light);
+}
+
+.post-navigation {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 40px;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.nav-link {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    color: var(--primary);
+}
+
+.sidebar-widget {
+    background: var(--light-bg);
+    padding: 25px;
+    border-radius: 16px;
+    margin-bottom: 30px;
+}
+
+.recent-posts {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.recent-post {
+    text-decoration: none;
+    color: var(--dark);
+}
+
+.recent-post span {
+    font-size: 0.85rem;
+    color: var(--gray);
+}
+
+.categories {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.category {
+    text-decoration: none;
+    color: var(--primary);
+}
+
 /* Responsive */
 @media (max-width: 992px) {
     .about-content, .contact-content, .hero .container {
@@ -1020,6 +1355,7 @@ footer h3 {
     .hero-full {
         height: 80vh;
         min-height: 500px;
+        margin-top: 70px;
     }
     
     .hero-slide-content h1 {
@@ -1028,6 +1364,33 @@ footer h3 {
     
     .hero-slide-content p {
         font-size: 1rem;
+    }
+    
+    .blog-post-content {
+        grid-template-columns: 1fr;
+    }
+    
+    /* CEO Section Responsive */
+    .ceo-content {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .ceo-image {
+        flex: 0 0 auto;
+        margin-bottom: 30px;
+    }
+    
+    .ceo-quote {
+        text-align: left;
+    }
+    
+    .ceo-contact {
+        justify-content: center;
+    }
+    
+    .skills-grid {
+        justify-content: center;
     }
 }
 
@@ -1123,6 +1486,30 @@ footer h3 {
     .section-title h2 {
         font-size: 2rem;
     }
+    
+    .footer-content {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 30px;
+    }
+    
+    .logo-img {
+        height: 40px;
+        max-width: 140px;
+    }
+    
+    /* CEO Section Mobile */
+    .ceo-image-placeholder {
+        width: 220px;
+        height: 220px;
+    }
+    
+    .ceo-image-placeholder i {
+        font-size: 80px;
+    }
+    
+    .ceo-info h3 {
+        font-size: 1.8rem;
+    }
 }
 
 @media (max-width: 576px) {
@@ -1135,8 +1522,40 @@ footer h3 {
         font-size: 0.9rem;
     }
     
+    .section-title h2 {
+        font-size: 1.8rem;
+    }
+    
+    .footer-content {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+    
     .logo-img {
         height: 35px;
+    }
+    
+    .container {
+        width: 95%;
+    }
+    
+    /* CEO Section Small Mobile */
+    .ceo-info h3 {
+        font-size: 1.6rem;
+    }
+    
+    .btn-ceo, .btn-ceo-outline {
+        padding: 10px 20px;
+        font-size: 0.9rem;
+    }
+    
+    .skill-tag {
+        padding: 6px 14px;
+        font-size: 0.8rem;
+    }
+    
+    .ceo-quote {
+        padding: 20px;
     }
 }
 

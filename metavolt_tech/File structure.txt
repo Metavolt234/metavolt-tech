@@ -5,8 +5,14 @@ metavolt-tech/
 ├── team.html
 ├── testimonials.html
 ├── blog.html
+├── blog-1.html
+├── blog-2.html
+├── blog-3.html
+├── blog-4.html
+├── blog-5.html
+├── blog-6.html
 ├── contact.html
 ├── styles.css
 ├── script.js
 └── assets/
-    └── (images if needed)
+    └── meta logo.jpeg

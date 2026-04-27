@@ -12,12 +12,8 @@
     <header id="header">
         <div class="container">
             <nav class="navbar">
-                <a href="index.html" class="logo">
-                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 60'%3E%3Crect width='200' height='60' fill='%230066ff' rx='10'/%3E%3Ctext x='15' y='38' font-family='Arial' font-weight='bold' font-size='22' fill='white'%3EMETAVOLT%3C/text%3E%3Ctext x='160' y='38' font-family='Arial' font-weight='bold' font-size='16' fill='%2300d4ff'%3ETECH%3C/text%3E%3C/svg%3E" alt="Logo" class="logo-img" style="height: 50px;">
-                </a>
-                <div class="theme-toggle-wrapper">
-                    <button id="themeToggle" class="theme-toggle" onclick="toggleTheme()">🌞</button>
-                </div>
+                <a href="index.html" class="logo"><img src="assets/meta logo.jpeg" alt="MetaVolt Tech Logo" class="logo-img"></a>
+                <div class="theme-toggle-wrapper"><button id="themeToggle" class="theme-toggle" onclick="toggleTheme()">🌞</button></div>
                 <ul class="nav-links">
                     <li><a href="index.html">Home</a></li>
                     <li><a href="about.html">About</a></li>
@@ -40,17 +36,113 @@
         </div>
     </header>
 
-    <section class="page-header"><div class="container"><div class="page-header-content"><h1>Contact Us</h1><ul class="breadcrumb"><li><a href="index.html">Home</a></li><li><i class="fas fa-chevron-right"></i></li><li>Contact</li></ul></div></div></section>
+    <section class="page-header">
+        <div class="container">
+            <div class="page-header-content">
+                <h1>Contact Us</h1>
+                <ul class="breadcrumb">
+                    <li><a href="index.html">Home</a></li>
+                    <li><i class="fas fa-chevron-right"></i></li>
+                    <li>Contact</li>
+                </ul>
+            </div>
+        </div>
+    </section>
 
-    <section class="contact"><div class="container"><div class="section-title"><h2>Get In Touch</h2><p>Have a project in mind or need technical consultation? Fill out the form and we'll get back to you via WhatsApp within 24 hours.</p></div><div class="contact-content"><div class="contact-info"><h3>Let's Start a Conversation</h3><p>We're here to help you transform your ideas into reality. Whether you need a custom software solution, electrical installation, or technical consultation, we'd love to hear from you.</p><div class="contact-item"><div class="contact-icon"><i class="fas fa-map-marker-alt"></i></div><div class="contact-details"><h3>Our Office</h3><p>Kampala, Uganda</p></div></div><div class="contact-item"><div class="contact-icon"><i class="fas fa-phone"></i></div><div class="contact-details"><h3>Phone Number</h3><p>+256 775 781560</p><p>Mon-Fri from 9am to 6pm</p></div></div><div class="contact-item"><div class="contact-icon"><i class="fas fa-envelope"></i></div><div class="contact-details"><h3>Email Address</h3><p>nelsonbastian94@gmail.com</p><p>We'll respond within 24 hours</p></div></div><div class="contact-item"><div class="contact-icon"><i class="fab fa-whatsapp"></i></div><div class="contact-details"><h3>WhatsApp</h3><p>+256 775 781560</p><p>Fastest way to reach us</p></div></div></div><div class="contact-form"><h3>Send Us a Message</h3><form id="contactForm"><div class="form-group"><input type="text" id="contactName" class="form-control" placeholder="Your Name" required></div><div class="form-group"><input type="email" id="contactEmail" class="form-control" placeholder="Your Email" required></div><div class="form-group"><input type="text" id="contactCompany" class="form-control" placeholder="Company Name"></div><div class="form-group"><select id="contactService" class="form-control" required><option value="">Select Service</option><option value="Web Development">Web Development</option><option value="Mobile Apps">Mobile Apps</option><option value="Electrical Installation">Electrical Installation</option><option value="Cloud Solutions">Cloud Solutions</option><option value="AI & Machine Learning">AI & Machine Learning</option><option value="Consultation">Technical Consultation</option></select></div><div class="form-group"><textarea id="contactMessage" class="form-control" placeholder="Your Message" rows="6" required></textarea></div><button type="submit" class="btn" style="width:100%"><i class="fab fa-whatsapp"></i> Send Message via WhatsApp</button></form><p style="font-size:0.8rem;margin-top:15px;text-align:center;color:var(--gray)">Your message will be sent directly to our WhatsApp. We'll reply as soon as possible!</p></div></div></div></section>
+    <section class="contact">
+        <div class="container">
+            <div class="section-title">
+                <h2>Get In Touch</h2>
+                <p>Fill out the form below and click Send - your message will go directly to our WhatsApp!</p>
+            </div>
+            <div class="contact-content">
+                <div class="contact-info">
+                    <h3>Let's Start a Conversation</h3>
+                    <p>We're here to help you transform your ideas into reality. Whether you need a custom software solution, electrical installation, or technical consultation, we'd love to hear from you.</p>
+                    <div class="contact-item">
+                        <div class="contact-icon"><i class="fas fa-map-marker-alt"></i></div>
+                        <div class="contact-details"><h3>Our Office</h3><p>Kampala, Uganda</p></div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon"><i class="fas fa-phone"></i></div>
+                        <div class="contact-details"><h3>Phone Number</h3><p>+256 775 781560</p><p>Mon-Fri from 9am to 6pm</p></div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon"><i class="fas fa-envelope"></i></div>
+                        <div class="contact-details"><h3>Email Address</h3><p>nelsonbastian94@gmail.com</p><p>We'll respond within 24 hours</p></div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon"><i class="fab fa-whatsapp"></i></div>
+                        <div class="contact-details"><h3>WhatsApp</h3><p>+256 775 781560</p><p>Fastest way to reach us</p></div>
+                    </div>
+                </div>
+                <div class="contact-form">
+                    <h3>Send Us a Message</h3>
+                    <form id="contactForm" onsubmit="sendToWhatsApp(); return false;">
+                        <div class="form-group">
+                            <input type="text" id="contactName" class="form-control" placeholder="Your Full Name *" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="email" id="contactEmail" class="form-control" placeholder="Your Email *" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="tel" id="contactPhone" class="form-control" placeholder="Your Phone Number (Optional)">
+                        </div>
+                        <div class="form-group">
+                            <select id="contactService" class="form-control" required>
+                                <option value="">Select Service *</option>
+                                <option value="Web Development">Web Development</option>
+                                <option value="Mobile Apps">Mobile Apps</option>
+                                <option value="Electrical Installation">Electrical Installation</option>
+                                <option value="Cloud Solutions">Cloud Solutions</option>
+                                <option value="AI & Machine Learning">AI & Machine Learning</option>
+                                <option value="Consultation">Technical Consultation</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <textarea id="contactMessage" class="form-control" placeholder="Your Message *" rows="6" required></textarea>
+                        </div>
+                        <button type="submit" class="btn" style="width:100%">
+                            <i class="fab fa-whatsapp"></i> Send
+                        </button>
+                    </form>
+                    <p style="font-size:0.8rem;margin-top:15px;text-align:center;color:var(--gray)">
+                        <i class="fab fa-whatsapp"></i> Clicking Send will open WhatsApp with your message ready to go!
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-    <footer><div class="container"><div class="footer-content"><div class="footer-column"><h3>MetaVolt Tech</h3><p>Innovative technology & electrical solutions.</p></div><div class="footer-column"><h3>Quick Links</h3><ul class="footer-links"><li><a href="index.html">Home</a></li><li><a href="about.html">About</a></li><li><a href="services.html">Services</a></li><li><a href="team.html">Team</a></li><li><a href="blog.html">Blog</a></li><li><a href="contact.html">Contact</a></li></ul></div><div class="footer-column"><h3>Services</h3><ul class="footer-links"><li><a href="services.html#web-development">Web Development</a></li><li><a href="services.html#mobile-apps">Mobile Apps</a></li><li><a href="services.html#electrical">Electrical Installation</a></li><li><a href="services.html#cloud-solutions">Cloud Solutions</a></li><li><a href="services.html#ai-ml">AI & ML</a></li></ul></div><div class="footer-column"><h3>Contact</h3><ul class="footer-links"><li><i class="fas fa-phone"></i> +256 775 781560</li><li><i class="fas fa-envelope"></i> nelsonbastian94@gmail.com</li><li><i class="fas fa-map-marker-alt"></i> Kampala, Uganda</li></ul></div></div><div class="footer-bottom"><p>&copy; 2025 MetaVolt Tech. All Rights Reserved.</p></div></div></footer>
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column"><h3>MetaVolt Tech</h3><p>Innovative technology & electrical solutions.</p></div>
+                <div class="footer-column"><h3>Quick Links</h3><ul class="footer-links"><li><a href="index.html">Home</a></li><li><a href="about.html">About</a></li><li><a href="services.html">Services</a></li><li><a href="team.html">Team</a></li><li><a href="blog.html">Blog</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+                <div class="footer-column"><h3>Services</h3><ul class="footer-links"><li><a href="services.html#web-development">Web Development</a></li><li><a href="services.html#mobile-apps">Mobile Apps</a></li><li><a href="services.html#electrical">Electrical Installation</a></li><li><a href="services.html#cloud-solutions">Cloud Solutions</a></li><li><a href="services.html#ai-ml">AI & ML</a></li></ul></div>
+                <div class="footer-column"><h3>Contact</h3><ul class="footer-links"><li><i class="fas fa-phone"></i> +256 775 781560</li><li><i class="fas fa-envelope"></i> nelsonbastian94@gmail.com</li><li><i class="fas fa-map-marker-alt"></i> Kampala, Uganda</li></ul></div>
+            </div>
+            <div class="footer-bottom"><p>&copy; 2025 MetaVolt Tech. All Rights Reserved.</p></div>
+        </div>
+    </footer>
 
-    <div class="floating-contact"><a href="https://wa.me/256775781560" target="_blank" class="contact-icon whatsapp"><i class="fab fa-whatsapp"></i></a><a href="mailto:nelsonbastian94@gmail.com" class="contact-icon email"><i class="fas fa-envelope"></i></a><a href="tel:+256775781560" class="contact-icon call"><i class="fas fa-phone-alt"></i></a></div>
+    <div class="floating-contact">
+        <a href="https://wa.me/256775781560" target="_blank" class="contact-icon whatsapp"><i class="fab fa-whatsapp"></i></a>
+        <a href="mailto:nelsonbastian94@gmail.com" class="contact-icon email"><i class="fas fa-envelope"></i></a>
+        <a href="tel:+256775781560" class="contact-icon call"><i class="fas fa-phone-alt"></i></a>
+    </div>
 
-    <div class="chatbot-container"><div class="chatbot-toggle" id="chatbotToggle"><i class="fas fa-comment-dots"></i></div><div class="chatbot-window" id="chatbotWindow"><div class="chatbot-header"><span><i class="fas fa-robot"></i> MetaVolt AI</span><i class="fas fa-times" id="closeChat" style="cursor:pointer"></i></div><div class="chatbot-messages" id="chatbotMessages"><div class="message bot-message"><div class="message-content">Hello! Need help with contacting us? Ask me anything!</div></div></div><div class="chatbot-input"><input type="text" id="chatbotInput" placeholder="Type..."><button id="chatbotSendBtn"><i class="fas fa-paper-plane"></i></button></div></div></div>
+    <div class="chatbot-container">
+        <div class="chatbot-toggle" id="chatbotToggle"><i class="fas fa-comment-dots"></i></div>
+        <div class="chatbot-window" id="chatbotWindow">
+            <div class="chatbot-header"><span><i class="fas fa-robot"></i> MetaVolt AI</span><i class="fas fa-times" id="closeChat" style="cursor:pointer"></i></div>
+            <div class="chatbot-messages" id="chatbotMessages"><div class="message bot-message"><div class="message-content">Hello! Need help with contacting us? Ask me anything!</div></div></div>
+            <div class="chatbot-input"><input type="text" id="chatbotInput" placeholder="Type..."><button id="chatbotSendBtn"><i class="fas fa-paper-plane"></i></button></div>
+        </div>
+    </div>
 
     <script>
+        // Theme toggle function
         function toggleTheme() {
             const body = document.body;
             const themeBtn = document.getElementById('themeToggle');
@@ -64,15 +156,82 @@
                 if (themeBtn) themeBtn.innerHTML = '🌙';
             }
         }
+        
         function loadTheme() {
             const body = document.body;
             const themeBtn = document.getElementById('themeToggle');
             const savedTheme = localStorage.getItem('theme');
-            if (savedTheme === 'dark') { body.classList.add('dark-mode'); if (themeBtn) themeBtn.innerHTML = '🌙'; }
-            else if (savedTheme === 'light') { body.classList.remove('dark-mode'); if (themeBtn) themeBtn.innerHTML = '🌞'; }
+            if (savedTheme === 'dark') {
+                body.classList.add('dark-mode');
+                if (themeBtn) themeBtn.innerHTML = '🌙';
+            } else if (savedTheme === 'light') {
+                body.classList.remove('dark-mode');
+                if (themeBtn) themeBtn.innerHTML = '🌞';
+            }
         }
         loadTheme();
         
+        // WhatsApp send function - SEPARATE and CLEAN
+        function sendToWhatsApp() {
+            // Get form values
+            const name = document.getElementById('contactName').value.trim();
+            const email = document.getElementById('contactEmail').value.trim();
+            const phone = document.getElementById('contactPhone').value.trim();
+            const service = document.getElementById('contactService').value;
+            const message = document.getElementById('contactMessage').value.trim();
+            
+            // Validate
+            if (!name) {
+                alert('❌ Please enter your name');
+                document.getElementById('contactName').focus();
+                return false;
+            }
+            if (!email) {
+                alert('❌ Please enter your email address');
+                document.getElementById('contactEmail').focus();
+                return false;
+            }
+            if (!email.includes('@')) {
+                alert('❌ Please enter a valid email address');
+                document.getElementById('contactEmail').focus();
+                return false;
+            }
+            if (!service) {
+                alert('❌ Please select a service');
+                document.getElementById('contactService').focus();
+                return false;
+            }
+            if (!message) {
+                alert('❌ Please enter your message');
+                document.getElementById('contactMessage').focus();
+                return false;
+            }
+            
+            // Create WhatsApp message
+            let whatsappMsg = `🏢 *NEW CONTACT FORM* 🏢%0A`;
+            whatsappMsg += `%0A`;
+            whatsappMsg += `👤 Name: ${encodeURIComponent(name)}%0A`;
+            whatsappMsg += `📧 Email: ${encodeURIComponent(email)}%0A`;
+            if (phone) whatsappMsg += `📞 Phone: ${encodeURIComponent(phone)}%0A`;
+            whatsappMsg += `🎯 Service: ${encodeURIComponent(service)}%0A`;
+            whatsappMsg += `%0A📝 *Message:*%0A`;
+            whatsappMsg += `${encodeURIComponent(message)}%0A`;
+            whatsappMsg += `%0A⚡ From MetaVolt Tech Website`;
+            
+            // WhatsApp number
+            const number = '256775781560';
+            
+            // Open WhatsApp
+            const url = `https://wa.me/${number}?text=${whatsappMsg}`;
+            window.open(url, '_blank');
+            
+            // Optional: Clear form or show success
+            alert('✓ Opening WhatsApp! Please send your message there.');
+            
+            return false;
+        }
+        
+        // Mobile menu toggle
         const hamburger = document.querySelector('.hamburger');
         const navLinks = document.querySelector('.nav-links');
         if (hamburger && navLinks) {
@@ -81,41 +240,8 @@
                 hamburger.innerHTML = navLinks.classList.contains('active') ? '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
             });
         }
-        document.querySelectorAll('.nav-links > li').forEach(item => {
-            const dropdown = item.querySelector('.dropdown');
-            if (dropdown) {
-                item.querySelector('> a')?.addEventListener('click', (e) => {
-                    if (window.innerWidth <= 768) { e.preventDefault(); dropdown.classList.toggle('active'); }
-                });
-            }
-        });
         
-        // Contact form WhatsApp submission
-        const contactForm = document.getElementById('contactForm');
-        if (contactForm) {
-            contactForm.addEventListener('submit', function(e) {
-                e.preventDefault();
-                const name = document.getElementById('contactName')?.value.trim();
-                const email = document.getElementById('contactEmail')?.value.trim();
-                const company = document.getElementById('contactCompany')?.value.trim();
-                const service = document.getElementById('contactService')?.value;
-                const message = document.getElementById('contactMessage')?.value.trim();
-                if (!name || !email || !service || !message) {
-                    alert('Please fill in all required fields');
-                    return;
-                }
-                let whatsappMessage = `*New Contact Form Submission*%0A%0A`;
-                whatsappMessage += `*Name:* ${encodeURIComponent(name)}%0A`;
-                whatsappMessage += `*Email:* ${encodeURIComponent(email)}%0A`;
-                if (company) whatsappMessage += `*Company:* ${encodeURIComponent(company)}%0A`;
-                whatsappMessage += `*Service:* ${encodeURIComponent(service)}%0A`;
-                whatsappMessage += `*Message:* ${encodeURIComponent(message)}%0A%0A`;
-                whatsappMessage += `*Sent from MetaVolt Tech Website*`;
-                window.open(`https://wa.me/256775781560?text=${whatsappMessage}`, '_blank');
-                alert('Thank you! You will be redirected to WhatsApp to send your message.');
-            });
-        }
-        
+        // Chatbot functionality
         const chatbotToggle = document.getElementById('chatbotToggle');
         const chatbotWindow = document.getElementById('chatbotWindow');
         const closeChat = document.getElementById('closeChat');

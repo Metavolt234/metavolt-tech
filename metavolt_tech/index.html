@@ -10,21 +10,15 @@
 </head>
 <body>
 
-    <!-- Header & Navigation -->
     <header id="header">
         <div class="container">
             <nav class="navbar">
                 <a href="index.html" class="logo">
-                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 60'%3E%3Crect width='200' height='60' fill='%230066ff' rx='10'/%3E%3Ctext x='15' y='38' font-family='Arial, sans-serif' font-weight='bold' font-size='22' fill='white'%3EMETAVOLT%3C/text%3E%3Ctext x='160' y='38' font-family='Arial, sans-serif' font-weight='bold' font-size='16' fill='%2300d4ff'%3ETECH%3C/text%3E%3C/svg%3E" alt="MetaVolt Tech Logo" class="logo-img" style="height: 50px;">
+                    <img src="assets/meta logo.jpeg" alt="MetaVolt Tech Logo" class="logo-img">
                 </a>
-                
-                <!-- THEME TOGGLE BUTTON - FIXED -->
                 <div class="theme-toggle-wrapper">
-                    <button id="themeToggle" class="theme-toggle" onclick="toggleTheme()">
-                        🌞
-                    </button>
+                    <button id="themeToggle" class="theme-toggle" onclick="toggleTheme()">🌞</button>
                 </div>
-                
                 <ul class="nav-links">
                     <li><a href="index.html" class="active">Home</a></li>
                     <li><a href="about.html">About</a></li>
@@ -43,7 +37,6 @@
                     <li><a href="blog.html">Blog</a></li>
                     <li><a href="contact.html">Contact</a></li>
                 </ul>
-                
                 <div class="hamburger">
                     <i class="fas fa-bars"></i>
                 </div>
@@ -51,55 +44,40 @@
         </div>
     </header>
 
-    <!-- Full Width Hero Slider -->
     <section class="hero-full">
         <div class="hero-slider">
             <button class="hero-slider-arrow prev" id="heroPrev"><i class="fas fa-chevron-left"></i></button>
             <button class="hero-slider-arrow next" id="heroNext"><i class="fas fa-chevron-right"></i></button>
-            
             <div class="hero-slider-track" id="heroTrack">
                 <div class="hero-slide" style="background-image: url('https://images.unsplash.com/photo-1581091226033-d5c48150dbaa?w=1600&auto=format');">
                     <div class="hero-slide-content">
                         <h1>Welcome to MetaVolt Tech</h1>
                         <p>Where Innovation Meets Excellence in Technology & Electrical Solutions</p>
-                        <div>
-                            <a href="contact.html" class="btn">Start Your Journey</a>
-                            <a href="services.html" class="btn btn-outline">Explore Solutions</a>
-                        </div>
+                        <div><a href="contact.html" class="btn">Start Your Journey</a><a href="services.html" class="btn btn-outline">Explore Solutions</a></div>
                     </div>
                 </div>
                 <div class="hero-slide" style="background-image: url('https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=1600&auto=format');">
                     <div class="hero-slide-content">
                         <h1>Code. Create. Innovate.</h1>
                         <p>Custom Software Development & Web Applications</p>
-                        <div>
-                            <a href="services.html#web-development" class="btn">Web Development</a>
-                            <a href="services.html#mobile-apps" class="btn btn-outline">Mobile Apps</a>
-                        </div>
+                        <div><a href="services.html#web-development" class="btn">Web Development</a><a href="services.html#mobile-apps" class="btn btn-outline">Mobile Apps</a></div>
                     </div>
                 </div>
                 <div class="hero-slide" style="background-image: url('https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=1600&auto=format');">
                     <div class="hero-slide-content">
                         <h1>Power Your Business</h1>
                         <p>Professional Electrical Installation & Cloud Solutions</p>
-                        <div>
-                            <a href="services.html#electrical" class="btn">Electrical Services</a>
-                            <a href="services.html#cloud-solutions" class="btn btn-outline">Cloud Solutions</a>
-                        </div>
+                        <div><a href="services.html#electrical" class="btn">Electrical Services</a><a href="services.html#cloud-solutions" class="btn btn-outline">Cloud Solutions</a></div>
                     </div>
                 </div>
                 <div class="hero-slide" style="background-image: url('https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=1600&auto=format');">
                     <div class="hero-slide-content">
                         <h1>AI & Machine Learning</h1>
                         <p>Intelligent Solutions for Tomorrow's Challenges</p>
-                        <div>
-                            <a href="services.html#ai-ml" class="btn">Explore AI</a>
-                            <a href="contact.html" class="btn btn-outline">Get in Touch</a>
-                        </div>
+                        <div><a href="services.html#ai-ml" class="btn">Explore AI</a><a href="contact.html" class="btn btn-outline">Get in Touch</a></div>
                     </div>
                 </div>
             </div>
-            
             <div class="hero-slider-nav" id="heroDots">
                 <span class="hero-slider-dot active"></span>
                 <span class="hero-slider-dot"></span>
@@ -109,7 +87,6 @@
         </div>
     </section>
 
-    <!-- Scrolling Code Marquee -->
     <div class="code-marquee">
         <div class="code-marquee-content">
             <span>&lt;?php echo "Innovation"; ?&gt;</span>
@@ -123,12 +100,9 @@
         </div>
     </div>
 
-    <!-- About Section -->
     <section id="about">
         <div class="container">
-            <div class="section-title">
-                <h2>About MetaVolt Tech</h2>
-            </div>
+            <div class="section-title"><h2>About MetaVolt Tech</h2></div>
             <div class="about-content">
                 <div class="about-text">
                     <h3>Driving Digital & Electrical Transformation Since 2015</h3>
@@ -136,116 +110,118 @@
                     <p>With over 8 years of experience, we've successfully delivered more than 500 projects for clients across various sectors including finance, healthcare, e-commerce, education, and residential/commercial electrical systems.</p>
                     <a href="about.html" class="btn" style="margin-top: 20px;">Learn More</a>
                 </div>
-                <div class="about-image">
-                    <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=600&auto=format" alt="MetaVolt Tech Team">
+                <div class="about-image"><img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=600&auto=format" alt="MetaVolt Tech Team"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- NEW: Meet the CEO Section -->
+    <section class="ceo-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Meet Our CEO & Founder</h2>
+                <p>Visionary Leader Driving Innovation at MetaVolt Tech</p>
+            </div>
+            <div class="ceo-content">
+                <div class="ceo-image">
+                    <div class="ceo-image-placeholder">
+                        <i class="fas fa-user-circle"></i>
+                        <span>CEO Photo</span>
+                    </div>
+                </div>
+                <div class="ceo-info">
+                    <h3>Tumwesige Nelson</h3>
+                    <p class="ceo-title">Founder & Chief Executive Officer</p>
+                    <div class="ceo-quote">
+                        <i class="fas fa-quote-left"></i>
+                        <p>"Innovation is not just about technology - it's about creating solutions that transform lives and businesses. At MetaVolt Tech, we bridge the gap between imagination and reality."</p>
+                        <i class="fas fa-quote-right"></i>
+                    </div>
+                    <div class="ceo-qualifications">
+                        <h4><i class="fas fa-graduation-cap"></i> Academic Qualifications</h4>
+                        <ul>
+                            <li><i class="fas fa-check-circle"></i> Bachelor's Degree in Applied Technology</li>
+                            <li><i class="fas fa-check-circle"></i> Bachelor of Science in Electrical Engineering</li>
+                            <li><i class="fas fa-check-circle"></i> Certified Professional in AI & Machine Learning</li>
+                            <li><i class="fas fa-check-circle"></i> Advanced Diploma in Cloud Computing</li>
+                        </ul>
+                    </div>
+                    <div class="ceo-skills">
+                        <h4><i class="fas fa-code"></i> Professional Skills & Expertise</h4>
+                        <div class="skills-grid">
+                            <span class="skill-tag"><i class="fas fa-laptop-code"></i> Web Development</span>
+                            <span class="skill-tag"><i class="fas fa-mobile-alt"></i> Mobile Apps</span>
+                            <span class="skill-tag"><i class="fas fa-bolt"></i> Electrical Engineering</span>
+                            <span class="skill-tag"><i class="fas fa-film"></i> 2D Animation</span>
+                            <span class="skill-tag"><i class="fas fa-paint-brush"></i> Graphic Design</span>
+                            <span class="skill-tag"><i class="fas fa-robot"></i> AI & Machine Learning</span>
+                            <span class="skill-tag"><i class="fas fa-cloud"></i> Cloud Architecture</span>
+                            <span class="skill-tag"><i class="fas fa-shield-alt"></i> Cybersecurity</span>
+                            <span class="skill-tag"><i class="fas fa-database"></i> Database Management</span>
+                            <span class="skill-tag"><i class="fas fa-chart-line"></i> Digital Transformation</span>
+                        </div>
+                    </div>
+                    <div class="ceo-experience">
+                        <h4><i class="fas fa-briefcase"></i> Experience & Achievements</h4>
+                        <ul>
+                            <li><i class="fas fa-star"></i> 10+ years of experience in technology and engineering</li>
+                            <li><i class="fas fa-star"></i> Successfully led 500+ digital transformation projects</li>
+                            <li><i class="fas fa-star"></i> Recognized expert in electrical systems and smart home technology</li>
+                            <li><i class="fas fa-star"></i> Published articles on AI integration in business processes</li>
+                            <li><i class="fas fa-star"></i> Speaker at international tech conferences</li>
+                        </ul>
+                    </div>
+                    <div class="ceo-contact">
+                        <a href="https://wa.me/256775781560" class="btn-ceo"><i class="fab fa-whatsapp"></i> WhatsApp Nelson</a>
+                        <a href="mailto:nelsonbastian94@gmail.com" class="btn-ceo-outline"><i class="fas fa-envelope"></i> Email Nelson</a>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Services Section -->
     <section class="services" id="services">
         <div class="container">
-            <div class="section-title">
-                <h2>Our Services</h2>
-            </div>
+            <div class="section-title"><h2>Our Services</h2></div>
             <div class="services-grid">
-                <div class="service-card fade-in">
-                    <div class="service-icon"><i class="fas fa-laptop-code"></i></div>
-                    <h3>Web Development</h3>
-                    <p>Custom web applications and responsive websites built with the latest technologies.</p>
-                    <a href="services.html#web-development" class="read-more">Learn More <i class="fas fa-arrow-right"></i></a>
-                </div>
-                <div class="service-card fade-in delay-1">
-                    <div class="service-icon"><i class="fas fa-mobile-alt"></i></div>
-                    <h3>Mobile Apps</h3>
-                    <p>Native and cross-platform mobile applications for iOS and Android.</p>
-                    <a href="services.html#mobile-apps" class="read-more">Learn More <i class="fas fa-arrow-right"></i></a>
-                </div>
-                <div class="service-card fade-in delay-2">
-                    <div class="service-icon"><i class="fas fa-bolt"></i></div>
-                    <h3>Electrical Installation</h3>
-                    <p>Professional residential, commercial, and industrial electrical services.</p>
-                    <a href="services.html#electrical" class="read-more">Learn More <i class="fas fa-arrow-right"></i></a>
-                </div>
-                <div class="service-card fade-in delay-3">
-                    <div class="service-icon"><i class="fas fa-cloud"></i></div>
-                    <h3>Cloud Solutions</h3>
-                    <p>Scalable cloud infrastructure and migration services.</p>
-                    <a href="services.html#cloud-solutions" class="read-more">Learn More <i class="fas fa-arrow-right"></i></a>
-                </div>
-                <div class="service-card fade-in delay-4">
-                    <div class="service-icon"><i class="fas fa-robot"></i></div>
-                    <h3>AI & Machine Learning</h3>
-                    <p>Intelligent solutions powered by artificial intelligence.</p>
-                    <a href="services.html#ai-ml" class="read-more">Learn More <i class="fas fa-arrow-right"></i></a>
-                </div>
+                <div class="service-card fade-in"><div class="service-icon"><i class="fas fa-laptop-code"></i></div><h3>Web Development</h3><p>Custom web applications and responsive websites.</p><a href="services.html#web-development" class="read-more">Learn More <i class="fas fa-arrow-right"></i></a></div>
+                <div class="service-card fade-in delay-1"><div class="service-icon"><i class="fas fa-mobile-alt"></i></div><h3>Mobile Apps</h3><p>Native and cross-platform mobile applications.</p><a href="services.html#mobile-apps" class="read-more">Learn More <i class="fas fa-arrow-right"></i></a></div>
+                <div class="service-card fade-in delay-2"><div class="service-icon"><i class="fas fa-bolt"></i></div><h3>Electrical Installation</h3><p>Professional residential, commercial, and industrial electrical services.</p><a href="services.html#electrical" class="read-more">Learn More <i class="fas fa-arrow-right"></i></a></div>
+                <div class="service-card fade-in delay-3"><div class="service-icon"><i class="fas fa-cloud"></i></div><h3>Cloud Solutions</h3><p>Scalable cloud infrastructure and migration services.</p><a href="services.html#cloud-solutions" class="read-more">Learn More <i class="fas fa-arrow-right"></i></a></div>
+                <div class="service-card fade-in delay-4"><div class="service-icon"><i class="fas fa-robot"></i></div><h3>AI & Machine Learning</h3><p>Intelligent solutions powered by artificial intelligence.</p><a href="services.html#ai-ml" class="read-more">Learn More <i class="fas fa-arrow-right"></i></a></div>
             </div>
         </div>
     </section>
 
-    <!-- Team Section Preview -->
     <section id="team">
         <div class="container">
-            <div class="section-title">
-                <h2>Our Tech Team</h2>
-            </div>
+            <div class="section-title"><h2>Our Tech Team</h2></div>
             <div class="team-grid">
-                <div class="team-member fade-in">
-                    <div class="member-image"><img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&auto=format" alt="Alex Johnson"></div>
-                    <div class="member-info"><h3>Alex Johnson</h3><p class="member-role">Chief Technology Officer</p><p>15+ years in software architecture.</p></div>
-                </div>
-                <div class="team-member fade-in delay-1">
-                    <div class="member-image"><img src="https://images.unsplash.com/photo-1494790108755-2616b612b786?w=300&auto=format" alt="Sarah Chen"></div>
-                    <div class="member-info"><h3>Sarah Chen</h3><p class="member-role">Lead AI Engineer</p><p>PhD in Computer Science from Stanford.</p></div>
-                </div>
-                <div class="team-member fade-in delay-2">
-                    <div class="member-image"><img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=300&auto=format" alt="Michael Rodriguez"></div>
-                    <div class="member-info"><h3>Michael Rodriguez</h3><p class="member-role">Senior Full-Stack Developer</p><p>10+ years of development experience.</p></div>
-                </div>
+                <div class="team-member fade-in"><div class="member-image"><img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&auto=format" alt="Alex Johnson"></div><div class="member-info"><h3>Alex Johnson</h3><p class="member-role">Chief Technology Officer</p><p>15+ years in software architecture.</p></div></div>
+                <div class="team-member fade-in delay-1"><div class="member-image"><img src="https://images.unsplash.com/photo-1494790108755-2616b612b786?w=300&auto=format" alt="Sarah Chen"></div><div class="member-info"><h3>Sarah Chen</h3><p class="member-role">Lead AI Engineer</p><p>PhD in Computer Science from Stanford.</p></div></div>
+                <div class="team-member fade-in delay-2"><div class="member-image"><img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=300&auto=format" alt="Michael Rodriguez"></div><div class="member-info"><h3>Michael Rodriguez</h3><p class="member-role">Senior Full-Stack Developer</p><p>10+ years of development experience.</p></div></div>
             </div>
         </div>
     </section>
 
-    <!-- Testimonials Section -->
     <section class="testimonials" id="testimonials">
         <div class="container">
-            <div class="section-title">
-                <h2>Client Testimonials</h2>
-            </div>
-            <div class="testimonial">
-                <div class="client-image"><img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=100&auto=format" alt="Robert Kim"></div>
-                <p>"MetaVolt Tech transformed our e-commerce platform. Our conversion rates increased by 45% within three months!"</p>
-                <h4 class="client-name">Robert Kim</h4>
-                <p class="client-company">CEO, RetailTech Solutions</p>
-            </div>
+            <div class="section-title"><h2>Client Testimonials</h2></div>
+            <div class="testimonial"><div class="client-image"><img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=100&auto=format" alt="Robert Kim"></div><p>"MetaVolt Tech transformed our e-commerce platform. Our conversion rates increased by 45% within three months!"</p><h4 class="client-name">Robert Kim</h4><p class="client-company">CEO, RetailTech Solutions</p></div>
         </div>
     </section>
 
-    <!-- Blog Section -->
     <section id="blog">
         <div class="container">
-            <div class="section-title">
-                <h2>Latest from Our Blog</h2>
-            </div>
+            <div class="section-title"><h2>Latest from Our Blog</h2></div>
             <div class="blog-grid">
-                <div class="blog-card fade-in">
-                    <div class="blog-image"><img src="https://images.unsplash.com/photo-1555949963-aa79dcee981c?w=400&auto=format" alt="AI Trends"></div>
-                    <div class="blog-content"><div class="blog-meta"><span><i class="far fa-calendar"></i> June 15, 2023</span><span><i class="far fa-user"></i> Sarah Chen</span></div><h3>The Future of AI in Business Automation</h3><p>Explore how AI is revolutionizing business processes.</p><a href="blog.html" class="read-more">Read More <i class="fas fa-arrow-right"></i></a></div>
-                </div>
-                <div class="blog-card fade-in delay-1">
-                    <div class="blog-image"><img src="https://images.unsplash.com/photo-1547658719-da2b51169166?w=400&auto=format" alt="Web Development"></div>
-                    <div class="blog-content"><div class="blog-meta"><span><i class="far fa-calendar"></i> May 28, 2023</span><span><i class="far fa-user"></i> Michael Rodriguez</span></div><h3>Progressive Web Apps: The Future of Mobile Web</h3><p>Discover how PWAs are bridging the gap between web and mobile.</p><a href="blog.html" class="read-more">Read More <i class="fas fa-arrow-right"></i></a></div>
-                </div>
-                <div class="blog-card fade-in delay-2">
-                    <div class="blog-image"><img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=400&auto=format" alt="Cloud Computing"></div>
-                    <div class="blog-content"><div class="blog-meta"><span><i class="far fa-calendar"></i> April 12, 2023</span><span><i class="far fa-user"></i> Alex Johnson</span></div><h3>Cloud Security Best Practices for 2023</h3><p>Learn about the latest strategies to secure your cloud infrastructure.</p><a href="blog.html" class="read-more">Read More <i class="fas fa-arrow-right"></i></a></div>
-                </div>
+                <div class="blog-card fade-in"><div class="blog-image"><img src="https://images.unsplash.com/photo-1555949963-aa79dcee981c?w=400&auto=format" alt="AI Trends"></div><div class="blog-content"><div class="blog-meta"><span><i class="far fa-calendar"></i> June 15, 2023</span><span><i class="far fa-user"></i> Sarah Chen</span></div><h3>The Future of AI in Business Automation</h3><p>Explore how AI is revolutionizing business processes.</p><a href="blog.html" class="read-more">Read More <i class="fas fa-arrow-right"></i></a></div></div>
+                <div class="blog-card fade-in delay-1"><div class="blog-image"><img src="https://images.unsplash.com/photo-1547658719-da2b51169166?w=400&auto=format" alt="Web Development"></div><div class="blog-content"><div class="blog-meta"><span><i class="far fa-calendar"></i> May 28, 2023</span><span><i class="far fa-user"></i> Michael Rodriguez</span></div><h3>Progressive Web Apps: The Future of Mobile Web</h3><p>Discover how PWAs are bridging the gap between web and mobile.</p><a href="blog.html" class="read-more">Read More <i class="fas fa-arrow-right"></i></a></div></div>
+                <div class="blog-card fade-in delay-2"><div class="blog-image"><img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=400&auto=format" alt="Cloud Computing"></div><div class="blog-content"><div class="blog-meta"><span><i class="far fa-calendar"></i> April 12, 2023</span><span><i class="far fa-user"></i> Alex Johnson</span></div><h3>Cloud Security Best Practices for 2023</h3><p>Learn about the latest strategies to secure your cloud infrastructure.</p><a href="blog.html" class="read-more">Read More <i class="fas fa-arrow-right"></i></a></div></div>
             </div>
         </div>
     </section>
 
-    <!-- Footer -->
     <footer>
         <div class="container">
             <div class="footer-content">
@@ -258,14 +234,12 @@
         </div>
     </footer>
 
-    <!-- Floating Contact Icons -->
     <div class="floating-contact">
-        <a href="https://wa.me/256775781560?text=Hello%20MetaVolt%20Tech%2C%20I%20need%20assistance%20with%20your%20services" target="_blank" class="contact-icon whatsapp" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
-        <a href="mailto:nelsonbastian94@gmail.com?subject=Inquiry%20from%20Website&body=Hi%20MetaVolt%2C%20I'd%20like%20to%20know%20more%20about%20your%20services" class="contact-icon email" aria-label="Email"><i class="fas fa-envelope"></i></a>
-        <a href="tel:+256775781560" class="contact-icon call" aria-label="Call"><i class="fas fa-phone-alt"></i></a>
+        <a href="https://wa.me/256775781560?text=Hello%20MetaVolt%20Tech%2C%20I%20need%20assistance" target="_blank" class="contact-icon whatsapp"><i class="fab fa-whatsapp"></i></a>
+        <a href="mailto:nelsonbastian94@gmail.com" class="contact-icon email"><i class="fas fa-envelope"></i></a>
+        <a href="tel:+256775781560" class="contact-icon call"><i class="fas fa-phone-alt"></i></a>
     </div>
 
-    <!-- AI Chatbot -->
     <div class="chatbot-container">
         <div class="chatbot-toggle" id="chatbotToggle"><i class="fas fa-comment-dots"></i></div>
         <div class="chatbot-window" id="chatbotWindow">
@@ -275,219 +249,25 @@
         </div>
     </div>
 
-    <!-- Theme Toggle JavaScript - FIXED -->
+    <script src="script.js"></script>
     <script>
-        // Theme toggle function - works on all pages
-        function toggleTheme() {
-            const body = document.body;
-            const themeBtn = document.getElementById('themeToggle');
-            
-            if (body.classList.contains('dark-mode')) {
-                body.classList.remove('dark-mode');
-                localStorage.setItem('theme', 'light');
-                if (themeBtn) themeBtn.innerHTML = '🌞';
-            } else {
-                body.classList.add('dark-mode');
-                localStorage.setItem('theme', 'dark');
-                if (themeBtn) themeBtn.innerHTML = '🌙';
-            }
-        }
-        
-        // Load saved theme on page load
-        function loadTheme() {
-            const body = document.body;
-            const themeBtn = document.getElementById('themeToggle');
-            const savedTheme = localStorage.getItem('theme');
-            
-            if (savedTheme === 'dark') {
-                body.classList.add('dark-mode');
-                if (themeBtn) themeBtn.innerHTML = '🌙';
-            } else if (savedTheme === 'light') {
-                body.classList.remove('dark-mode');
-                if (themeBtn) themeBtn.innerHTML = '🌞';
-            } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-                // If no saved preference, check system preference
-                body.classList.add('dark-mode');
-                if (themeBtn) themeBtn.innerHTML = '🌙';
-            } else {
-                if (themeBtn) themeBtn.innerHTML = '🌞';
-            }
-        }
-        
-        // Run on page load
-        loadTheme();
-    </script>
-    
-    <!-- Hero Slider JavaScript -->
-    <script>
+        // Hero Slider
         const heroTrack = document.getElementById('heroTrack');
         const heroSlides = document.querySelectorAll('.hero-slide');
         const heroDots = document.querySelectorAll('.hero-slider-dot');
         const heroPrev = document.getElementById('heroPrev');
         const heroNext = document.getElementById('heroNext');
-        
         let heroIndex = 0;
         const heroTotal = heroSlides.length;
         let heroInterval;
-        
-        function updateHeroSlider() {
-            if (heroTrack) {
-                heroTrack.style.transform = `translateX(-${heroIndex * 100}%)`;
-                heroDots.forEach((dot, i) => {
-                    dot.classList.toggle('active', i === heroIndex);
-                });
-            }
-        }
-        
-        function nextHeroSlide() {
-            heroIndex = (heroIndex + 1) % heroTotal;
-            updateHeroSlider();
-            resetHeroInterval();
-        }
-        
-        function prevHeroSlide() {
-            heroIndex = (heroIndex - 1 + heroTotal) % heroTotal;
-            updateHeroSlider();
-            resetHeroInterval();
-        }
-        
-        function startHeroInterval() {
-            heroInterval = setInterval(nextHeroSlide, 5000);
-        }
-        
-        function resetHeroInterval() {
-            clearInterval(heroInterval);
-            startHeroInterval();
-        }
-        
-        if (heroPrev && heroNext) {
-            heroPrev.addEventListener('click', prevHeroSlide);
-            heroNext.addEventListener('click', nextHeroSlide);
-        }
-        
-        if (heroDots) {
-            heroDots.forEach((dot, i) => {
-                dot.addEventListener('click', () => {
-                    heroIndex = i;
-                    updateHeroSlider();
-                    resetHeroInterval();
-                });
-            });
-        }
-        
-        if (heroTotal > 0) {
-            startHeroInterval();
-        }
-    </script>
-    
-    <!-- Mobile Menu & Chatbot Script -->
-    <script>
-        // Mobile Navigation Toggle
-        const hamburger = document.querySelector('.hamburger');
-        const navLinks = document.querySelector('.nav-links');
-        
-        if (hamburger && navLinks) {
-            hamburger.addEventListener('click', () => {
-                navLinks.classList.toggle('active');
-                hamburger.innerHTML = navLinks.classList.contains('active') ? '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
-            });
-        }
-        
-        // Mobile dropdown fix
-        const dropdownParents = document.querySelectorAll('.nav-links > li');
-        dropdownParents.forEach(item => {
-            const dropdown = item.querySelector('.dropdown');
-            if (dropdown) {
-                const parentLink = item.querySelector('> a');
-                if (parentLink) {
-                    parentLink.addEventListener('click', (e) => {
-                        if (window.innerWidth <= 768) {
-                            e.preventDefault();
-                            dropdown.classList.toggle('active');
-                        }
-                    });
-                }
-            }
-        });
-        
-        // Chatbot functionality
-        const chatbotToggleBtn = document.getElementById('chatbotToggle');
-        const chatbotWindowDiv = document.getElementById('chatbotWindow');
-        const closeChatBtn = document.getElementById('closeChat');
-        const chatbotMessagesDiv = document.getElementById('chatbotMessages');
-        const chatbotInputField = document.getElementById('chatbotInput');
-        const chatbotSendBtn = document.getElementById('chatbotSendBtn');
-        
-        if (chatbotToggleBtn && chatbotWindowDiv) {
-            chatbotToggleBtn.addEventListener('click', () => {
-                chatbotWindowDiv.style.display = 'flex';
-            });
-        }
-        
-        if (closeChatBtn && chatbotWindowDiv) {
-            closeChatBtn.addEventListener('click', () => {
-                chatbotWindowDiv.style.display = 'none';
-            });
-        }
-        
-        function addChatMessage(content, isUser = false) {
-            if (!chatbotMessagesDiv) return;
-            const messageDiv = document.createElement('div');
-            messageDiv.className = `message ${isUser ? 'user-message' : 'bot-message'}`;
-            const messageContent = document.createElement('div');
-            messageContent.className = 'message-content';
-            messageContent.textContent = content;
-            messageDiv.appendChild(messageContent);
-            chatbotMessagesDiv.appendChild(messageDiv);
-            chatbotMessagesDiv.scrollTop = chatbotMessagesDiv.scrollHeight;
-        }
-        
-        async function getAIResponse(userMessage) {
-            const lowerMsg = userMessage.toLowerCase();
-            if (lowerMsg.includes('service')) return "We offer Web Development, Mobile Apps, Electrical Installation, Cloud Solutions, and AI & Machine Learning. Which interests you?";
-            if (lowerMsg.includes('electrical')) return "Our electrical services include residential wiring, commercial installations, industrial electrical work, repairs, lighting, and safety inspections.";
-            if (lowerMsg.includes('price') || lowerMsg.includes('cost')) return "Pricing depends on project scope. Please WhatsApp +256 775 781560 for a free quote!";
-            if (lowerMsg.includes('contact') || lowerMsg.includes('whatsapp')) return "Reach us via WhatsApp at +256 775 781560 or email nelsonbastian94@gmail.com";
-            if (lowerMsg.includes('hello') || lowerMsg.includes('hi')) return "Hello! 👋 Welcome to MetaVolt Tech. How can I assist you today?";
-            return "Thanks for your message! For immediate assistance, please WhatsApp +256 775 781560 or email nelsonbastian94@gmail.com.";
-        }
-        
-        async function handleChatSend() {
-            const message = chatbotInputField?.value.trim();
-            if (!message) return;
-            addChatMessage(message, true);
-            if (chatbotInputField) chatbotInputField.value = '';
-            const response = await getAIResponse(message);
-            setTimeout(() => addChatMessage(response, false), 500);
-        }
-        
-        if (chatbotSendBtn) chatbotSendBtn.addEventListener('click', handleChatSend);
-        if (chatbotInputField) chatbotInputField.addEventListener('keypress', (e) => { if (e.key === 'Enter') handleChatSend(); });
-        
-        // Active nav link
-        const currentPage = window.location.pathname.split('/').pop() || 'index.html';
-        document.querySelectorAll('.nav-links a').forEach(link => {
-            const href = link.getAttribute('href');
-            if (href === currentPage) link.classList.add('active');
-        });
-        
-        // Fade in on scroll
-        const fadeElements = document.querySelectorAll('.fade-in');
-        const fadeInOnScroll = () => {
-            fadeElements.forEach(el => {
-                if (el.getBoundingClientRect().top < window.innerHeight - 150) {
-                    el.style.opacity = "1";
-                    el.style.transform = "translateY(0)";
-                }
-            });
-        };
-        fadeElements.forEach(el => {
-            el.style.opacity = "0";
-            el.style.transform = "translateY(20px)";
-            el.style.transition = "opacity 0.8s ease, transform 0.8s ease";
-        });
-        window.addEventListener('scroll', fadeInOnScroll);
-        window.addEventListener('load', fadeInOnScroll);
+        function updateHeroSlider() { if (heroTrack) { heroTrack.style.transform = `translateX(-${heroIndex * 100}%)`; heroDots.forEach((dot, i) => { dot.classList.toggle('active', i === heroIndex); }); } }
+        function nextHeroSlide() { heroIndex = (heroIndex + 1) % heroTotal; updateHeroSlider(); resetHeroInterval(); }
+        function prevHeroSlide() { heroIndex = (heroIndex - 1 + heroTotal) % heroTotal; updateHeroSlider(); resetHeroInterval(); }
+        function startHeroInterval() { heroInterval = setInterval(nextHeroSlide, 5000); }
+        function resetHeroInterval() { clearInterval(heroInterval); startHeroInterval(); }
+        if (heroPrev && heroNext) { heroPrev.addEventListener('click', prevHeroSlide); heroNext.addEventListener('click', nextHeroSlide); }
+        if (heroDots) { heroDots.forEach((dot, i) => { dot.addEventListener('click', () => { heroIndex = i; updateHeroSlider(); resetHeroInterval(); }); }); }
+        if (heroTotal > 0) { startHeroInterval(); }
     </script>
 </body>
 </html>
