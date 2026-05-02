@@ -57,6 +57,20 @@ h1, h2, h3, h4, h5 {
     color: var(--text-color);
 }
 
+/*photo css*/
+.ceo-photo {
+    width: 280px;
+    height: 280px;
+    border-radius: 50%;
+    object-fit: cover;
+    box-shadow: var(--shadow-hover);
+    transition: transform 0.3s ease;
+}
+
+.ceo-photo:hover {
+    transform: scale(1.02);
+}
+/*end of ceo*/
 .container {
     width: 90%;
     max-width: 1280px;
